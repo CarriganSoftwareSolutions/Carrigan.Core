@@ -1,0 +1,356 @@
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Carrigan.Core.Extensions;
+//IGNORE SPELLING: dddd mm yyyy
+public static class DateTimeExtensions
+{
+    #region ToAmPmString
+
+    /// <summary>
+    /// Converts a TimeOnly value to a string formatted as "h:mm tt" (12-hour format with AM/PM).
+    /// </summary>
+    /// <param name="time">The TimeOnly value to format.</param>
+    /// <returns>A string in the format "h:mm tt".</returns>
+    /// <example>
+    /// For example, a TimeOnly value of "14:30" would be formatted as "2:30 PM".
+    /// </example>
+    public static string ToAmPmString(this TimeOnly time)
+    {
+        return time.ToString("h:mm tt");
+    }
+
+    /// <summary>
+    /// Converts a nullable TimeOnly value to a string formatted as "h:mm tt" (12-hour format with AM/PM), or an empty string if the value is null.
+    /// </summary>
+    /// <param name="time">The nullable TimeOnly value to format.</param>
+    /// <returns>A string in the format "h:mm tt" or an empty string if null.</returns>
+    /// <example>
+    /// For example, a nullable TimeOnly value of "14:30" would be formatted as "2:30 PM".
+    /// A null value would return an empty string.
+    /// </example>
+    public static string ToAmPmString(this TimeOnly? time)
+    {
+        return time?.ToString("h:mm tt") ?? string.Empty;
+    }
+    #endregion
+
+    #region ToDateOnlyExtension
+
+    public static DateOnly ToDateOnly(this DateTime date) =>
+        DateOnly.FromDateTime(date);
+    public static DateOnly? ToDateOnly(this DateTime? date) =>
+        date?.ToDateOnly();
+    #endregion
+
+    #region ToDayOfWeekExtension
+    /// <summary>
+    /// Converts a DateTime value to a string representing the full day of the week.
+    /// </summary>
+    /// <param name="date">The DateTime value to format.</param>
+    /// <returns>A string representing the day of the week, in the format "dddd".</returns>
+    /// <example>
+    /// For example, a DateTime value of "2024-09-29" (Sunday) would be formatted as "Sunday".
+    /// </example>
+    public static string ToDayOfWeek(this DateTime date)
+    {
+        return date.ToString("dddd");
+    }
+
+    /// <summary>
+    /// Converts a nullable DateTime value to a string representing the full day of the week, or an empty string if the value is null.
+    /// </summary>
+    /// <param name="date">The nullable DateTime value to format.</param>
+    /// <returns>A string representing the day of the week, in the format "dddd", or an empty string if null.</returns>
+    /// <example>
+    /// For example, a DateTime value of "2024-09-29" (Sunday) would be formatted as "Sunday".
+    /// A null value would return an empty string.
+    /// </example>
+    public static string ToDayOfWeek(this DateTime? date)
+    {
+        return date?.ToString("dddd") ?? string.Empty;
+    }
+
+    /// <summary>
+    /// Converts a DateOnly value to a string representing the full day of the week.
+    /// </summary>
+    /// <param name="date">The DateOnly value to format.</param>
+    /// <returns>A string representing the day of the week, in the format "dddd".</returns>
+    /// <example>
+    /// For example, a DateOnly value of "2024-09-29" (Sunday) would be formatted as "Sunday".
+    /// </example>
+    public static string ToDayOfWeek(this DateOnly date)
+    {
+        return date.ToString("dddd");
+    }
+
+    /// <summary>
+    /// Converts a nullable DateOnly value to a string representing the full day of the week, or an empty string if the value is null.
+    /// </summary>
+    /// <param name="date">The nullable DateOnly value to format.</param>
+    /// <returns>A string representing the day of the week, in the format "dddd", or an empty string if null.</returns>
+    /// <example>
+    /// For example, a DateOnly value of "2024-09-29" (Sunday) would be formatted as "Sunday".
+    /// A null value would return an empty string.
+    /// </example>
+    public static string ToDayOfWeek(this DateOnly? date)
+    {
+        return date?.ToString("dddd") ?? string.Empty;
+    }
+    #endregion
+
+    #region ToTimeOnlyExtension
+    public static TimeOnly ToTimeOnly(this DateTime time) =>
+        TimeOnly.FromDateTime(time);
+
+    public static TimeOnly? ToTimeOnly(this DateTime? time) =>
+        time?.ToTimeOnly();
+    #endregion
+
+    #region ToMonthDayYearLongExtension
+    /// <summary>
+    /// Converts a DateTime to a string formatted as "MMMM, d, yyyy".
+    /// </summary>
+    /// <param name="date">The DateTime value to format.</param>
+    /// <returns>A string in the format "Month day, year".</returns>
+    /// <example>
+    /// For example, a DateTime value of "2024-09-29" would be formatted as "September 29, 2024".
+    /// </example>
+    public static string ToMonthDayYearLong(this DateTime date)
+    {
+        return date.ToString("MMMM d, yyyy");
+    }
+
+    /// <summary>
+    /// Converts a nullable DateTime to a string formatted as "MMMM, d, yyyy", or an empty string if the value is null.
+    /// </summary>
+    /// <param name="date">The nullable DateTime value to format.</param>
+    /// <returns>A string in the format "Month day, year" or an empty string if null.</returns>
+    /// <example>
+    /// For example, a DateTime value of "2024-09-29" would be formatted as "September 29, 2024".
+    /// A null value would return an empty string.
+    /// </example>
+    public static string ToMonthDayYearLong(this DateTime? date)
+    {
+        return date?.ToString("MMMM d, yyyy") ?? string.Empty;
+    }
+
+    /// <summary>
+    /// Converts a DateOnly to a string formatted as "MMMM, d, yyyy".
+    /// </summary>
+    /// <param name="date">The DateOnly value to format.</param>
+    /// <returns>A string in the format "Month day, year".</returns>
+    /// <example>
+    /// For example, a DateOnly value of "2024-09-29" would be formatted as "September 29, 2024".
+    /// </example>
+    public static string ToMonthDayYearLong(this DateOnly date)
+    {
+        return date.ToString("MMMM d, yyyy");
+    }
+
+    /// <summary>
+    /// Converts a nullable DateOnly to a string formatted as "MMMM, d, yyyy", or an empty string if the value is null.
+    /// </summary>
+    /// <param name="date">The nullable DateOnly value to format.</param>
+    /// <returns>A string in the format "Month day, year" or an empty string if null.</returns>
+    /// <example>
+    /// For example, a DateOnly value of "2024-09-29" would be formatted as "September 29, 2024".
+    /// A null value would return an empty string.
+    /// </example>
+    public static string ToMonthDayYearLong(this DateOnly? date)
+    {
+        return date?.ToString("MMMM d, yyyy") ?? string.Empty;
+    }
+    #endregion
+
+    #region ToMonthDayYearAmPmExtension
+    /// <summary>
+    /// Converts a DateTime to a string formatted as "MMMM, d, yyyy h:mm tt".
+    /// </summary>
+    /// <param name="date">The DateTime value to format.</param>
+    /// <returns>A string in the format "Month day, year hour:minute AM/PM".</returns>
+    /// <example>
+    /// For example, a DateTime value of "2024-09-29 14:30:00" would be formatted as "September 29, 2024 2:30 PM".
+    /// </example>
+    public static string ToMonthDayYearAmPm(this DateTime date)
+    {
+        return date.ToString("MMMM d, yyyy h:mm tt");
+    }
+
+    /// <summary>
+    /// Converts a nullable DateTime to a string formatted as "MMMM, d, yyyy h:mm tt", or an empty string if the value is null.
+    /// </summary>
+    /// <param name="date">The nullable DateTime value to format.</param>
+    /// <returns>A string in the format "Month day, year hour:minute AM/PM" or an empty string if null.</returns>
+    /// <example>
+    /// For example, a DateTime value of "2024-09-29 14:30:00" would be formatted as "September 29, 2024 2:30 PM".
+    /// A null value would return an empty string.
+    /// </example>
+    public static string ToMonthDayYearAmPm(this DateTime? date)
+    {
+        return date?.ToString("MMMM d, yyyy h:mm tt") ?? string.Empty;
+    }
+    #endregion
+
+    #region Covert to long Order value
+    public static long ToDateOrderBy(this DateOnly value)
+    {
+        return    value.Year *  1_00_00_00_00L +            // Multiplier for year:   1 00, 00 0,0 00
+                  value.Month * 1_00_00_00L +               // Multiplier for month:     1, 00 0,0 00
+                  value.Day *   1_00_00L;                   // Multiplier for day:           1 0,0 00
+    }
+    public static long ToDateOrderBy(this DateOnly? value)
+    {
+        if (value is null)
+            return 9999_13_32_00_00L;                       // 9999 years, 13 months, 32 days, 00 hours, 00 minutes
+                                                            //                    999,9 13, 32 0,0 00                  
+        else
+            return value.Value.Year *  1_00_00_00_00L +     // Multiplier for year:   1 00, 00 0,0 00
+                   value.Value.Month * 1_00_00_00L +        // Multiplier for month:     1, 00 0,0 00
+                   value.Value.Day *   1_00_00L;            // Multiplier for day:           1 0,0 00
+    }
+    public static long ToDateOrderBy(this DateTime value)
+    {
+         return    value.Year *  1_00_00_00_00L +           // Multiplier for year:   1 00, 00 0,0 00
+                   value.Month * 1_00_00_00L +              // Multiplier for month:     1, 00 0,0 00
+                   value.Day *   1_00_00L;                  // Multiplier for day:           1 0,0 00
+    }
+    public static long ToDateOrderBy(this DateTime? value)
+    {
+        if (value is null)
+            return 9999_13_32_00_00L;                       // 9999 years, 13 months, 32 days, 00 hours, 00 minutes
+                                                            //                    999,9 13, 32 0,0 00                  
+        else
+            return value.Value.Year *  1_00_00_00_00L +     // Multiplier for year:   1 00, 00 0,0 00
+                   value.Value.Month * 1_00_00_00L +        // Multiplier for month:     1, 00 0,0 00
+                   value.Value.Day *   1_00_00L;            // Multiplier for day:           1 0,0 00
+
+    }
+    public static long ToTimeOrderBy(this TimeOnly value)
+    {
+         return    
+                   value.Hour *  1_00L +                    // Multiplier for hour:              1 00
+                   value.Minute;                            // Multiplier for minute:               1
+
+    }
+    public static long ToTimeOrderBy(this TimeOnly? value)
+    {
+        if (value is null)
+            return 0L;                                      // 0 hours, 0 minutes
+                                                            //                                  0,0 0                  
+        else
+            return value.Value.Hour *  1_00L +              // Multiplier for hour:              1 00
+                   value.Value.Minute;                      // Multiplier for minute:               1
+
+    }
+    public static long ToDateTimeOrderBy(this DateOnly dateValue, TimeOnly? timeValue)
+    {
+        if (timeValue is not null)
+            return dateValue.Year *  1_00_00_00_00L +       // Multiplier for year:   1 00, 00 0,0 00
+                   dateValue.Month * 1_00_00_00L +          // Multiplier for month:     1, 00 0,0 00
+                   dateValue.Day *   1_00_00L +             // Multiplier for day:           1 0,0 00
+                   timeValue.Value.Hour *  1_00L +          // Multiplier for hour:              1 00
+                   timeValue.Value.Minute;                  // Multiplier for minute:               1 
+
+        else //time is null
+            return                                      // 0 hours, 0 minutes                0 00    
+                   dateValue.Year *  1_00_00_00_00L +       // Multiplier for year:   1 00, 00 0,0 00
+                   dateValue.Month * 1_00_00_00L +          // Multiplier for month:     1, 00 0,0 00
+                   dateValue.Day *   1_00_00L ;             // Multiplier for day:           1 0,0 00   
+    }
+    public static long ToDateTimeOrderBy(this DateOnly? dateValue, TimeOnly? timeValue)
+    {             
+        if (dateValue is not null && timeValue is not null)
+            return dateValue.Value.Year *  1_00_00_00_00L + // Multiplier for year:   1 00, 00 0,0 00
+                   dateValue.Value.Month * 1_00_00_00L +    // Multiplier for month:     1, 00 0,0 00
+                   dateValue.Value.Day *   1_00_00L +       // Multiplier for day:           1 0,0 00
+                   timeValue.Value.Hour *  1_00L +          // Multiplier for hour:              1 00
+                   timeValue.Value.Minute;                  // Multiplier for minute:               1 
+        else if(dateValue is null && timeValue is not null)
+            return 9999_13_32_00_00L +                      // 9999 years, 13 months, 32 days, 00 hours, 00 minutes
+                                                            //                    999,9 13, 32 0,0 00     
+                   timeValue.Value.Hour *  1_00L +          // Multiplier for hour:              1 00
+                   timeValue.Value.Minute;                  // Multiplier for minute:               1
+
+        else if (dateValue is not null && timeValue is null)
+            return                                     
+                   dateValue.Value.Year *  1_00_00_00_00L + // Multiplier for year:   1 00, 00 0,0 00
+                   dateValue.Value.Month * 1_00_00_00L +    // Multiplier for month:     1, 00 0,0 00
+                   dateValue.Value.Day *   1_00_00L ;       // Multiplier for day:           1 0,0 00
+        else //both are null
+            return 9999_13_32_00_00L;                       // 9999 years, 13 months, 32 days, 25 hours, 61 minutes
+                                                            //                    999,9 13, 32 2,5 61    
+
+
+    }
+    public static long ToDateTimeOrderBy(this DateTime value)
+    {
+         return    value.Year *  1_00_00_00_00L +           // Multiplier for year:   1 00, 00 0,0 00
+                   value.Month * 1_00_00_00L +              // Multiplier for month:     1, 00 0,0 00
+                   value.Day *   1_00_00L +                 // Multiplier for day:           1 0,0 00
+                   value.Hour *  1_00L +                    // Multiplier for hour:              1 00
+                   value.Minute;                            // Multiplier for minute:               1
+
+    }
+    public static long ToDateTimeOrderBy(this DateTime? value)
+    {
+        if (value is null)
+            return 9999_13_32_00_00L;                       // 9999 years, 13 months, 32 days, 0 hours, 0 minutes
+                                                            //                    999,9 13, 32 0,0 00                  
+        else
+            return value.Value.Year *  1_00_00_00_00L +     // Multiplier for year:   1 00, 00 0,0 00
+                   value.Value.Month * 1_00_00_00L +        // Multiplier for month:     1, 00 0,0 00
+                   value.Value.Day *   1_00_00L +           // Multiplier for day:           1 0,0 00
+                   value.Value.Hour *  1_00L +              // Multiplier for hour:              1 00
+                   value.Value.Minute;                      // Multiplier for minute:               1
+
+    }
+
+    #endregion
+
+    #region IsNullOrEmpty, IsNotNullOrEmpty
+    public static bool IsNullOrEmpty(this DateTime? value) =>
+        value == null || value.Equals(new DateTime());
+
+    public static bool IsNotNullOrEmpty([NotNullWhen(true)] this DateTime? value) =>
+        !value.IsNullOrEmpty();
+
+    public static bool IsNullOrEmpty(this DateTime value) =>
+        value == null || value.Equals(new DateTime());
+
+    public static bool IsNotNullOrEmpty  ([NotNullWhen(true)] this DateTime value) =>
+        !value.IsNullOrEmpty();
+
+
+    public static bool IsNullOrEmpty(this DateOnly? value) =>
+        value == null || value.Equals(new DateOnly());
+
+    public static bool IsNotNullOrEmpty ([NotNullWhen(true)] this DateOnly? value) =>
+        !value.IsNullOrEmpty();
+    public static bool IsNullOrEmpty(this DateOnly value) =>
+        value == null || value.Equals(new DateOnly());
+
+    public static bool IsNotNullOrEmpty([NotNullWhen(true)] this DateOnly value) =>
+        !value.IsNullOrEmpty();
+
+    public static bool IsNullOrEmpty(this TimeOnly? value) =>
+        value == null || value.Equals(new TimeOnly());
+
+    public static bool IsNotNullOrEmpty ([NotNullWhen(true)] this TimeOnly? value) =>
+        !value.IsNullOrEmpty();
+    public static bool IsNullOrEmpty(this TimeOnly value) =>
+        value == null || value.Equals(new TimeOnly());
+
+    public static bool IsNotNullOrEmpty([NotNullWhen(true)] this TimeOnly value) =>
+        !value.IsNullOrEmpty();
+    #endregion
+
+    #region to filename format
+    public static string ToFileName(this DateTime dateTime)
+    {
+        // Ensure we use the current local time
+        DateTime localDateTime = dateTime.ToLocalTime();
+        // Format: yyyy-MM-dd'T'HH_mm_ss
+        return localDateTime.ToString("yyyy-MM-dd'T'HH_mm_ss");
+    }
+    #endregion
+}

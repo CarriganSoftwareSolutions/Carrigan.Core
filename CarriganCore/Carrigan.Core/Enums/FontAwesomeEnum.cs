@@ -1,0 +1,42 @@
+﻿namespace Carrigan.Core.Enums;
+
+public enum FontAwesomeEnum
+{
+    Add,
+    Back,
+    Calculator,
+    CalendarAdd,
+    CalendarSubtract,
+    CalendarXMark,
+    Cancel,
+    Close,
+    Confirm,
+    Delete,
+    Bible,
+    Edit,
+    Email,
+    Events,
+    Information,
+    LeftRight,
+    MapLocation,
+    News,
+    Phone,
+    Pray,
+    Print,
+    Recycle,
+    Repeat,
+    Reset,
+    RotateLeft,
+    RotateRight,
+    Save,
+    SearchMap,
+    Search,
+    Sort,
+    Submit,
+    Subscribe,
+    Unsubscribe,
+    UpDown,
+    Upload,
+    View
+}
+
