@@ -5,7 +5,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Authors>Carrigan Software Solutions LLC</Authors>
     <Description>
       Carrigan.Core is a core library designed to provide essential utilities and infrastructure for other projects. While not intended for standalone use, it serves as a dependency required by other packages to enable key functionality.
 
@@ -19,7 +18,7 @@
     <!--<PackageLicenseUrl></PackageLicenseUrl>-->
     <VersionPrefix>0.1.0-alpha</VersionPrefix>
     <!-- Fix the version string format by adding a build number -->
-    <Version>$(VersionPrefix).$(BuildDate)-$(SetGitCommitCount)</Version>
+    <Version>$(VersionPrefix).$(BuildDate)-$(GitCommits)</Version>
   </PropertyGroup>
 
 
@@ -30,11 +29,11 @@
     </PropertyGroup>
   </Target>
 
-  <Target Name="SetGitCommitCount" BeforeTargets="Build">
-    <Exec Command="git rev-list --count HEAD" Outputs="git_commit_count.txt" />
-    <ReadLinesFromFile File="git_commit_count.txt">
-      <Output TaskParameter="Lines" PropertyName="GitCommitCount" />
-    </ReadLinesFromFile>
-  </Target>
+  <ItemGroup>
+    <PackageReference Include="GitInfo" Version="3.5.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
 
 </Project>

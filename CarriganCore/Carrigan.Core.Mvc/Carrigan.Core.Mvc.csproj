@@ -1,5 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <!-- Ignore Spelling: Carrigan contentfiles buildtransitive -->
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -9,7 +10,7 @@
     <Description>
       Carrigan.Core.Mvc is a core library designed to provide essential utilities and infrastructure for other projects, specifically for projects already using Microsoft.AspNetCore.Mvc. While not intended for standalone use, it serves as a dependency required by other packages to enable key functionality.
 
-      This package contains primarily extension methods, helper methods, base classes, interfaces, data structures, enums, etc which are shared by multiple other packages. It is an internal-use library that supports the architecture of larger projects, ensuring consistency and re-usability across the code base.
+      This package contains primarily extension methods, helper methods, base classes, interfaces, data structures, enumerations, etc which are shared by multiple other packages. It is an internal-use library that supports the architecture of larger projects, ensuring consistency and re-usability across the code base.
 
       If you are working with other Carrigan Software Solutions projects or components in your solution, Carrigan.Core.Mvc will be automatically referenced as part of the required dependencies, if it requires this package as a dependency.
 
@@ -19,7 +20,7 @@
     <!--<PackageLicenseUrl></PackageLicenseUrl>-->
     <VersionPrefix>0.1.0-alpha</VersionPrefix>
     <!-- Fix the version string format by adding a build number -->
-    <Version>$(VersionPrefix).$(BuildDate)-$(SetGitCommitCount)</Version>
+    <Version>$(VersionPrefix).$(BuildDate)-$(GitCommits)</Version>
   </PropertyGroup>
 
   <Target Name="SetBuildDate" BeforeTargets="Build">
@@ -29,14 +30,12 @@
     </PropertyGroup>
   </Target>
 
-  <Target Name="SetGitCommitCount" BeforeTargets="Build">
-    <Exec Command="git rev-list --count HEAD" Outputs="git_commit_count.txt" />
-    <ReadLinesFromFile File="git_commit_count.txt">
-      <Output TaskParameter="Lines" PropertyName="GitCommitCount" />
-    </ReadLinesFromFile>
-  </Target>
 
   <ItemGroup>
+    <PackageReference Include="GitInfo" Version="3.5.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.3.0" />
   </ItemGroup>
 

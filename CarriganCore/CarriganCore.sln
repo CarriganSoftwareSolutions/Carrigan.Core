@@ -1,11 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36202.13 d17.14
+VisualStudioVersion = 17.14.36202.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Carrigan.Core", "Carrigan.Core\Carrigan.Core.csproj", "{F1445D1D-6510-4F05-A948-9D2C3E92B1BD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Carrigan.Core.Mvc", "Carrigan.Core.Mvc\Carrigan.Core.Mvc.csproj", "{B7AD4FD5-3F1E-4B84-A198-47008A0036EA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Carrigan.Core.Test", "Carrigan.Core.Test\Carrigan.Core.Test.csproj", "{F9D4F545-57C1-4E39-8DF9-DEF3F89D3128}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+		LICENSE = LICENSE
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +31,16 @@ Global
 		{B7AD4FD5-3F1E-4B84-A198-47008A0036EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7AD4FD5-3F1E-4B84-A198-47008A0036EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7AD4FD5-3F1E-4B84-A198-47008A0036EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9D4F545-57C1-4E39-8DF9-DEF3F89D3128}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9D4F545-57C1-4E39-8DF9-DEF3F89D3128}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9D4F545-57C1-4E39-8DF9-DEF3F89D3128}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9D4F545-57C1-4E39-8DF9-DEF3F89D3128}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F9D4F545-57C1-4E39-8DF9-DEF3F89D3128} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7BF97607-F199-4531-840E-43C14CBFA029}

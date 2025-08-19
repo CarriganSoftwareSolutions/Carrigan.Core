@@ -1,0 +1,21 @@
+<Project>
+  <PropertyGroup>
+    <Company>Carrigan Software Solutions LLC</Company>
+    <Authors>Carrigan Software Solutions LLC</Authors>
+
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <_CurrentYear>$([System.DateTime]::UtcNow.ToString('yyyy'))</_CurrentYear>
+    <Copyright>© $(_CurrentYear) $(Company)</Copyright>
+
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>    
+    
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)LICENSE"
+          Pack="true"
+          PackagePath="">
+      <Link>LICENSE</Link>
+    </None>
+  </ItemGroup>
+</Project>
