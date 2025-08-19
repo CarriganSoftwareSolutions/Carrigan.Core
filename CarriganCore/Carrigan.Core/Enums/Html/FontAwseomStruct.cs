@@ -1,4 +1,8 @@
-﻿namespace Carrigan.Core.Enums;
+﻿namespace Carrigan.Core.Enums.Html;
+
+/// <summary>
+/// Boilerplate to allow implicit conversions to and from string and the enum
+/// </summary>
 public class FontAwesomeStruct
 {
     public FontAwesomeEnum Value { get; }
@@ -17,6 +21,6 @@ public class FontAwesomeStruct
     // Implicit conversion from FontAwesomeIcon to string using a stub conversion function
     public static implicit operator string(FontAwesomeStruct icon)
     {
-        return icon.Value.GetIconText();
+        return icon.Value.ToHtml();
     }
 }

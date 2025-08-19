@@ -1,4 +1,4 @@
-﻿namespace Carrigan.Core.Enums;
+﻿namespace Carrigan.Core.Enums.Html;
 
 /// <summary>
 /// This is an enumeration of font awesome fonts being used for internal purposes.

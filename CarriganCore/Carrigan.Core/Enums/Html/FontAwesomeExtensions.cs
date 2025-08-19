@@ -1,9 +1,30 @@
-﻿namespace Carrigan.Core.Enums;
+﻿namespace Carrigan.Core.Enums.Html;
 
 //IGNORE SPELLING: xmark
+/// <summary>
+/// Extension methods for FontAwesomeEnum.
+/// </summary>
 public static class FontAwesomeEnumExtensions
 {
-    public static string GetIconText(this FontAwesomeEnum icon)
+    [Obsolete("Use ToHtml instead.", false)]
+    public static string GetIconText(this FontAwesomeEnum icon) =>
+        ToHtml(icon) ?? string.Empty;
+
+    [Obsolete("Use ToHtml instead.", false)]
+    public static string ToString(this FontAwesomeEnum icon) =>
+        ToHtml(icon) ?? string.Empty;
+
+
+    /// <summary>
+    /// Convert the enum to an HTML string for use in CSHTML
+    /// </summary>
+    /// <param name="icon">this variable for extension methods</param>
+    /// <returns><see cref="string"/> to represent an HTML string</returns>
+    /// <exception cref="ArgumentOutOfRangeException">
+    /// This occurs when a <see cref="FontAwesomeEnum"/> is being used that was not coded for in this method.
+    /// Fix this by adding the new enum value to the code in the method.
+    /// </exception>
+    public static string ToHtml(this FontAwesomeEnum icon)
     {
         return icon switch
         {
