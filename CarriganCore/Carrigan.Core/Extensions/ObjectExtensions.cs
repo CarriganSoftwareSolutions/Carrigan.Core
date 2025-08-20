@@ -5,6 +5,9 @@ using System.Reflection;
 
 namespace Carrigan.Core.Extensions;
 
+/// <summary>
+/// Extension methods for <see cref="object"/>
+/// </summary>
 public static class ObjectExtensions
 {
     #region HasValue

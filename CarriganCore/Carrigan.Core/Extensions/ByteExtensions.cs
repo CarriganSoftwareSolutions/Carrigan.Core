@@ -1,7 +1,16 @@
 ﻿namespace Carrigan.Core.Extensions;
 
+/// <summary>
+/// Extension methods for the ByteExtensions Type
+/// </summary>
 public static class ByteExtensions
 {
+    /// <summary>
+    /// Produces a string to indicate the size of a bytes array using the most significant unit of measurement. 
+    /// Ex: 3.14 GB
+    /// </summary>
+    /// <param name="byteArray">byte array data</param>
+    /// <returns>A string represent the size of a byte array using the most significant unit of measurement.</returns>
     public static string FormattedSize(this byte[] byteArray)
     {
         if (byteArray == null)

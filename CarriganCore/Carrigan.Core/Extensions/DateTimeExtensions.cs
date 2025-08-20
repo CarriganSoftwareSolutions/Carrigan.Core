@@ -2,6 +2,10 @@
 
 namespace Carrigan.Core.Extensions;
 //IGNORE SPELLING: dddd mm yyyy
+
+/// <summary>
+/// Extension methods for DateTime, TimeOnly and DateOnly
+/// </summary>
 public static class DateTimeExtensions
 {
     #region ToAmPmString
@@ -36,8 +40,18 @@ public static class DateTimeExtensions
 
     #region ToDateOnlyExtension
 
+    /// <summary>
+    /// Extracts the Date from a DateTime object.
+    /// </summary>
+    /// <param name="date">date as a <see cref="DateTime"/></param>
+    /// <returns>The date as a <see cref="DateOnly"/></returns>
     public static DateOnly ToDateOnly(this DateTime date) =>
         DateOnly.FromDateTime(date);
+    /// <summary>
+    /// Extracts the Date from a DateTime object.
+    /// </summary>
+    /// <param name="date">date as a <see cref="DateTime"/></param>
+    /// <returns>The date as a <see cref="DateOnly"/></returns>
     public static DateOnly? ToDateOnly(this DateTime? date) =>
         date?.ToDateOnly();
     #endregion
@@ -99,9 +113,19 @@ public static class DateTimeExtensions
     #endregion
 
     #region ToTimeOnlyExtension
+    /// <summary>
+    /// Extracts the Time as a <see cref="TimeOnly"/> from a <see cref="DateTime"/>
+    /// </summary>
+    /// <param name="time"></param>
+    /// <returns>the Time as a <see cref="TimeOnly"/> from a <see cref="DateTime"/></returns>
     public static TimeOnly ToTimeOnly(this DateTime time) =>
         TimeOnly.FromDateTime(time);
 
+    /// <summary>
+    /// Extracts the Time as a <see cref="TimeOnly"/> from a <see cref="DateTime"/>
+    /// </summary>
+    /// <param name="time"></param>
+    /// <returns>the Time as a <see cref="TimeOnly"/> from a <see cref="DateTime"/></returns>
     public static TimeOnly? ToTimeOnly(this DateTime? time) =>
         time?.ToTimeOnly();
     #endregion
@@ -192,12 +216,24 @@ public static class DateTimeExtensions
     #endregion
 
     #region Covert to long Order value
+    /// <summary>
+    /// Converts a <see cref="DateOnly"/> to a sortable <see cref="long"/>.
+    /// This is not likely to useful to any but me, and the one very specific use case I had.
+    /// </summary
+    /// <param name="value"> the date</param>
+    /// <returns>the <see cref="DateOnly"/> as a sortable <see cref="long"/></returns>
     public static long ToDateOrderBy(this DateOnly value)
     {
         return    value.Year *  1_00_00_00_00L +            // Multiplier for year:   1 00, 00 0,0 00
                   value.Month * 1_00_00_00L +               // Multiplier for month:     1, 00 0,0 00
                   value.Day *   1_00_00L;                   // Multiplier for day:           1 0,0 00
     }
+    /// <summary>
+    /// Converts a <see cref="DateOnly"/> to a sortable <see cref="long"/>.
+    /// This is not likely to useful to any but me, and the one very specific use case I had.
+    /// </summary
+    /// <param name="value"> the date</param>
+    /// <returns>the <see cref="DateOnly"/> as a sortable <see cref="long"/></returns>
     public static long ToDateOrderBy(this DateOnly? value)
     {
         if (value is null)
@@ -208,12 +244,26 @@ public static class DateTimeExtensions
                    value.Value.Month * 1_00_00_00L +        // Multiplier for month:     1, 00 0,0 00
                    value.Value.Day *   1_00_00L;            // Multiplier for day:           1 0,0 00
     }
+
+    /// <summary>
+    /// Converts a date as a <see cref="DateTime"/> to a sortable <see cref="long"/>.
+    /// This is not likely to useful to any but me, and the one very specific use case I had.
+    /// </summary
+    /// <param name="value"> the date</param>
+    /// <returns>the Date as a sortable <see cref="long"/></returns>
     public static long ToDateOrderBy(this DateTime value)
     {
          return    value.Year *  1_00_00_00_00L +           // Multiplier for year:   1 00, 00 0,0 00
                    value.Month * 1_00_00_00L +              // Multiplier for month:     1, 00 0,0 00
                    value.Day *   1_00_00L;                  // Multiplier for day:           1 0,0 00
     }
+
+    /// <summary>
+    /// Converts a date as a <see cref="DateTime"/> to a sortable <see cref="long"/>.
+    /// This is not likely to useful to any but me, and the one very specific use case I had.
+    /// </summary
+    /// <param name="value"> the date</param>
+    /// <returns>the Date as a sortable <see cref="long"/></returns>
     public static long ToDateOrderBy(this DateTime? value)
     {
         if (value is null)
@@ -225,6 +275,14 @@ public static class DateTimeExtensions
                    value.Value.Day *   1_00_00L;            // Multiplier for day:           1 0,0 00
 
     }
+
+
+    /// <summary>
+    /// Converts a <see cref="TimeOnly"/> to a sortable <see cref="long"/>.
+    /// This is not likely to useful to any but me, and the one very specific use case I had.
+    /// </summary
+    /// <param name="value"> the date</param>
+    /// <returns>the <see cref="TimeOnly"/> as a sortable <see cref="long"/></returns>
     public static long ToTimeOrderBy(this TimeOnly value)
     {
          return    
@@ -232,6 +290,13 @@ public static class DateTimeExtensions
                    value.Minute;                            // Multiplier for minute:               1
 
     }
+
+    /// <summary>
+    /// Converts a <see cref="TimeOnly"/> to a sortable <see cref="long"/>.
+    /// This is not likely to useful to any but me, and the one very specific use case I had.
+    /// </summary
+    /// <param name="value"> the date</param>
+    /// <returns>the <see cref="TimeOnly"/> as a sortable <see cref="long"/></returns>
     public static long ToTimeOrderBy(this TimeOnly? value)
     {
         if (value is null)
@@ -242,6 +307,13 @@ public static class DateTimeExtensions
                    value.Value.Minute;                      // Multiplier for minute:               1
 
     }
+
+    /// <summary>
+    /// Converts a <see cref="DateOnly"/> and a <see cref="TimeOnly"/> to a sortable <see cref="long"/>.
+    /// This is not likely to useful to any but me, and the one very specific use case I had.
+    /// </summary
+    /// <param name="value"> the date</param>
+    /// <returns>the <see cref="DateOnly"/> and a <see cref="TimeOnly"/> as a sortable <see cref="long"/></returns>
     public static long ToDateTimeOrderBy(this DateOnly dateValue, TimeOnly? timeValue)
     {
         if (timeValue is not null)
@@ -257,6 +329,13 @@ public static class DateTimeExtensions
                    dateValue.Month * 1_00_00_00L +          // Multiplier for month:     1, 00 0,0 00
                    dateValue.Day *   1_00_00L ;             // Multiplier for day:           1 0,0 00   
     }
+
+    /// <summary>
+    /// Converts a <see cref="DateOnly"/> and a <see cref="TimeOnly"/> to a sortable <see cref="long"/>.
+    /// This is not likely to useful to any but me, and the one very specific use case I had.
+    /// </summary
+    /// <param name="value"> the date</param>
+    /// <returns>the <see cref="DateOnly"/> and a <see cref="TimeOnly"/> as a sortable <see cref="long"/></returns>
     public static long ToDateTimeOrderBy(this DateOnly? dateValue, TimeOnly? timeValue)
     {             
         if (dateValue is not null && timeValue is not null)
@@ -282,6 +361,13 @@ public static class DateTimeExtensions
 
 
     }
+
+    /// <summary>
+    /// Converts a <see cref="DateTime"/> to a sortable <see cref="long"/>.
+    /// This is not likely to useful to any but me, and the one very specific use case I had.
+    /// </summary
+    /// <param name="value"> the date</param>
+    /// <returns>the <see cref="DateTime"/> as a sortable <see cref="long"/></returns>
     public static long ToDateTimeOrderBy(this DateTime value)
     {
          return    value.Year *  1_00_00_00_00L +           // Multiplier for year:   1 00, 00 0,0 00
@@ -291,6 +377,13 @@ public static class DateTimeExtensions
                    value.Minute;                            // Multiplier for minute:               1
 
     }
+
+    /// <summary>
+    /// Converts a <see cref="DateTime"/> to a sortable <see cref="long"/>.
+    /// This is not likely to useful to any but me, and the one very specific use case I had.
+    /// </summary
+    /// <param name="value"> the date</param>
+    /// <returns>the <see cref="DateTime"/> as a sortable <see cref="long"/></returns>
     public static long ToDateTimeOrderBy(this DateTime? value)
     {
         if (value is null)
@@ -308,43 +401,112 @@ public static class DateTimeExtensions
     #endregion
 
     #region IsNullOrEmpty, IsNotNullOrEmpty
+
+    /// <summary>
+    /// Extension method to determine if a <see cref="DateTime"/> is Null Or Empty
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns>true if the <see cref="DateTime"/> is null or Empty, else false</returns>
     public static bool IsNullOrEmpty(this DateTime? value) =>
         value == null || value.Equals(new DateTime());
 
+    /// <summary>
+    /// Extension method to determine if a <see cref="DateTime"/> is Not Null Or Empty
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns>false if the <see cref="DateTime"/> is null or Empty, else true</returns>
     public static bool IsNotNullOrEmpty([NotNullWhen(true)] this DateTime? value) =>
         !value.IsNullOrEmpty();
 
+    /// <summary>
+    /// Extension method to determine if a <see cref="DateTime"/> is Null Or Empty
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns>true if the <see cref="DateTime"/> is null or Empty, else false</returns>
     public static bool IsNullOrEmpty(this DateTime value) =>
         value == null || value.Equals(new DateTime());
 
+    /// <summary>
+    /// Extension method to determine if a <see cref="DateTime"/> is Not Null Or Empty
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns>false if the <see cref="DateTime"/> is null or Empty, else true</returns>
     public static bool IsNotNullOrEmpty  ([NotNullWhen(true)] this DateTime value) =>
         !value.IsNullOrEmpty();
 
 
+    /// <summary>
+    /// Extension method to determine if a <see cref="DateOnly"/> is Null Or Empty
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns>true if the <see cref="DateOnly"/> is null or Empty, else false</returns>
     public static bool IsNullOrEmpty(this DateOnly? value) =>
         value == null || value.Equals(new DateOnly());
 
+    /// <summary>
+    /// Extension method to determine if a <see cref="DateOnly"/> is Not Null Or Empty
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns>false if the <see cref="DateOnly"/> is null or Empty, else true</returns>
     public static bool IsNotNullOrEmpty ([NotNullWhen(true)] this DateOnly? value) =>
         !value.IsNullOrEmpty();
+
+    /// <summary>
+    /// Extension method to determine if a <see cref="DateOnly"/> is Null Or Empty
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns>true if the <see cref="DateOnly"/> is null or Empty, else false</returns>
     public static bool IsNullOrEmpty(this DateOnly value) =>
         value == null || value.Equals(new DateOnly());
 
+    /// <summary>
+    /// Extension method to determine if a <see cref="DateOnly"/> is Not Null Or Empty
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns>false if the <see cref="DateOnly"/> is null or Empty, else true</returns>
     public static bool IsNotNullOrEmpty([NotNullWhen(true)] this DateOnly value) =>
         !value.IsNullOrEmpty();
 
+    /// <summary>
+    /// Extension method to determine if a <see cref="TimeOnly"/> is Null Or Empty
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns>true if the <see cref="TimeOnly"/> is null or Empty, else false</returns>
     public static bool IsNullOrEmpty(this TimeOnly? value) =>
         value == null || value.Equals(new TimeOnly());
 
+    /// <summary>
+    /// Extension method to determine if a <see cref="TimeOnly"/> is Not Null Or Empty
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns>false if the <see cref="TimeOnly"/> is null or Empty, else true</returns>
     public static bool IsNotNullOrEmpty ([NotNullWhen(true)] this TimeOnly? value) =>
         !value.IsNullOrEmpty();
+
+    /// <summary>
+    /// Extension method to determine if a <see cref="TimeOnly"/> is Null Or Empty
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns>true if the <see cref="TimeOnly"/> is null or Empty, else false</returns>
     public static bool IsNullOrEmpty(this TimeOnly value) =>
         value == null || value.Equals(new TimeOnly());
 
+    /// <summary>
+    /// Extension method to determine if a <see cref="TimeOnly"/> is Not Null Or Empty
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns>false if the <see cref="TimeOnly"/> is null or Empty, else true</returns>
     public static bool IsNotNullOrEmpty([NotNullWhen(true)] this TimeOnly value) =>
         !value.IsNullOrEmpty();
     #endregion
 
     #region to filename format
+    /// <summary>
+    /// Creates a string for a filename of a <see cref="DateTime"/> object in a format that is date sortable.
+    /// Intended to use either as the full filename or the prefix for a filename.
+    /// </summary>
+    /// <param name="dateTime"></param>
+    /// <returns></returns>
     public static string ToFileName(this DateTime dateTime)
     {
         // Ensure we use the current local time

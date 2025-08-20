@@ -1,13 +1,30 @@
 ﻿namespace Carrigan.Core.Extensions;
 
+/// <summary>
+/// <see cref="Type"/> extension methods
+/// </summary>
 public static class TypeExtensions
 {
     #region IsBoolType
+    /// <summary>
+    /// Returns true if the <see cref="Type"/> is <see cref="bool"/> else false
+    /// </summary>
+    /// <param name="type">the type being tested</param>
+    /// <returns>
+    /// Returns true if the <see cref="Type"/> is <see cref="bool"/> else false
+    /// </returns>
     public static bool IsBoolType(this Type type) =>
         type == typeof(bool) || type == typeof(bool?);
     #endregion
 
     #region IsDateOnlyType
+    /// <summary>
+    /// Returns true if the <see cref="Type"/> is <see cref="DateOnly"/> else false
+    /// </summary>
+    /// <param name="type">the type being tested</param>
+    /// <returns>
+    /// Returns true if the <see cref="Type"/> is <see cref="DateOnly"/> else false
+    /// </returns>
     public static bool IsDateOnlyType(this Type type) =>
         type == typeof(DateOnly) || type == typeof(DateOnly?);
     #endregion
@@ -20,7 +37,6 @@ public static class TypeExtensions
     /// <returns>
     ///   <c>true</c> if the specified type is a floating-point type or a nullable floating-point type; otherwise, <c>false</c>.
     /// </returns>
-
     public static bool IsFloatingPointType(this Type type)
     {
         ArgumentNullException.ThrowIfNull(type);
@@ -58,12 +74,26 @@ public static class TypeExtensions
     }
     #endregion
 
+    /// <summary>
+    /// Returns true if the <see cref="Type"/> is <see cref="string"/> else false
+    /// </summary>
+    /// <param name="type">the type being tested</param>
+    /// <returns>
+    /// Returns true if the <see cref="Type"/> is <see cref="string"/> else false
+    /// </returns>
     #region IsStringType
     public static bool IsStringType(this Type type) =>
         type == typeof(string);
     #endregion
 
     #region IsTimeOnlyType
+    /// <summary>
+    /// Returns true if the <see cref="Type"/> is <see cref="TimeOnly"/> else false
+    /// </summary>
+    /// <param name="type">the type being tested</param>
+    /// <returns>
+    /// Returns true if the <see cref="Type"/> is <see cref="TimeOnly"/> else false
+    /// </returns>
     public static bool IsTimeOnlyType(this Type type) =>
         type == typeof(TimeOnly) || type == typeof(TimeOnly?);
     #endregion
