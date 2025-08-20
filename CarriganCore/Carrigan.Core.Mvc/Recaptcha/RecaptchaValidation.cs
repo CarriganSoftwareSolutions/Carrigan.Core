@@ -5,13 +5,28 @@ using System.Text.Json;
 
 namespace Carrigan.Core.Mvc.Recaptcha;
 
+/// <summary>
+/// Class used for Google Recaptcha validation
+/// This is very specific to my own uses in projects, and likely of little value to anyone else.
+/// </summary>
 public class RecaptchaValidation
 {
     private IRecaptchaConfiguration _recaptchaConfiguration;
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="recaptchaConfiguration">contains definitions for keys</param>
     public RecaptchaValidation(IRecaptchaConfiguration recaptchaConfiguration)
     {
         _recaptchaConfiguration = recaptchaConfiguration;
     }
+
+    /// <summary>
+    /// Perform V3 validation
+    /// </summary>
+    /// <param name="modelState">provide the model state, which is going to get updated with any relevant validation errors.</param>
+    /// <param name="token">provide the token to validate</param>
+    /// <returns><see cref="Task{bool}"/> <c>true</c> if the validation passes, else <c>false</c></returns>
     public async Task<bool> ValidateV3(ModelStateDictionary modelState, string? token)
     {
         ReCaptchaV3Response? recaptchaResponse = null;
@@ -41,6 +56,15 @@ public class RecaptchaValidation
             return true;
         }
     }
+
+
+
+    /// <summary>
+    /// Perform V2 validation
+    /// </summary>
+    /// <param name="modelState">provide the model state, which is going to get updated with any relevant validation errors.</param>
+    /// <param name="recaptchaResponse">provide the recaptcha response to validate</param>
+    /// <returns><see cref="Task{bool}"/> <c>true</c> if the validation passes, else <c>false</c></returns>
     public async Task<bool> ValidateV2(ModelStateDictionary modelState, string recaptchaResponse)
     {
         // Prepare the verification URL
