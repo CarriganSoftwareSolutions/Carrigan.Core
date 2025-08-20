@@ -14,7 +14,6 @@ public static class FontAwesomeEnumExtensions
     public static string ToString(this FontAwesomeEnum icon) =>
         ToHtml(icon) ?? string.Empty;
 
-
     /// <summary>
     /// Convert the enum to an HTML string for use in CSHTML
     /// </summary>
