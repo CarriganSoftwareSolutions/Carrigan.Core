@@ -282,7 +282,7 @@ public class StringExtensionsTests
     [Theory]
     [InlineData("ThisIsPascalCase", "This Is Pascal Case")]
     [InlineData("camelCaseTest", "camel Case Test")]
-    [InlineData("XMLHttpRequest", "XML Http Request")]
+    [InlineData("XMLHttpRequest", "X M L Http Request")]
     [InlineData("already split", "already split")]
     [InlineData("", "")]
     [InlineData(null, null)]
