@@ -2,11 +2,11 @@
 
   <!-- Ignore Spelling: Carrigan contentfiles buildtransitive -->
   <PropertyGroup>
+    <PackageId>Carrigan.Core.Mvc</PackageId>
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Authors>Carrigan Software Solutions LLC</Authors>
     <Description>
       Carrigan.Core.Mvc is a core library designed to provide essential utilities and infrastructure for other projects, specifically for projects already using Microsoft.AspNetCore.Mvc. While not intended for standalone use, it serves as a dependency required by other packages to enable key functionality.
 

@@ -7,8 +7,11 @@
     <_CurrentYear>$([System.DateTime]::UtcNow.ToString('yyyy'))</_CurrentYear>
     <Copyright>© $(_CurrentYear) $(Company)</Copyright>
 
+    <RepositoryUrl>https://github.com/CarriganSoftwareSolutions/Carrigan.Core</RepositoryUrl>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
 
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
 
     <!-- Base version: x.y.z For Carrigan.Core -->
     <CoreVersionBase>0.1.0</CoreVersionBase>
