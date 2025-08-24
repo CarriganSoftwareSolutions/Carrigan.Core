@@ -14,20 +14,26 @@
 
       This package is not intended for direct consumption, but if you really want to use my pointless helper methods, feel free.
     </Description>
-    <PackageTags>core, utilities, dependency, internal</PackageTags>
-    <!--<PackageLicenseUrl></PackageLicenseUrl>-->
-    <VersionPrefix>0.1.0-alpha</VersionPrefix>
-    <!-- Fix the version string format by adding a build number -->
-    <Version>$(VersionPrefix).$(BuildDate)-$(GitCommits)</Version>
+    <PackageTags>core, utilities, dependency, internal</PackageTags>   
+
+    <!-- Build date is evaluation-time (no target needed) -->
+    <BuildDate>$([System.DateTime]::UtcNow.ToString("yyyyMMdd.HHmm"))</BuildDate>
+
+    <!-- Base version: x.y.z -->
+    <VersionBase>$(CoreVersionBase)</VersionBase>
+    <!-- Default beta release label (empty on Release builds) -->
+    <PreReleaseLabel>$(CorePreReleaseLabel)</PreReleaseLabel>
+
+    <!-- Compose the postfix: e.g., -alpha.20250822.2140 -->
+    <VersionPostFix Condition="'$(PreReleaseLabel)'!=''">-$(PreReleaseLabel).$(BuildDate)</VersionPostFix>
+
+    <VersionPostFix>-$(PreReleaseLabel).$(BuildDate)-$(GitCommits)</VersionPostFix>
+
+    <!-- Final package/assembly version -->
+    <Version>$(VersionBase)$(VersionPostFix)</Version>
+    <PackageVersion>$(Version)</PackageVersion>
+
   </PropertyGroup>
-
-
-  <Target Name="SetBuildDate" BeforeTargets="Build">
-    <PropertyGroup>
-      <BuildDate>$([System.DateTime]::Now.ToString("yyyyMMdd.HHmm"))</BuildDate>
-      <!-- Generate a date-based build number -->
-    </PropertyGroup>
-  </Target>
 
   <ItemGroup>
     <PackageReference Include="GitInfo" Version="3.5.0">

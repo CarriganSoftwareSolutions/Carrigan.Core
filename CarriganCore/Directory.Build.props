@@ -7,8 +7,20 @@
     <_CurrentYear>$([System.DateTime]::UtcNow.ToString('yyyy'))</_CurrentYear>
     <Copyright>© $(_CurrentYear) $(Company)</Copyright>
 
-    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>    
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+
+
+    <!-- Base version: x.y.z For Carrigan.Core -->
+    <CoreVersionBase>0.1.0</CoreVersionBase>
+    <!-- Default beta release label (empty on Release builds) For Carrigan.Core -->
+    <CorePreReleaseLabel>alpha</CorePreReleaseLabel>
     
+    <!-- Base version: x.y.z For Carrigan.Core -->
+    <CoreMvcVersionBase>0.1.0</CoreMvcVersionBase>
+    <!-- Default beta release label (empty on Release builds) For Carrigan.Core -->
+    <CoreMvcPreReleaseLabel>alpha</CoreMvcPreReleaseLabel>
+    
+    <GitRemote>origin</GitRemote>
   </PropertyGroup>
 
   <ItemGroup>
