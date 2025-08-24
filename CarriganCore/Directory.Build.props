@@ -24,6 +24,7 @@
     <CoreMvcPreReleaseLabel>alpha</CoreMvcPreReleaseLabel>
     
     <GitRemote>origin</GitRemote>
+    <GitVersion>false</GitVersion>
   </PropertyGroup>
 
   <ItemGroup>

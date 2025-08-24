@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <PackageId>Carrigan.Core</PackageId>
     <TargetFramework>net9.0</TargetFramework>
@@ -15,25 +14,11 @@
 
       This package is not intended for direct consumption, but if you really want to use my pointless helper methods, feel free.
     </Description>
-    <PackageTags>core, utilities, dependency, internal</PackageTags>   
+    <PackageTags>core, utilities, dependency, internal</PackageTags>
+  </PropertyGroup>
 
-    <!-- Build date is evaluation-time (no target needed) -->
-    <BuildDate>$([System.DateTime]::UtcNow.ToString("yyyyMMdd.HHmm"))</BuildDate>
-
-    <!-- Base version: x.y.z -->
-    <VersionBase>$(CoreVersionBase)</VersionBase>
-    <!-- Default beta release label (empty on Release builds) -->
-    <PreReleaseLabel>$(CorePreReleaseLabel)</PreReleaseLabel>
-
-    <!-- Compose the postfix: e.g., -alpha.20250822.2140 -->
-    <VersionPostFix Condition="'$(PreReleaseLabel)'!=''">-$(PreReleaseLabel).$(BuildDate)</VersionPostFix>
-
-    <VersionPostFix>-$(PreReleaseLabel).$(BuildDate)-$(GitCommits)</VersionPostFix>
-
-    <!-- Final package/assembly version -->
-    <Version>$(VersionBase)$(VersionPostFix)</Version>
-    <PackageVersion>$(Version)</PackageVersion>
-
+  <PropertyGroup>
+    <UseGitInfo>true</UseGitInfo>
   </PropertyGroup>
 
   <ItemGroup>
@@ -42,5 +27,4 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
-
 </Project>

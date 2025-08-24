@@ -17,22 +17,10 @@
       This package is not intended for direct consumption, but if you really want to use my pointless helper methods, feel free.
     </Description>
     <PackageTags>core, utilities, dependency, internal</PackageTags>
-    <!-- Build date is evaluation-time (no target needed) -->
-    <BuildDate>$([System.DateTime]::UtcNow.ToString("yyyyMMdd.HHmm"))</BuildDate>
+  </PropertyGroup>
 
-    <!-- Base version: x.y.z -->
-    <VersionBase>$(CoreMvcVersionBase)</VersionBase>
-    <!-- Default beta release label (empty on Release builds) -->
-    <PreReleaseLabel>$(CoreMvcPreReleaseLabel)</PreReleaseLabel>
-
-    <!-- Compose the postfix: e.g., -alpha.20250822.2140 -->
-    <VersionPostFix Condition="'$(PreReleaseLabel)'!=''">-$(PreReleaseLabel).$(BuildDate)</VersionPostFix>
-
-    <VersionPostFix>-$(PreReleaseLabel).$(BuildDate)-$(GitCommits)</VersionPostFix>
-
-    <!-- Final package/assembly version -->
-    <Version>$(VersionBase)$(VersionPostFix)</Version>
-    <PackageVersion>$(Version)</PackageVersion>
+  <PropertyGroup>
+    <UseGitInfo>true</UseGitInfo>
   </PropertyGroup>
 
   <ItemGroup>
