@@ -15,6 +15,7 @@
       This package is not intended for direct consumption, but if you really want to use my pointless helper methods, feel free.
     </Description>
     <PackageTags>core, utilities, dependency, internal</PackageTags>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -26,5 +27,9 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Include="readme.md" Pack="true" PackagePath="\"/>
   </ItemGroup>
 </Project>
