@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
 namespace Carrigan.Core.Extensions;
-//IGNORE SPELLING: dddd mm yyyy
+//IGNORE SPELLING: dddd mm yyyy utc
 
 /// <summary>
 /// Extension methods for DateTime, TimeOnly and DateOnly
@@ -515,4 +515,54 @@ public static class DateTimeExtensions
         return localDateTime.ToString("yyyy-MM-dd'T'HH_mm_ss");
     }
     #endregion
+
+    /// <summary>
+    /// Formats a <see cref="TimeSpan"/> as human-readable text including only non-zero
+    /// days, hours, and minutes. If all are zero, returns empty string.
+    /// </summary>
+    /// <remarks>
+    /// Examples:
+    /// -  /// 1 day, 2 hours, 5 minutes
+    /// -  /// 2 hours, 1 minute
+    /// -  /// 3 minutes
+    /// -  /// 0 minutes
+    /// -  /// -1 day, 3 hours
+    /// </remarks>
+    /// <param name="Duration">The time span to format.</param>
+    /// <returns>A string like "1 day, 2 hours, 5 minutes".</returns>
+    public static string ToHumanString(this TimeSpan Duration)
+    {
+        bool isNegative = Duration.Ticks < 0;
+        TimeSpan absoluteDuration = Duration.Duration();
+
+        List<string> subtext = [];
+        if (absoluteDuration.Days != 0)
+            subtext.Add($"{absoluteDuration.Days} {(absoluteDuration.Days == 1 ? "day" : "days")}");
+        if (absoluteDuration.Hours != 0)
+            subtext.Add($"{absoluteDuration.Hours} {(absoluteDuration.Hours == 1 ? "hour" : "hours")}");
+        if (absoluteDuration.Minutes != 0)
+            subtext.Add($"{absoluteDuration.Minutes} {(absoluteDuration.Minutes == 1 ? "minute" : "minutes")}");
+
+        return isNegative ? "-" + subtext.JoinAnd() : subtext.JoinAnd();
+    }
+
+
+    /// <summary>
+    /// Formats a <see cref="TimeSpan"/> as human-readable text including only non-zero
+    /// days, hours, and minutes. If all are zero, returns empty string.
+    /// </summary>
+    /// <remarks>
+    /// Examples:
+    /// -  /// 1 day, 2 hours, 5 minutes
+    /// -  /// 2 hours, 1 minute
+    /// -  /// 3 minutes
+    /// -  /// 0 minutes
+    /// -  /// -1 day, 3 hours
+    /// </remarks>
+    /// <param name="Duration">The time span to format.</param>
+    /// <returns>A string like "1 day, 2 hours, 5 minutes".</returns>
+    public static string ToHumanString(this TimeSpan? Duration)
+    {
+        return Duration is null ? string.Empty : Duration.Value.ToHumanString();
+    }
 }
