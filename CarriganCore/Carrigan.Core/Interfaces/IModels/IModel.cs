@@ -2,6 +2,7 @@
 
 public interface IModel
 {
+    public DateTime? LastUpdated { get; set; }
     /// <summary>
     /// Note: this interface meant for use with Entity Framework models. This will be of little interest to anyone besides myself.
     /// This a sort of validation that the  perquisites for saving the record have been met.
