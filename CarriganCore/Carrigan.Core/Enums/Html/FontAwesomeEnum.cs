@@ -21,11 +21,15 @@ public enum FontAwesomeEnum
     Edit,
     Email,
     Events,
+    Facebook,
     Information,
+    Instagram,
     LeftRight,
+    LinkedIn,
     MapLocation,
     News,
     Phone,
+    Pinterest,
     Pray,
     Print,
     Recycle,
@@ -39,9 +43,12 @@ public enum FontAwesomeEnum
     Sort,
     Submit,
     Subscribe,
+    TikTok,
+    Twitter,
     Unsubscribe,
     UpDown,
     Upload,
-    View
+    View,
+    YouTube
 }
 

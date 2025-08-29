@@ -1,7 +1,7 @@
 ﻿namespace Carrigan.Core.Enums.Html;
 
-//IGNORE SPELLING: xmark
-/// <summary>
+//IGNORE SPELLING: xmark facebook instagram linkedin youtube tiktok pinterest
+/// <summary> 
 /// Extension methods for FontAwesomeEnum.
 /// </summary>
 public static class FontAwesomeEnumExtensions
@@ -41,12 +41,16 @@ public static class FontAwesomeEnumExtensions
             FontAwesomeEnum.Edit => "fa-solid fa-file-pen",
             FontAwesomeEnum.Email => "fa-solid fa-envelope",
             FontAwesomeEnum.Events => "fa-solid fa-calendar-days",
+            FontAwesomeEnum.Facebook => "fa-brands fa-facebook",
             FontAwesomeEnum.Information => "fa-solid fa-circle-info",
+            FontAwesomeEnum.Instagram => "fa-brands fa-instagram",
             FontAwesomeEnum.LeftRight => "fa-solid fa-right-left",
+            FontAwesomeEnum.LinkedIn => "fa-brands fa-linkedin",
             FontAwesomeEnum.MapLocation => "fa-solid fa-map-location-dot",
             FontAwesomeEnum.News => "fa-regular fa-newspaper",
             FontAwesomeEnum.Phone => "fa-solid fa-phone",
             FontAwesomeEnum.Pray => "fa-solid fa-hands-praying",
+            FontAwesomeEnum.Pinterest => "fa-brands fa-pinterest",
             FontAwesomeEnum.Print => "fa-solid fa-print",
             FontAwesomeEnum.Recycle => "fa-solid fa-recycle",
             FontAwesomeEnum.Repeat => "fa-solid fa-repeat",
@@ -59,10 +63,13 @@ public static class FontAwesomeEnumExtensions
             FontAwesomeEnum.Sort => "fa-solid fa-arrow-down-1-9",
             FontAwesomeEnum.Submit => "fa-solid fa-paper-plane",
             FontAwesomeEnum.Subscribe => "fa-regular fa-bell",
+            FontAwesomeEnum.TikTok => "fa-brands fa-tiktok",
+            FontAwesomeEnum.Twitter => "fa-brands fa-twitter",
             FontAwesomeEnum.Unsubscribe => "fa-regular fa-bell-slash",
             FontAwesomeEnum.UpDown => "fas fa-exchange-alt rotate-90",
             FontAwesomeEnum.Upload => "fa-solid fa-upload",
             FontAwesomeEnum.View => "fa-solid fa-magnifying-glass",
+            FontAwesomeEnum.YouTube => "fa-brands fa-youtube",
             _ => throw new ArgumentOutOfRangeException(nameof(icon), icon, "Unknown FontAwesomeEnum value"),
         };
     }
