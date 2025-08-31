@@ -1,3 +1,9 @@
+name: Publish to NuGet (version/0.x)
+
+on:
+  push:
+    branches: [ version/0.x ]
+
 jobs:
   build-pack-publish:
     runs-on: self-hosted
@@ -21,7 +27,6 @@ jobs:
       - name: Detect version changes (cmd)
         id: changed
         run: |
-          rem Compute a safe base; if no parent commit, treat as changed
           for /f "usebackq delims=" %%A in (`git rev-parse HEAD~1 2^>NUL`) do set BASE=%%A
           if not defined BASE (
             echo changed=true>>"%GITHUB_OUTPUT%"
