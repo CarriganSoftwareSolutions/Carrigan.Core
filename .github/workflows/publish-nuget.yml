@@ -12,6 +12,7 @@ jobs:
 
     steps:
       - name: Debug Git presence
+        shell: cmd
         run: |
             where git
             git --version
