@@ -21,7 +21,7 @@ public static class FontAwesomeEnumExtensions
     /// <returns><see cref="string"/> to represent an HTML string</returns>
     /// <exception cref="ArgumentOutOfRangeException">
     /// This occurs when a <see cref="FontAwesomeEnum"/> is being used that was not coded for in this method.
-    /// Fix this by adding the new enum value to the code in the method.
+    /// Fix this by adding the new enum value to the code in the method. 
     /// </exception>
     public static string ToHtml(this FontAwesomeEnum icon)
     {
