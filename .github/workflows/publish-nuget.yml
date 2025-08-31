@@ -1,68 +1,71 @@
-name: Publish to NuGet (version change)
-
-on:
-  push:
-    branches: [ version/0.x ]
-
 jobs:
   build-pack-publish:
-    runs-on: self-hosted   # or 'windows-latest'
+    runs-on: self-hosted
     env:
       NUGET_SOURCE: https://api.nuget.org/v3/index.json
+    defaults:
+      run:
+        shell: cmd
 
     steps:
-      - name: Debug Git presence
-        shell: cmd
-        run: |
-            where git
-            git --version
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0   # needed for git diff
+          fetch-depth: 0
 
-      - name: Detect version changes
-        id: changed
-        shell: pwsh
+      - name: Debug Git presence
         run: |
-          $base = (git rev-parse HEAD~1)
-          $files = git diff --name-only $base HEAD -- '**/*.csproj'
-          if (-not $files) { echo "changed=false" >> $env:GITHUB_OUTPUT; exit 0 }
+          where git
+          git --version
 
-          $pattern = '<Version>|<VersionPrefix>|<VersionSuffix>'
-          $changed = $false
-          foreach ($f in $files) {
-            $diff = git diff $base HEAD -- "$f"
-            if ($diff -match $pattern) { $changed = $true }
-          }
-          echo "changed=$changed" >> $env:GITHUB_OUTPUT
+      - name: Detect version changes (cmd)
+        id: changed
+        run: |
+          rem Compute a safe base; if no parent commit, treat as changed
+          for /f "usebackq delims=" %%A in (`git rev-parse HEAD~1 2^>NUL`) do set BASE=%%A
+          if not defined BASE (
+            echo changed=true>>"%GITHUB_OUTPUT%"
+            goto :eof
+          )
+          set CHANGED=false
+          for /f "usebackq delims=" %%F in (`git diff --name-only %BASE% HEAD -- "**/*.csproj"`) do (
+            call :checkfile "%%F"
+          )
+          echo changed=%CHANGED%>>"%GITHUB_OUTPUT%"
+          goto :eof
+
+          :checkfile
+          set FILE=%~1
+          git diff %BASE% HEAD -- "%FILE%" | findstr /r /c:"<Version>" /c:"<VersionPrefix>" /c:"<VersionSuffix>" >NUL
+          if not errorlevel 1 set CHANGED=true
+          goto :eof
 
       - name: Stop if no version bump
-        if: steps.changed.outputs.changed != 'True'
-        run: echo "No version changes detected; skipping publish."
+        if: steps.changed.outputs.changed != 'true'
+        run: echo No version changes detected; skipping publish.
 
       - name: Setup .NET
-        if: steps.changed.outputs.changed == 'True'
+        if: steps.changed.outputs.changed == 'true'
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.0.x'
 
       - name: Restore
-        if: steps.changed.outputs.changed == 'True'
+        if: steps.changed.outputs.changed == 'true'
         run: dotnet restore CarriganCore.sln
 
       - name: Build (Release)
-        if: steps.changed.outputs.changed == 'True'
+        if: steps.changed.outputs.changed == 'true'
         run: dotnet build CarriganCore.sln --configuration Release --no-restore
 
       - name: Pack solution
-        if: steps.changed.outputs.changed == 'True'
+        if: steps.changed.outputs.changed == 'true'
         run: dotnet pack CarriganCore.sln --configuration Release --no-build -o .\artifacts
 
       - name: Publish to NuGet
-        if: steps.changed.outputs.changed == 'True'
+        if: steps.changed.outputs.changed == 'true'
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
         run: |
-          dotnet nuget push .\artifacts\*.nupkg --api-key "$env:NUGET_API_KEY" --source $env:NUGET_SOURCE --skip-duplicate
-          dotnet nuget push .\artifacts\*.snupkg --api-key "$env:NUGET_API_KEY" --source $env:NUGET_SOURCE --skip-duplicate
+          dotnet nuget push .\artifacts\*.nupkg --api-key "%NUGET_API_KEY%" --source %NUGET_SOURCE% --skip-duplicate
+          dotnet nuget push .\artifacts\*.snupkg --api-key "%NUGET_API_KEY%" --source %NUGET_SOURCE% --skip-duplicate
