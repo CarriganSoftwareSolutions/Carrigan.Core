@@ -11,6 +11,10 @@ jobs:
       NUGET_SOURCE: https://api.nuget.org/v3/index.json
 
     steps:
+      - name: Debug Git presence
+        run: |
+            where git
+            git --version
       - name: Checkout
         uses: actions/checkout@v4
         with:
