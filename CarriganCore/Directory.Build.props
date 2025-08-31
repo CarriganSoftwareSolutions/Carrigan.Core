@@ -12,6 +12,9 @@
 
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    <Deterministic>true</Deterministic>
 
     <!-- Base version: x.y.z For Carrigan.Core -->
     <CoreVersionBase>0.1.0</CoreVersionBase>
