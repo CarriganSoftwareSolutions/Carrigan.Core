@@ -24,6 +24,9 @@ jobs:
           where git
           git --version
 
+      - name: Ensure dotnet install directory exists
+        run: if not exist "C:\actions-runner\dotnet" mkdir "C:\actions-runner\dotnet"
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
