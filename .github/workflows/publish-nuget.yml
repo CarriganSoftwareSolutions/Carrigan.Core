@@ -9,6 +9,9 @@ jobs:
     runs-on: self-hosted
     env:
       NUGET_SOURCE: https://api.nuget.org/v3/index.json
+      DOTNET_INSTALL_DIR: C:\actions-runner\dotnet   
+      DOTNET_ROOT: C:\actions-runner\dotnet
+      PATH: C:\actions-runner\dotnet;%PATH%
     defaults:
       run:
         shell: cmd
@@ -31,6 +34,9 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.0.x'
+                    
+      - name: dotnet info
+        run: dotnet --info
 
       - name: Restore
         run: dotnet restore CarriganCore.sln
