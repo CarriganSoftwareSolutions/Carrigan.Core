@@ -38,13 +38,13 @@ jobs:
         run: dotnet --info
 
       - name: Restore
-        run: dotnet restore CarriganCore.sln
+        run: dotnet restore CarriganCore\CarriganCore.sln
 
       - name: Build (Release)
-        run: dotnet build CarriganCore.sln --configuration Release --no-restore
+        run: dotnet build CarriganCore\CarriganCore.sln --configuration Release --no-restore
 
       - name: Pack solution
-        run: dotnet pack CarriganCore.sln --configuration Release --no-build -o .\artifacts
+        run: dotnet pack CarriganCore\CarriganCore.sln --configuration Release --no-build -o .\artifacts
 
       - name: Publish to NuGet
         env:
