@@ -24,51 +24,21 @@ jobs:
           where git
           git --version
 
-      - name: Detect version changes (cmd)
-        id: changed
-        run: |
-          for /f "usebackq delims=" %%A in (`git rev-parse HEAD~1 2^>NUL`) do set BASE=%%A
-          if not defined BASE (
-            echo changed=true>>"%GITHUB_OUTPUT%"
-            goto :eof
-          )
-          set CHANGED=false
-          for /f "usebackq delims=" %%F in (`git diff --name-only %BASE% HEAD -- "**/*.csproj"`) do (
-            call :checkfile "%%F"
-          )
-          echo changed=%CHANGED%>>"%GITHUB_OUTPUT%"
-          goto :eof
-
-          :checkfile
-          set FILE=%~1
-          git diff %BASE% HEAD -- "%FILE%" | findstr /r /c:"<Version>" /c:"<VersionPrefix>" /c:"<VersionSuffix>" >NUL
-          if not errorlevel 1 set CHANGED=true
-          goto :eof
-
-      - name: Stop if no version bump
-        if: steps.changed.outputs.changed != 'true'
-        run: echo No version changes detected; skipping publish.
-
       - name: Setup .NET
-        if: steps.changed.outputs.changed == 'true'
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.0.x'
 
       - name: Restore
-        if: steps.changed.outputs.changed == 'true'
         run: dotnet restore CarriganCore.sln
 
       - name: Build (Release)
-        if: steps.changed.outputs.changed == 'true'
         run: dotnet build CarriganCore.sln --configuration Release --no-restore
 
       - name: Pack solution
-        if: steps.changed.outputs.changed == 'true'
         run: dotnet pack CarriganCore.sln --configuration Release --no-build -o .\artifacts
 
       - name: Publish to NuGet
-        if: steps.changed.outputs.changed == 'true'
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
         run: |
