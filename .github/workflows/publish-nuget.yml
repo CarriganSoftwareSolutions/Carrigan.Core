@@ -52,3 +52,7 @@ jobs:
         run: |
           dotnet nuget push .\artifacts\*.nupkg --api-key "%NUGET_API_KEY%" --source %NUGET_SOURCE% --skip-duplicate
           dotnet nuget push .\artifacts\*.snupkg --api-key "%NUGET_API_KEY%" --source %NUGET_SOURCE% --skip-duplicate
+
+      - name: Publish to local feed
+        run: |
+          dotnet nuget push .\artifacts\*.nupkg --source "C:\LocalNuGet" --skip-duplicate
