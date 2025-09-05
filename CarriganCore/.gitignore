@@ -3,6 +3,10 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
+# Visual Studio cruft(cruft?)
+.vs/
+*.cache
+
 # User-specific files
 *.rsuser
 *.suo
@@ -184,7 +188,9 @@ publish/
 *.azurePubxml
 # Note: Comment the next line if you want to checkin your web deploy settings,
 # but database connection strings (with potential passwords) will be unencrypted
-*.pubxml
+#*.pubxml
+#the secrets are in *.pubxml.user
+*.pubxml.user
 *.publishproj
 
 # Microsoft Azure Web App publish settings. Comment the next line if you want to
@@ -396,3 +402,22 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# SSDT/SQL tooling caches
+*.database
+*.dbmdl
+*.dacpac
+*.bacpac
+
+# SSIS/VS user state
+*.dtproj.user
+
+# Build output / artifacts
+bin/
+obj/
+*.ispac
+
+# IDE/OS junk (add)
+.idea/
+Thumbs.db
+.DS_Store
