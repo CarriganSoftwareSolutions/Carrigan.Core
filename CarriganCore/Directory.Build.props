@@ -16,19 +16,33 @@
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
     <Deterministic>true</Deterministic>
 
+    <!-- PreRelease Status -->
+    <PreReleaseLabel>alpha</PreReleaseLabel>
+
+    <!--Base Version for other projects-->
+    <BaseVersion>0.1.0</BaseVersion>
     <!-- Base version: x.y.z For Carrigan.Core -->
     <CoreVersionBase>0.1.0</CoreVersionBase>
-    <!-- Default beta release label (empty on Release builds) For Carrigan.Core -->
-    <CorePreReleaseLabel>alpha</CorePreReleaseLabel>
-    
     <!-- Base version: x.y.z For Carrigan.Core -->
     <CoreMvcVersionBase>0.1.0</CoreMvcVersionBase>
-    <!-- Default beta release label (empty on Release builds) For Carrigan.Core -->
-    <CoreMvcPreReleaseLabel>alpha</CoreMvcPreReleaseLabel>
+    
+    <!-- Time Stamp -->
+    <BuildTimeStamp>$([System.DateTime]::UtcNow.ToString('yyyyMMddHHmm'))</BuildTimeStamp>
+
+    <!-- Pick base/label by package -->
+    <BaseVersion Condition="'$(PackageId)'=='Carrigan.Core'">$(CoreVersionBase)</BaseVersion>
+    <BaseVersion Condition="'$(PackageId)'=='Carrigan.Core.Mvc'">$(CoreMvcVersionBase)</BaseVersion>
+
+    <PreReleasePart Condition="'$(PreReleaseLabel)' != ''">-$(PreReleaseLabel).$(BuildTimeStamp)</PreReleasePart>
+
+    <!-- Final version -->
+    <Version>$(BaseVersion)$(PreReleasePart)</Version>
+    <PackageVersion>$(Version)</PackageVersion>
     
     <GitRemote>origin</GitRemote>
     <GitVersion>false</GitVersion>
   </PropertyGroup>
+  
 
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)LICENSE"
