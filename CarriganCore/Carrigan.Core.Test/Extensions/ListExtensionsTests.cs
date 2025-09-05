@@ -1,5 +1,5 @@
-﻿using Carrigan.Core.Test.Extensions.IOrderTestClasses;
-using Carrigan.Core.Extensions;
+﻿using Carrigan.Core.Extensions;
+using Carrigan.Core.Test.Extensions.IOrderTestClasses;
 
 namespace Carrigan.Core.Test.Extensions;
 

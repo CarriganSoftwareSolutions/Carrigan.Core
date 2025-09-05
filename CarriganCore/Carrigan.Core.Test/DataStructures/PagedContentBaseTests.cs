@@ -2,7 +2,7 @@
 
 namespace Carrigan.Core.Test.DataStructures;
 
-public class PagedContentBaseTests 
+public class PagedContentBaseTests
 {
     [Theory]
     //Special case with less than 11 pages

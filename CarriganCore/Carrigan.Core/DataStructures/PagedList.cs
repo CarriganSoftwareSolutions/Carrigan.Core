@@ -13,7 +13,7 @@ public class PagedList<T> : PagedContentBase<T>
     /// <summary>
     /// Total number of items, computed from the underlying <see cref="IEnumerable{T}"/>.
     /// </summary>
-    public override uint TotalItemCount => 
+    public override uint TotalItemCount =>
         (uint)_enumerable.Count();
 
     /// <summary>

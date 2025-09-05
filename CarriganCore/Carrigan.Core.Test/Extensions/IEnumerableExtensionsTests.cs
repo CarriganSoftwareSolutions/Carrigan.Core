@@ -319,7 +319,7 @@ public class IEnumerableExtensionsTests
         IEnumerable<int> postfix = [1];
 
         // Act & Assert
-        Assert.Throws<ArgumentNullException>(() =>  enumerable!.EndsWith(postfix));
+        Assert.Throws<ArgumentNullException>(() => enumerable!.EndsWith(postfix));
     }
 
     #endregion
@@ -657,5 +657,5 @@ public class IEnumerableExtensionsTests
 
     #endregion
 
-    
+
 }

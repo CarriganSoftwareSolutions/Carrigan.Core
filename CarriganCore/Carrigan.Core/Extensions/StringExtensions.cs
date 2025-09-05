@@ -21,7 +21,7 @@ public static class StringExtensions
     /// </summary>
     /// <param name="value"></param>
     /// <returns>return false if null or empty</returns>
-    public static bool IsNotNullOrEmpty ([NotNullWhen(true)] this string? value) =>
+    public static bool IsNotNullOrEmpty([NotNullWhen(true)] this string? value) =>
         !value.IsNullOrEmpty();
 
     /// <summary>

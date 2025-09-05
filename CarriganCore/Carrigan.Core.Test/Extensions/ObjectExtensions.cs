@@ -1,5 +1,5 @@
-﻿using Carrigan.Core.Test.Extensions.ObjectExtensionTestsSupport;
-using Carrigan.Core.Extensions;
+﻿using Carrigan.Core.Extensions;
+using Carrigan.Core.Test.Extensions.ObjectExtensionTestsSupport;
 
 namespace Carrigan.Core.Test.Extensions;
 

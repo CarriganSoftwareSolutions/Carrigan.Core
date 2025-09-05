@@ -431,7 +431,7 @@ public static class DateTimeExtensions
     /// </summary>
     /// <param name="value"></param>
     /// <returns>false if the <see cref="DateTime"/> is null or Empty, else true</returns>
-    public static bool IsNotNullOrEmpty  ([NotNullWhen(true)] this DateTime value) =>
+    public static bool IsNotNullOrEmpty([NotNullWhen(true)] this DateTime value) =>
         !value.IsNullOrEmpty();
 
 
@@ -448,7 +448,7 @@ public static class DateTimeExtensions
     /// </summary>
     /// <param name="value"></param>
     /// <returns>false if the <see cref="DateOnly"/> is null or Empty, else true</returns>
-    public static bool IsNotNullOrEmpty ([NotNullWhen(true)] this DateOnly? value) =>
+    public static bool IsNotNullOrEmpty([NotNullWhen(true)] this DateOnly? value) =>
         !value.IsNullOrEmpty();
 
     /// <summary>
@@ -480,7 +480,7 @@ public static class DateTimeExtensions
     /// </summary>
     /// <param name="value"></param>
     /// <returns>false if the <see cref="TimeOnly"/> is null or Empty, else true</returns>
-    public static bool IsNotNullOrEmpty ([NotNullWhen(true)] this TimeOnly? value) =>
+    public static bool IsNotNullOrEmpty([NotNullWhen(true)] this TimeOnly? value) =>
         !value.IsNullOrEmpty();
 
     /// <summary>

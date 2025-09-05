@@ -1,5 +1,5 @@
-﻿using Carrigan.Core.Test.Extensions.PropertyInfoExtensionsTestsSupport;
-using Carrigan.Core.Extensions;
+﻿using Carrigan.Core.Extensions;
+using Carrigan.Core.Test.Extensions.PropertyInfoExtensionsTestsSupport;
 using System.Reflection;
 
 namespace Carrigan.Core.Test.Extensions;

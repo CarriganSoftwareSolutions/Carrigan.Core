@@ -32,7 +32,7 @@ public static class HorizontalAlignmentExtensions
         return alignment switch
         {
             HorizontalAlignmentEnum.Left => "text-start",
-            HorizontalAlignmentEnum.Center =>"text-center",
+            HorizontalAlignmentEnum.Center => "text-center",
             HorizontalAlignmentEnum.Right => "text-end",
             _ => throw new ArgumentOutOfRangeException(nameof(alignment), alignment, null)
         };

@@ -15,7 +15,7 @@ public class ProcedureAttribute : Attribute
     public string Name { get; }
     public string Schema { get; }
 
-    public ProcedureAttribute (string Name, string Schema = "")
+    public ProcedureAttribute(string Name, string Schema = "")
     {
         if (string.IsNullOrWhiteSpace(Name))
         {

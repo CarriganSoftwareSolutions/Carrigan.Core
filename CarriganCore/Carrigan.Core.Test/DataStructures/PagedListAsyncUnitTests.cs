@@ -88,7 +88,7 @@ public class PagedListAsyncUnitTests
         uint totalPageCount = 20;
 
         // Use the non-generic NavigationPagesTestClassAsync
-        NavigationPagesTestClassAsync testClass = new (pageNumber, totalPageCount);
+        NavigationPagesTestClassAsync testClass = new(pageNumber, totalPageCount);
 
         // Act
         uint[] actualPages = await testClass.GetNavigationPagesAsync();

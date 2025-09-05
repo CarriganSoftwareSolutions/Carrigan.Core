@@ -66,7 +66,7 @@ public class Base64DataTests
     [InlineData("", true)]              // Empty string is valid Base64
     [InlineData("hello", false)]        // Not valid Base64; wrong length and invalid characters
     [InlineData("abc", false)]          // Length not a multiple of 4
-    [InlineData("abcd", true)]          
+    [InlineData("abcd", true)]
     public void IsBase64String_ReturnsExpectedResult(string input, bool expected)
     {
         // Act

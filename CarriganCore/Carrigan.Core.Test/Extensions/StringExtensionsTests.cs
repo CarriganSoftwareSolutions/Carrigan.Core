@@ -87,10 +87,10 @@ public class StringExtensionsTests
 
     #region SplitNewLines Tests
 
-/// <summary>
-/// Tests the SplitNewLines extension method with various input strings containing different types of line endings.
-/// </summary>
-[Theory]
+    /// <summary>
+    /// Tests the SplitNewLines extension method with various input strings containing different types of line endings.
+    /// </summary>
+    [Theory]
     [InlineData("Line1\nLine2\nLine3", new[] { "Line1", "Line2", "Line3" })]
     [InlineData("Line1\r\nLine2\r\nLine3", new[] { "Line1", "Line2", "Line3" })]
     [InlineData("Line1\rLine2\rLine3", new[] { "Line1", "Line2", "Line3" })]

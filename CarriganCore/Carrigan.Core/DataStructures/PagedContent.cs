@@ -39,8 +39,8 @@ public class PagedContent<TModel> : PagedContentBase<TModel>
     /// <summary>
     /// Override implementation for the abstract getter for the page size and the protected setter.
     /// </summary>
-    public override uint PageSize 
-    { 
+    public override uint PageSize
+    {
         get => _PageSize;
         protected set
         {
