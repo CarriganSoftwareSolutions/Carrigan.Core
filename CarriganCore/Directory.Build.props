@@ -23,7 +23,7 @@
     <BaseVersion>0.1.0</BaseVersion>
     <!-- Base version: x.y.z For Carrigan.Core -->
     <CoreVersionBase>0.1.0</CoreVersionBase>
-    <!-- Base version: x.y.z For Carrigan.Core -->
+    <!-- Base version: x.y.z For Carrigan.Core.Mvc -->
     <CoreMvcVersionBase>0.1.0</CoreMvcVersionBase>
     
     <!-- Time Stamp -->
