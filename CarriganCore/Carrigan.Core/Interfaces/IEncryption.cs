@@ -20,7 +20,7 @@ public interface IEncryption
     /// This method does the encryption.
     /// </summary>
     /// <param name="plainText">The plain text to be encrypted</param>
-    /// <returns>the encrypted cypher text</returns>
+    /// <returns>the encrypted cipher text</returns>
     string? Encrypt(string? plainText);
 
     /// <summary>
