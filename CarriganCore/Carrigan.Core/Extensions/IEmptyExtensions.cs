@@ -1,4 +1,4 @@
-﻿using Carrigan.Core.Interfaces.IModels;
+﻿using Carrigan.Core.Interfaces;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Carrigan.Core.Extensions;

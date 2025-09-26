@@ -8,6 +8,28 @@ namespace Carrigan.Core.Extensions;
 /// </summary>
 public static class StringExtensions
 {
+
+    /// <summary>
+    /// return true if empty
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns>return true if empty</returns>
+    public static bool IsEmpty(this string value) =>
+        value == string.Empty;
+
+    /// <summary>
+    /// return true if empty or whitespace
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns>return true if empty or whitespace</returns>
+    public static bool IsWhiteSpace(this string value)
+    {
+        if (value.All(char.IsWhiteSpace))
+            return true;
+        else
+            return false;
+    }
+
     /// <summary>
     /// return true if null or empty
     /// </summary>

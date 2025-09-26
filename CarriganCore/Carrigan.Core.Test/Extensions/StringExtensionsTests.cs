@@ -3,7 +3,48 @@
 namespace Carrigan.Core.Test.Extensions;
 
 public class StringExtensionsTests
-{
+{    
+    #region IsEmpty Tests
+
+    /// <summary>
+    /// Tests the IsEmpty extension method with various string inputs.
+    /// </summary>
+    /// 
+    [Theory]
+    [InlineData("", true)]
+    [InlineData("   ", false)] // Whitespace characters are not considered empty
+    [InlineData("Hello, World!", false)]
+    [InlineData("Test", false)]
+    public void IsEmpty_Tests(string input, bool expected)
+    {
+        // Act
+        bool result = input.IsEmpty();
+
+        // Assert
+        Assert.Equal(expected, result);
+    }
+
+    #endregion
+
+    #region IsWhiteSpace Tests
+    [Theory]
+    [InlineData("", true)]
+    [InlineData(" ", true)]
+    [InlineData("   ", true)]
+    [InlineData("\t", true)]
+    [InlineData("\n", true)]
+    [InlineData("Hello", false)]
+    [InlineData(" Hello ", false)]
+    public void IsWhiteSpace_ShouldReturnExpectedResult(string input, bool expected)
+    {
+        // Act
+        bool result = input.IsWhiteSpace();
+
+        // Assert
+        Assert.Equal(expected, result);
+    }
+    #endregion
+
     #region IsNullOrEmpty Tests
 
     /// <summary>
@@ -48,6 +89,7 @@ public class StringExtensionsTests
 
     #endregion
 
+    #region IsNullOrWhiteSpace Tests
     [Theory]
     [InlineData(null, true)]
     [InlineData("", true)]
@@ -83,7 +125,7 @@ public class StringExtensionsTests
         // Assert
         Assert.Equal(expected, result);
     }
-
+    #endregion
 
     #region SplitNewLines Tests
 
