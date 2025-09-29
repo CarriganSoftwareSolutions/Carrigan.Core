@@ -1,11 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <!-- Ignore Spelling: Carrigan contentfiles buildtransitive -->
+  <!-- Ignore Spelling: Carrigan contentfiles buildtransitive  snupkg-->
   <PropertyGroup>
     <PackageId>Carrigan.Core.Mvc</PackageId>
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <PropertyGroup>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
     <Description>
