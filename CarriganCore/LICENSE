@@ -24,39 +24,60 @@ This project includes projects that depend on external packages.
 Those packages are licensed separately as follows:
 
 - Microsoft.NETCore.App  
-  © Microsoft Corporation  
-  Licensed under the MIT License  
-  https://github.com/dotnet/runtime/blob/main/LICENSE.TXT  
+    © Microsoft Corporation  
+    Licensed under the MIT License  
+    https://github.com/dotnet/runtime/blob/main/LICENSE.TXT  
 
 - Microsoft.AspNetCore.Mvc  
-  © Microsoft Corporation  
-  Licensed under the Apache License, Version 2.0  
-  https://github.com/dotnet/aspnetcore/blob/main/LICENSE.txt  
+    © Microsoft Corporation  
+    Licensed under the Apache License, Version 2.0  
+    https://github.com/dotnet/aspnetcore/blob/main/LICENSE.txt  
+
+- NetStandard.Library
+    © .NET Foundation and contributors
+    Licensed under the MIT License
+    https://github.com/dotnet/runtime/blob/main/LICENSE.TXT
 
 - GitInfo  
-  © devlooped and Contributors  
-  Licensed under the MIT License  
-  https://github.com/devlooped/GitInfo/blob/main/license.txt
+    © devlooped and Contributors  
+    Licensed under the MIT License  
+    https://github.com/devlooped/GitInfo/blob/main/license.txt
 
 - coverlet.collector  
-  © Contributors  
-  Licensed under the MIT License  
-  https://github.com/coverlet-coverage/coverlet/blob/master/LICENSE  
+    © Contributors  
+    Licensed under the MIT License  
+    https://github.com/coverlet-coverage/coverlet/blob/master/LICENSE  
 
 - Microsoft.NET.Test.Sdk  
-  © Microsoft Corporation  
-  Licensed under the MIT License  
-  https://github.com/microsoft/vstest/blob/main/LICENSE  
+    © Microsoft Corporation  
+    Licensed under the MIT License  
+    https://github.com/microsoft/vstest/blob/main/LICENSE  
 
 - xUnit  
-  © James Newkirk, Brad Wilson, and xUnit contributors  
-  Licensed under the Apache License, Version 2.0  
-  https://github.com/xunit/xunit/blob/main/LICENSE
+    © James Newkirk, Brad Wilson, and xUnit contributors  
+    Licensed under the Apache License, Version 2.0  
+    https://github.com/xunit/xunit/blob/main/LICENSE
 
 - xunit.runner.visualstudio  
-  © xUnit contributors  
-  Licensed under the Apache License, Version 2.0  
-  https://github.com/xunit/visualstudio.xunit/blob/main/License.txt
+    © xUnit contributors  
+    Licensed under the Apache License, Version 2.0  
+    https://github.com/xunit/visualstudio.xunit/blob/main/License.txt
+
+- Microsoft.CodeAnalysis.CSharp
+    © .NET Foundation and contributors
+    Licensed under the MIT License
+    https://github.com/dotnet/roslyn/blob/main/License.txt
+
+- Microsoft.CodeAnalysis.Common
+    © .NET Foundation and contributors
+    Licensed under the MIT License
+    https://github.com/dotnet/roslyn/blob/main/License.txt
+
+- Microsoft.CodeAnalysis.Analyzers
+    © .NET Foundation and contributors
+    Licensed under the MIT License
+    https://github.com/dotnet/roslyn-analyzers/blob/main/License.txt
+
 
 ---------------------------------------------------------------------
 

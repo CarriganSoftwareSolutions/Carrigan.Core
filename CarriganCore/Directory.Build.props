@@ -25,6 +25,8 @@
     <CoreVersionBase>0.1.0</CoreVersionBase>
     <!-- Base version: x.y.z For Carrigan.Core.Mvc -->
     <CoreMvcVersionBase>0.1.0</CoreMvcVersionBase>
+    <!-- Base version: x.y.z For Carrigan.Core.Analyzers -->
+    <CoreAnalyzersVersionBase>0.1.0</CoreAnalyzersVersionBase>
     
     <!-- Time Stamp -->
     <BuildTimeStamp>$([System.DateTime]::UtcNow.ToString('yyyyMMddHHmm'))</BuildTimeStamp>
@@ -32,6 +34,8 @@
     <!-- Pick base/label by package -->
     <BaseVersion Condition="'$(PackageId)'=='Carrigan.Core'">$(CoreVersionBase)</BaseVersion>
     <BaseVersion Condition="'$(PackageId)'=='Carrigan.Core.Mvc'">$(CoreMvcVersionBase)</BaseVersion>
+    <BaseVersion Condition="'$(PackageId)'=='Carrigan.Core.Analyzers'">$(CoreAnalyzersVersionBase)</BaseVersion>
+
 
     <PreReleasePart Condition="'$(PreReleaseLabel)' != ''">-$(PreReleaseLabel).$(BuildTimeStamp)</PreReleasePart>
 

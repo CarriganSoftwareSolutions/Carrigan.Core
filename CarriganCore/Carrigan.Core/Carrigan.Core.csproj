@@ -5,6 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
     <Description>
       Carrigan.Core is a core library designed to provide essential utilities and infrastructure for other projects. While not intended for standalone use, it serves as a dependency required by other packages to enable key functionality.
 
@@ -15,7 +16,6 @@
       This package is not intended for direct consumption, but if you really want to use my pointless helper methods, feel free.
     </Description>
     <PackageTags>core, utilities, dependency, internal</PackageTags>
-    <PackageReadmeFile>readme.md</PackageReadmeFile>
   </PropertyGroup>
 
   <PropertyGroup>
