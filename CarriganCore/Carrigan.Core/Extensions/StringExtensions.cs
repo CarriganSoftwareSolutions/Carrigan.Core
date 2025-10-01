@@ -8,7 +8,7 @@ namespace Carrigan.Core.Extensions;
 /// </summary>
 public static class StringExtensions
 {
-    public static string? GetValueOrNull(this string? value, bool allowWhiteSpace = true) =>
+    public static string? GetValueOrNull(this string? value, bool allowWhiteSpace = false) =>
         allowWhiteSpace
             ? (value.IsNullOrEmpty() ? null : value)
             : (value.IsNullOrWhiteSpace() ? null : value);

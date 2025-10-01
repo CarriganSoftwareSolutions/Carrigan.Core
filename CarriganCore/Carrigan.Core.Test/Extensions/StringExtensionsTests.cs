@@ -16,7 +16,7 @@ public class StringExtensionsTests
     [InlineData(" a ", " a ")]
     public void GetValueOrNull_AllowWhiteSpace(string? input, string? expected)
     {
-        string? actual = input.GetValueOrNull(); // default: allowWhiteSpace = true
+        string? actual = input.GetValueOrNull(true); 
         Assert.Equal(expected, actual);
     }
 
@@ -29,7 +29,7 @@ public class StringExtensionsTests
     [InlineData(" a ", " a ")]
     public void GetValueOrNull_DisallowWhiteSpace(string? input, string? expected)
     {
-        string? actual = input.GetValueOrNull(allowWhiteSpace: false);
+        string? actual = input.GetValueOrNull();// default: allowWhiteSpace = true
         Assert.Equal(expected, actual);
     }
 
