@@ -2,8 +2,46 @@
 
 namespace Carrigan.Core.Test.Extensions;
 
+//IGNORE SPELLING: abc
+
 public class StringExtensionsTests
-{    
+{
+    #region GetValueOrNull Tests
+    [Theory]
+    [InlineData(null, null)]
+    [InlineData("", null)]
+    [InlineData(" ", " ")]
+    [InlineData("\t\r\n", "\t\r\n")]
+    [InlineData("abc", "abc")]
+    [InlineData(" a ", " a ")]
+    public void GetValueOrNull_AllowWhiteSpace(string? input, string? expected)
+    {
+        string? actual = input.GetValueOrNull(); // default: allowWhiteSpace = true
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory]
+    [InlineData(null, null)]
+    [InlineData("", null)]
+    [InlineData(" ", null)]
+    [InlineData("\t\r\n", null)]
+    [InlineData("abc", "abc")]
+    [InlineData(" a ", " a ")]
+    public void GetValueOrNull_DisallowWhiteSpace(string? input, string? expected)
+    {
+        string? actual = input.GetValueOrNull(allowWhiteSpace: false);
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void PreservedValue_IsSameInstance()
+    {
+        string? original = string.Concat(" ", "a", " ");
+        string? actual = original.GetValueOrNull();
+        Assert.Same(original, actual);        
+    }
+    #endregion
+
     #region IsEmpty Tests
 
     /// <summary>
