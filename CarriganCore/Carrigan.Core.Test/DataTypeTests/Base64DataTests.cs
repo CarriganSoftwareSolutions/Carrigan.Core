@@ -1,6 +1,6 @@
-﻿using Carrigan.Core.Base64;
+﻿using Carrigan.Core.DataTypes;
 
-namespace Carrigan.Core.Test.Base64Tests;
+namespace Carrigan.Core.Test.DataTypeTests;
 
 //IGNORE SPELLING: Foo Foob abc abcd
 public class Base64DataTests
@@ -77,9 +77,7 @@ public class Base64DataTests
     }
 
     [Fact]
-    public void IsBase64String_NullInput_ThrowsNullReferenceException()
-    {
+    public void IsBase64String_NullInput_ThrowsNullReferenceException() =>
         // Since the method doesn't check for null, a NullReferenceException is expected.
         Assert.Throws<NullReferenceException>(() => Base64Data.IsBase64String(null!));
-    }
 }

@@ -1,4 +1,4 @@
-﻿namespace Carrigan.Core.Base64;
+﻿namespace Carrigan.Core.DataTypes;
 
 /// <summary>
 /// An object oriented wrapper around a Base64 string that guarantees validity and type safety.
