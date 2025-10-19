@@ -2,10 +2,13 @@
 using Carrigan.Core.Interfaces;
 namespace Carrigan.Core.DataTypes;
 
-
-//TODO: Proof read documentation
 /// <summary>
-/// Strongly typed string wrapper for String names
+/// Base class for strongly typed string wrappers used to give common string
+/// contexts (e.g., identifiers, tags, names) a type-safe representation.
+/// <para>
+/// Equality, ordering, and hashing are performed using the configured
+/// <see cref="StringComparison"/> provided at construction.
+/// </para>
 /// </summary>
 public abstract class StringWrapper : IComparable<StringWrapper>, IEquatable<StringWrapper>, IEqualityComparer<StringWrapper>, IWhiteSpace
 {
@@ -13,9 +16,13 @@ public abstract class StringWrapper : IComparable<StringWrapper>, IEquatable<Str
     protected readonly StringComparison _stringComparison;
 
     /// <summary>
-    /// Strongly typed string wrapper for String names
+    /// Initializes a new instance of the <see cref="StringWrapper"/> class.
     /// </summary>
-    /// <param name="Value">String name</param>
+    /// <param name="value">The underlying string value (treated as <see cref="string.Empty"/> if <c>null</c>).</param>
+    /// <param name="stringComparison">
+    /// The comparison mode used for equality, ordering, and hashing.
+    /// Defaults to <see cref="StringComparison.Ordinal"/>.
+    /// </param>
     protected StringWrapper(string? value, StringComparison stringComparison = StringComparison.Ordinal)
     {
         _stringComparison = stringComparison;
@@ -23,18 +30,16 @@ public abstract class StringWrapper : IComparable<StringWrapper>, IEquatable<Str
     }
 
     /// <summary>
-    /// Returns the SQL string representation of this <see cref="StringWrapper"/> instance.
+    /// Returns the underlying string value of this <see cref="StringWrapper"/>.
     /// </summary>
-    /// <returns>The SQL-formatted alias string.</returns>
     public override string ToString() =>
         _value;
 
-
     /// <summary>
-    /// Implicitly converts a <see cref="StringWrapper"/> to its SQL string representation
+    /// Implicitly converts a <see cref="StringWrapper"/> to its underlying string value.
     /// </summary>
     /// <param name="tag">The <see cref="StringWrapper"/> to convert.</param>
-    /// <returns>The SQL-formatted as string.</returns>
+    /// <returns>The wrapped string value.</returns>
     public static implicit operator string(StringWrapper tag) =>
         tag._value;
 
@@ -52,11 +57,13 @@ public abstract class StringWrapper : IComparable<StringWrapper>, IEquatable<Str
         if (other is null) return 1;
         return string.Compare(_value, other._value, _stringComparison);
     }
+
     /// <summary>
-    /// Determines whether this <see cref="StringWrapper"/> is equal to another instance.
+    /// Determines whether this <see cref="StringWrapper"/> is equal to another instance
+    /// using the configured <see cref="StringComparison"/>.
     /// </summary>
     /// <param name="other">The other <see cref="StringWrapper"/> to compare.</param>
-    /// <returns><c>true</c> if both represent the same StringWrapper; otherwise, <c>false</c>.</returns>
+    /// <returns><c>true</c> if both wrap equal string values; otherwise, <c>false</c>.</returns>
     public bool Equals(StringWrapper? other)
     {
         if (other is null) return false;
@@ -64,26 +71,32 @@ public abstract class StringWrapper : IComparable<StringWrapper>, IEquatable<Str
 
         return string.Equals(_value, other._value, _stringComparison);
     }
+
     /// <summary>
     /// Determines whether the specified object is equal to the current instance.
     /// </summary>
     /// <param name="obj">The object to compare with this instance.</param>
-    /// <returns><c>true</c> if <paramref name="obj"/> is a <see cref="StringWrapper"/> equal to this instance; otherwise, <c>false</c>.</returns>
+    /// <returns>
+    /// <c>true</c> if <paramref name="obj"/> is a <see cref="StringWrapper"/> equal to this instance;
+    /// otherwise, <c>false</c>.
+    /// </returns>
     public override bool Equals(object? obj) =>
         Equals(obj as StringWrapper);
 
     /// <summary>
-    /// Returns a hash code for this <see cref="StringWrapper"/> instance.
+    /// Returns a hash code for this <see cref="StringWrapper"/> instance,
+    /// consistent with the configured <see cref="StringComparison"/>.
     /// </summary>
     public override int GetHashCode() =>
         _value.ToString().GetHashCode(_stringComparison);
 
     /// <summary>
-    /// Determines whether two <see cref="StringWrapper"/> instances are equal.
+    /// Determines whether two <see cref="StringWrapper"/> instances are equal
+    /// using the configured <see cref="StringComparison"/>.
     /// </summary>
     /// <param name="x">The first <see cref="StringWrapper"/> to compare.</param>
     /// <param name="y">The second <see cref="StringWrapper"/> to compare.</param>
-    /// <returns><c>true</c> if both are equal; otherwise, <c>false</c>.</returns>
+    /// <returns><c>true</c> if both wrap equal string values; otherwise, <c>false</c>.</returns>
     public bool Equals(StringWrapper? x, StringWrapper? y)
     {
         if (x is null && y is null) return true;
@@ -92,7 +105,8 @@ public abstract class StringWrapper : IComparable<StringWrapper>, IEquatable<Str
     }
 
     /// <summary>
-    /// Returns a hash code for the specified <see cref="StringWrapper"/> instance.
+    /// Returns a hash code for the specified <see cref="StringWrapper"/> instance,
+    /// consistent with the configured <see cref="StringComparison"/>.
     /// </summary>
     /// <param name="obj">The <see cref="StringWrapper"/> for which to compute a hash code.</param>
     public int GetHashCode(StringWrapper obj) =>
@@ -103,7 +117,7 @@ public abstract class StringWrapper : IComparable<StringWrapper>, IEquatable<Str
     /// </summary>
     /// <param name="left">The first <see cref="StringWrapper"/> to compare.</param>
     /// <param name="right">The second <see cref="StringWrapper"/> to compare.</param>
-    /// <returns><c>true</c> if both represent the same identifier; otherwise, <c>false</c>.</returns>
+    /// <returns><c>true</c> if both represent the same value; otherwise, <c>false</c>.</returns>
     /// <remarks>Equivalent to <see cref="Equals(StringWrapper?, StringWrapper?)"/>.</remarks>
     public static bool operator ==(StringWrapper? left, StringWrapper? right)
     {
@@ -125,32 +139,31 @@ public abstract class StringWrapper : IComparable<StringWrapper>, IEquatable<Str
     public static bool operator !=(StringWrapper? left, StringWrapper? right) =>
         !(left == right);
 
-
-
     /// <summary>
-    /// Determines if the underlying string is empty or whitespace.
+    /// Determines whether the underlying string is empty or consists only of white-space characters.
     /// </summary>
-    /// <returns>true is the underlying string is empty or whitespace, else false</returns>
+    /// <returns><c>true</c> if the underlying string is empty or white space; otherwise, <c>false</c>.</returns>
     public bool IsWhiteSpace() =>
         _value.IsWhiteSpace();
 
     /// <summary>
-    /// Determines if the underlying string is not empty and not whitespace.
+    /// Determines whether the underlying string is not empty and not white space.
     /// </summary>
-    /// <returns>false is the underlying string is empty or whitespace, else true</returns>
+    /// <returns><c>true</c> if the underlying string is neither empty nor white space; otherwise, <c>false</c>.</returns>
     public bool IsNotWhiteSpace() =>
         IsWhiteSpace() is false;
 
-    /// Determines if the underlying string is empty.
+    // <summary>
+    /// Determines whether the underlying string is empty.
     /// </summary>
-    /// <returns>true is the underlying string is empty, else false</returns>
+    /// <returns><c>true</c> if the underlying string is empty; otherwise, <c>false</c>.</returns>
     public bool IsEmpty() =>
        _value.IsEmpty();
 
     /// <summary>
-    /// Determines if the underlying string is not empty.
+    /// Determines whether the underlying string is not empty.
     /// </summary>
-    /// <returns>false is the underlying string is empty, else true</returns>
+    /// <returns><c>true</c> if the underlying string is not empty; otherwise, <c>false</c>.</returns>
     public bool IsNotEmpty() =>
         IsEmpty() is false;
 }
