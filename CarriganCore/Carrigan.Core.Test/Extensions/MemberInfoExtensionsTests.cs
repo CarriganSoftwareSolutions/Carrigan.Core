@@ -10,8 +10,8 @@ public class MemberInfoExtensionsTests
     private class SampleClass
     {
         public int Property { get; set; }
-        public void Method() { }
-        public int Field;
+        public static void Method() { }
+        public int Field = 1;
     }
 
     [Fact]
@@ -28,7 +28,7 @@ public class MemberInfoExtensionsTests
     [Fact]
     public void GetQualifiedName_ReturnsQualifiedName_ForProperty()
     {
-        PropertyInfo property = typeof(SampleClass).GetProperty("Property")!;
+        PropertyInfo property = typeof(SampleClass).GetProperty(nameof(SampleClass.Property))!;
 
         string result = property.GetQualifiedName();
 
@@ -39,7 +39,7 @@ public class MemberInfoExtensionsTests
     [Fact]
     public void GetQualifiedName_ReturnsQualifiedName_ForField()
     {
-        FieldInfo field = typeof(SampleClass).GetField("Field")!;
+        FieldInfo field = typeof(SampleClass).GetField(nameof(SampleClass.Field))!;
 
         string result = field.GetQualifiedName();
 
@@ -50,7 +50,7 @@ public class MemberInfoExtensionsTests
     [Fact]
     public void GetQualifiedName_ReturnsQualifiedName_ForMethod()
     {
-        MethodInfo method = typeof(SampleClass).GetMethod("Method")!;
+        MethodInfo method = typeof(SampleClass).GetMethod(nameof(SampleClass.Method))!;
 
         string result = method.GetQualifiedName();
 
