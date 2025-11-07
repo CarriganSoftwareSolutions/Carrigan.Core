@@ -3,71 +3,66 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Operations;
+//IGNORE SPELLING: callee
+namespace Carrigan.Core.Analyzers;
 
-namespace Carrigan.Core.Analyzers
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class ExternalOnlyAnalyzer : DiagnosticAnalyzer
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class ExternalOnlyAnalyzer : DiagnosticAnalyzer
+    public const string DiagnosticId = "CARRIGAN0001";
+    private const string MessageFormat = "Member '{0}' is marked [ExternalOnly] and should not be called from within assembly '{1}'";
+    private static readonly DiagnosticDescriptor Rule = new (
+        id: DiagnosticId,
+        title: "External-only API invoked internally",
+        messageFormat: MessageFormat,
+        category: "Usage",
+        defaultSeverity: DiagnosticSeverity.Error,
+        isEnabledByDefault: true,
+        description: "APIs marked [ExternalOnly] are intended for external consumers only; internal calls are disallowed.");
+
+    public ExternalOnlyAnalyzer()
     {
-        public const string DiagnosticId = "EXTO001";
+    }
 
-        private static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor(
-            id: DiagnosticId,
-            title: "External-only API invoked internally",
-            messageFormat: "Member '{0}' is marked [ExternalOnly] and should not be called from within assembly '{1}'.",
-            category: "Usage",
-            defaultSeverity: DiagnosticSeverity.Error,
-            isEnabledByDefault: true,
-            description: "APIs marked [ExternalOnly] are intended for external consumers only; internal calls are disallowed.");
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
+    {
+        get { return [Rule]; }
+    }
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
+    public override void Initialize(AnalysisContext context)
+    {
+        context.EnableConcurrentExecution();
+        context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
+
+        context.RegisterOperationAction(AnalyzeInvocation, OperationKind.Invocation);
+        context.RegisterOperationAction(AnalyzeObjectCreation, OperationKind.ObjectCreation);
+    }
+
+    private static bool HasExternalOnly(ISymbol symbol)
+    {
+        foreach (AttributeData attribute in symbol.GetAttributes())
         {
-            get { return ImmutableArray.Create(Rule); }
-        }
-
-        public override void Initialize(AnalysisContext context)
-        {
-            context.EnableConcurrentExecution();
-            context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
-
-            context.RegisterOperationAction(AnalyzeInvocation, OperationKind.Invocation);
-            context.RegisterOperationAction(AnalyzeObjectCreation, OperationKind.ObjectCreation);
-        }
-
-        private static bool HasExternalOnly(ISymbol symbol)
-        {
-            foreach (AttributeData attribute in symbol.GetAttributes())
+            INamedTypeSymbol? attributeClass = attribute.AttributeClass;
+            if (attributeClass is not null)
             {
-                INamedTypeSymbol? attributeClass = attribute.AttributeClass;
-                if (attributeClass == null)
-                {
-                    continue;
-                }
-
-                string name = attributeClass.Name;
-                if (name == "ExternalOnlyAttribute")
-                {
-                    return true;
-                }
-
-                string full = attributeClass.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
-                if (full.EndsWith(".ExternalOnlyAttribute"))
+                if (attributeClass.Name == "ExternalOnlyAttribute"
+                    || attributeClass
+                        .ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)
+                        .EndsWith(".ExternalOnlyAttribute"))
                 {
                     return true;
                 }
             }
-            return false;
         }
+        return false;
+    }
 
-        private static void AnalyzeObjectCreation(OperationAnalysisContext context)
+    private static void AnalyzeObjectCreation(OperationAnalysisContext context)
+    {
+        IObjectCreationOperation operation = (IObjectCreationOperation)context.Operation;
+        IMethodSymbol? constructor = operation.Constructor;
+        if (constructor is not null)
         {
-            IObjectCreationOperation operation = (IObjectCreationOperation)context.Operation;
-            IMethodSymbol? constructor = operation.Constructor;
-            if (constructor == null)
-            {
-                return;
-            }
-
             if (HasExternalOnly(constructor) && IsInternalCall(context.Compilation, constructor))
             {
                 Diagnostic diagnostic = Diagnostic.Create(
@@ -78,28 +73,28 @@ namespace Carrigan.Core.Analyzers
                 context.ReportDiagnostic(diagnostic);
             }
         }
+    }
 
-        private static void AnalyzeInvocation(OperationAnalysisContext context)
+    private static void AnalyzeInvocation(OperationAnalysisContext context)
+    {
+        IInvocationOperation operation = (IInvocationOperation)context.Operation;
+        IMethodSymbol target = operation.TargetMethod;
+
+        if (HasExternalOnly(target) && IsInternalCall(context.Compilation, target))
         {
-            IInvocationOperation operation = (IInvocationOperation)context.Operation;
-            IMethodSymbol target = operation.TargetMethod;
-
-            if (HasExternalOnly(target) && IsInternalCall(context.Compilation, target))
-            {
-                Diagnostic diagnostic = Diagnostic.Create(
-                    Rule,
-                    operation.Syntax.GetLocation(),
-                    target.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat),
-                    target.ContainingAssembly?.Name ?? "<unknown>");
-                context.ReportDiagnostic(diagnostic);
-            }
+            Diagnostic diagnostic = Diagnostic.Create(
+                Rule,
+                operation.Syntax.GetLocation(),
+                target.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat),
+                target.ContainingAssembly?.Name ?? "<unknown>");
+            context.ReportDiagnostic(diagnostic);
         }
+    }
 
-        private static bool IsInternalCall(Compilation compilation, ISymbol callee)
-        {
-            IAssemblySymbol callerAssembly = compilation.Assembly;
-            IAssemblySymbol? calleeAssembly = callee.ContainingAssembly;
-            return SymbolEqualityComparer.Default.Equals(callerAssembly, calleeAssembly);
-        }
+    private static bool IsInternalCall(Compilation compilation, ISymbol callee)
+    {
+        IAssemblySymbol callerAssembly = compilation.Assembly;
+        IAssemblySymbol? calleeAssembly = callee.ContainingAssembly;
+        return SymbolEqualityComparer.Default.Equals(callerAssembly, calleeAssembly);
     }
 }

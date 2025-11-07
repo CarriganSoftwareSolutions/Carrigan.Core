@@ -6,6 +6,8 @@
     <LangVersion>latest</LangVersion>
     <IsRoslynAnalyzer>true</IsRoslynAnalyzer>
     <IncludeBuildOutput>false</IncludeBuildOutput>
+    <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+    <GenerateAnalyzerReleaseTrackingFile>true</GenerateAnalyzerReleaseTrackingFile>
   </PropertyGroup>
   <PropertyGroup>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
@@ -30,5 +32,10 @@
   <ItemGroup>
     <None Include="$(TargetPath)" Pack="true" PackagePath="analyzers/dotnet/cs" />
     <None Include="readme.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <AdditionalFiles Include="AdditionalFiles\AnalyzerReleases.Shipped.md" />
+    <AdditionalFiles Include="AdditionalFiles\AnalyzerReleases.Unshipped.md" />
   </ItemGroup>
 </Project>
