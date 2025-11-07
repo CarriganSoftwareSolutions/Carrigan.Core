@@ -14,7 +14,7 @@ public class ObjectExtensionsTests
     public void HasValue_NullObject_ReturnsFalse()
     {
         // Arrange
-        object obj = null;
+        object? obj = null;
 
         // Act
         bool result = obj.HasValue();
@@ -35,7 +35,7 @@ public class ObjectExtensionsTests
     public void HasValue_StringTests(string? input, bool expected)
     {
         // Arrange
-        object obj = input;
+        object? obj = input;
 
         // Act
         bool result = obj.HasValue();
@@ -52,7 +52,7 @@ public class ObjectExtensionsTests
     public void HasValue_IEnumerableTests<T>(T[]? input, bool expected)
     {
         // Arrange
-        object obj = input;
+        object? obj = input;
 
         // Act
         bool result = obj.HasValue();
@@ -71,7 +71,7 @@ public class ObjectExtensionsTests
     public void HasValue_NullableValueTypesTests(int? input, bool expected)
     {
         // Arrange
-        object obj = input;
+        object? obj = input;
 
         // Act
         bool result = obj.HasValue();
@@ -108,7 +108,7 @@ public class ObjectExtensionsTests
     public void HasValue_ReferenceTypeTests(Type? type, bool expected)
     {
         // Arrange
-        object obj = type != null ? Activator.CreateInstance(type) : null;
+        object? obj = type != null ? Activator.CreateInstance(type) : null;
 
         // Act
         bool result = obj.HasValue();
@@ -130,7 +130,7 @@ public class ObjectExtensionsTests
     public void HasValue_NullableTypesWithInnerValuesTests(object? input, bool expected)
     {
         // Arrange
-        object obj = input;
+        object? obj = input;
 
         // Act
         bool result = obj.HasValue();
@@ -227,7 +227,7 @@ public class ObjectExtensionsTests
     {
         // Arrange
         CustomNullableType? customNullable = new CustomNullableType { Value = "Test" };
-        object obj = customNullable;
+        object? obj = customNullable;
 
         // Act
         bool result = obj.HasValue();

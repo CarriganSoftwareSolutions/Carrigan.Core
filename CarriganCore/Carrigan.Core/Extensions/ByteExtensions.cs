@@ -11,7 +11,7 @@ public static class ByteExtensions
     /// </summary>
     /// <param name="byteArray">byte array data</param>
     /// <returns>A string represent the size of a byte array using the most significant unit of measurement.</returns>
-    public static string FormattedSize(this byte[] byteArray)
+    public static string FormattedSize(this byte[]? byteArray)
     {
         if (byteArray == null)
         {

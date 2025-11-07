@@ -18,10 +18,8 @@ public static class DateTimeExtensions
     /// <example>
     /// For example, a TimeOnly value of "14:30" would be formatted as "2:30 PM".
     /// </example>
-    public static string ToAmPmString(this TimeOnly time)
-    {
-        return time.ToString("h:mm tt");
-    }
+    public static string ToAmPmString(this TimeOnly time) =>
+        time.ToString("h:mm tt");
 
     /// <summary>
     /// Converts a nullable TimeOnly value to a string formatted as "h:mm tt" (12-hour format with AM/PM), or an empty string if the value is null.
@@ -32,10 +30,8 @@ public static class DateTimeExtensions
     /// For example, a nullable TimeOnly value of "14:30" would be formatted as "2:30 PM".
     /// A null value would return an empty string.
     /// </example>
-    public static string ToAmPmString(this TimeOnly? time)
-    {
-        return time?.ToString("h:mm tt") ?? string.Empty;
-    }
+    public static string ToAmPmString(this TimeOnly? time) =>
+        time?.ToString("h:mm tt") ?? string.Empty;
     #endregion
 
     #region ToDateOnlyExtension
@@ -65,10 +61,8 @@ public static class DateTimeExtensions
     /// <example>
     /// For example, a DateTime value of "2024-09-29" (Sunday) would be formatted as "Sunday".
     /// </example>
-    public static string ToDayOfWeek(this DateTime date)
-    {
-        return date.ToString("dddd");
-    }
+    public static string ToDayOfWeek(this DateTime date) =>
+        date.ToString("dddd");
 
     /// <summary>
     /// Converts a nullable DateTime value to a string representing the full day of the week, or an empty string if the value is null.
@@ -79,10 +73,8 @@ public static class DateTimeExtensions
     /// For example, a DateTime value of "2024-09-29" (Sunday) would be formatted as "Sunday".
     /// A null value would return an empty string.
     /// </example>
-    public static string ToDayOfWeek(this DateTime? date)
-    {
-        return date?.ToString("dddd") ?? string.Empty;
-    }
+    public static string ToDayOfWeek(this DateTime? date) =>
+        date?.ToString("dddd") ?? string.Empty;
 
     /// <summary>
     /// Converts a DateOnly value to a string representing the full day of the week.
@@ -92,10 +84,8 @@ public static class DateTimeExtensions
     /// <example>
     /// For example, a DateOnly value of "2024-09-29" (Sunday) would be formatted as "Sunday".
     /// </example>
-    public static string ToDayOfWeek(this DateOnly date)
-    {
-        return date.ToString("dddd");
-    }
+    public static string ToDayOfWeek(this DateOnly date) =>
+        date.ToString("dddd");
 
     /// <summary>
     /// Converts a nullable DateOnly value to a string representing the full day of the week, or an empty string if the value is null.
@@ -106,10 +96,8 @@ public static class DateTimeExtensions
     /// For example, a DateOnly value of "2024-09-29" (Sunday) would be formatted as "Sunday".
     /// A null value would return an empty string.
     /// </example>
-    public static string ToDayOfWeek(this DateOnly? date)
-    {
-        return date?.ToString("dddd") ?? string.Empty;
-    }
+    public static string ToDayOfWeek(this DateOnly? date) =>
+        date?.ToString("dddd") ?? string.Empty;
     #endregion
 
     #region ToTimeOnlyExtension
@@ -139,10 +127,8 @@ public static class DateTimeExtensions
     /// <example>
     /// For example, a DateTime value of "2024-09-29" would be formatted as "September 29, 2024".
     /// </example>
-    public static string ToMonthDayYearLong(this DateTime date)
-    {
-        return date.ToString("MMMM d, yyyy");
-    }
+    public static string ToMonthDayYearLong(this DateTime date) =>
+        date.ToString("MMMM d, yyyy");
 
     /// <summary>
     /// Converts a nullable DateTime to a string formatted as "MMMM, d, yyyy", or an empty string if the value is null.
@@ -153,10 +139,8 @@ public static class DateTimeExtensions
     /// For example, a DateTime value of "2024-09-29" would be formatted as "September 29, 2024".
     /// A null value would return an empty string.
     /// </example>
-    public static string ToMonthDayYearLong(this DateTime? date)
-    {
-        return date?.ToString("MMMM d, yyyy") ?? string.Empty;
-    }
+    public static string ToMonthDayYearLong(this DateTime? date) =>
+        date?.ToString("MMMM d, yyyy") ?? string.Empty;
 
     /// <summary>
     /// Converts a DateOnly to a string formatted as "MMMM, d, yyyy".
@@ -166,10 +150,8 @@ public static class DateTimeExtensions
     /// <example>
     /// For example, a DateOnly value of "2024-09-29" would be formatted as "September 29, 2024".
     /// </example>
-    public static string ToMonthDayYearLong(this DateOnly date)
-    {
-        return date.ToString("MMMM d, yyyy");
-    }
+    public static string ToMonthDayYearLong(this DateOnly date) =>
+        date.ToString("MMMM d, yyyy");
 
     /// <summary>
     /// Converts a nullable DateOnly to a string formatted as "MMMM, d, yyyy", or an empty string if the value is null.
@@ -180,10 +162,8 @@ public static class DateTimeExtensions
     /// For example, a DateOnly value of "2024-09-29" would be formatted as "September 29, 2024".
     /// A null value would return an empty string.
     /// </example>
-    public static string ToMonthDayYearLong(this DateOnly? date)
-    {
-        return date?.ToString("MMMM d, yyyy") ?? string.Empty;
-    }
+    public static string ToMonthDayYearLong(this DateOnly? date) =>
+        date?.ToString("MMMM d, yyyy") ?? string.Empty;
     #endregion
 
     #region ToMonthDayYearAmPmExtension
@@ -195,10 +175,8 @@ public static class DateTimeExtensions
     /// <example>
     /// For example, a DateTime value of "2024-09-29 14:30:00" would be formatted as "September 29, 2024 2:30 PM".
     /// </example>
-    public static string ToMonthDayYearAmPm(this DateTime date)
-    {
-        return date.ToString("MMMM d, yyyy h:mm tt");
-    }
+    public static string ToMonthDayYearAmPm(this DateTime date) =>
+        date.ToString("MMMM d, yyyy h:mm tt");
 
     /// <summary>
     /// Converts a nullable DateTime to a string formatted as "MMMM, d, yyyy h:mm tt", or an empty string if the value is null.
@@ -209,10 +187,8 @@ public static class DateTimeExtensions
     /// For example, a DateTime value of "2024-09-29 14:30:00" would be formatted as "September 29, 2024 2:30 PM".
     /// A null value would return an empty string.
     /// </example>
-    public static string ToMonthDayYearAmPm(this DateTime? date)
-    {
-        return date?.ToString("MMMM d, yyyy h:mm tt") ?? string.Empty;
-    }
+    public static string ToMonthDayYearAmPm(this DateTime? date) =>
+        date?.ToString("MMMM d, yyyy h:mm tt") ?? string.Empty;
     #endregion
 
     #region Covert to long Order value
@@ -220,14 +196,17 @@ public static class DateTimeExtensions
     /// Converts a <see cref="DateOnly"/> to a sortable <see cref="long"/>.
     /// This is not likely to useful to any but me, and the one very specific use case I had.
     /// </summary
+    /// <remarks>
+    /// This code was created for a very specific use case to avoid refactoring a sort function
+    /// that only worked with long integers. No one should ever do this, this was meant a temporary hack,
+    /// I never got around to removing it.
+    /// </remarks>
     /// <param name="value"> the date</param>
     /// <returns>the <see cref="DateOnly"/> as a sortable <see cref="long"/></returns>
-    public static long ToDateOrderBy(this DateOnly value)
-    {
-        return    value.Year *  1_00_00_00_00L +            // Multiplier for year:   1 00, 00 0,0 00
-                  value.Month * 1_00_00_00L +               // Multiplier for month:     1, 00 0,0 00
-                  value.Day *   1_00_00L;                   // Multiplier for day:           1 0,0 00
-    }
+    public static long ToDateOrderBy(this DateOnly value) => 
+        value.Year *    1_00_00_00_00L +                // Multiplier for year:   1 00, 00 0,0 00
+        value.Month *   1_00_00_00L +                   // Multiplier for month:     1, 00 0,0 00
+        value.Day *     1_00_00L;                       // Multiplier for day:           1 0,0 00
     /// <summary>
     /// Converts a <see cref="DateOnly"/> to a sortable <see cref="long"/>.
     /// This is not likely to useful to any but me, and the one very specific use case I had.
@@ -251,12 +230,10 @@ public static class DateTimeExtensions
     /// </summary
     /// <param name="value"> the date</param>
     /// <returns>the Date as a sortable <see cref="long"/></returns>
-    public static long ToDateOrderBy(this DateTime value)
-    {
-         return    value.Year *  1_00_00_00_00L +           // Multiplier for year:   1 00, 00 0,0 00
-                   value.Month * 1_00_00_00L +              // Multiplier for month:     1, 00 0,0 00
-                   value.Day *   1_00_00L;                  // Multiplier for day:           1 0,0 00
-    }
+    public static long ToDateOrderBy(this DateTime value) => 
+        value.Year *    1_00_00_00_00L +            // Multiplier for year:   1 00, 00 0,0 00
+        value.Month *   1_00_00_00L +               // Multiplier for month:     1, 00 0,0 00
+        value.Day *     1_00_00L;                   // Multiplier for day:           1 0,0 00
 
     /// <summary>
     /// Converts a date as a <see cref="DateTime"/> to a sortable <see cref="long"/>.
@@ -283,13 +260,9 @@ public static class DateTimeExtensions
     /// </summary
     /// <param name="value"> the date</param>
     /// <returns>the <see cref="TimeOnly"/> as a sortable <see cref="long"/></returns>
-    public static long ToTimeOrderBy(this TimeOnly value)
-    {
-         return    
-                   value.Hour *  1_00L +                    // Multiplier for hour:              1 00
-                   value.Minute;                            // Multiplier for minute:               1
-
-    }
+    public static long ToTimeOrderBy(this TimeOnly value) => 
+        value.Hour * 1_00L +                    // Multiplier for hour:              1 00
+        value.Minute;                           // Multiplier for minute:               1
 
     /// <summary>
     /// Converts a <see cref="TimeOnly"/> to a sortable <see cref="long"/>.
@@ -317,14 +290,14 @@ public static class DateTimeExtensions
     public static long ToDateTimeOrderBy(this DateOnly dateValue, TimeOnly? timeValue)
     {
         if (timeValue is not null)
-            return dateValue.Year *  1_00_00_00_00L +       // Multiplier for year:   1 00, 00 0,0 00
-                   dateValue.Month * 1_00_00_00L +          // Multiplier for month:     1, 00 0,0 00
-                   dateValue.Day *   1_00_00L +             // Multiplier for day:           1 0,0 00
-                   timeValue.Value.Hour *  1_00L +          // Multiplier for hour:              1 00
-                   timeValue.Value.Minute;                  // Multiplier for minute:               1 
+            return dateValue.Year *         1_00_00_00_00L +        // Multiplier for year:   1 00, 00 0,0 00
+                   dateValue.Month *        1_00_00_00L +           // Multiplier for month:     1, 00 0,0 00
+                   dateValue.Day *          1_00_00L +              // Multiplier for day:           1 0,0 00
+                   timeValue.Value.Hour *   1_00L +                 // Multiplier for hour:              1 00
+                   timeValue.Value.Minute;                          // Multiplier for minute:               1 
 
         else //time is null
-            return                                      // 0 hours, 0 minutes                0 00    
+            return                                          // 0 hours, 0 minutes                0 00    
                    dateValue.Year *  1_00_00_00_00L +       // Multiplier for year:   1 00, 00 0,0 00
                    dateValue.Month * 1_00_00_00L +          // Multiplier for month:     1, 00 0,0 00
                    dateValue.Day *   1_00_00L ;             // Multiplier for day:           1 0,0 00   
@@ -368,15 +341,12 @@ public static class DateTimeExtensions
     /// </summary
     /// <param name="value"> the date</param>
     /// <returns>the <see cref="DateTime"/> as a sortable <see cref="long"/></returns>
-    public static long ToDateTimeOrderBy(this DateTime value)
-    {
-         return    value.Year *  1_00_00_00_00L +           // Multiplier for year:   1 00, 00 0,0 00
-                   value.Month * 1_00_00_00L +              // Multiplier for month:     1, 00 0,0 00
-                   value.Day *   1_00_00L +                 // Multiplier for day:           1 0,0 00
-                   value.Hour *  1_00L +                    // Multiplier for hour:              1 00
-                   value.Minute;                            // Multiplier for minute:               1
-
-    }
+    public static long ToDateTimeOrderBy(this DateTime value) => 
+        value.Year *    1_00_00_00_00L +                // Multiplier for year:   1 00, 00 0,0 00
+        value.Month *   1_00_00_00L +                   // Multiplier for month:     1, 00 0,0 00
+        value.Day *     1_00_00L +                      // Multiplier for day:           1 0,0 00
+        value.Hour *    1_00L +                         // Multiplier for hour:              1 00
+        value.Minute;                                   // Multiplier for minute:               1
 
     /// <summary>
     /// Converts a <see cref="DateTime"/> to a sortable <see cref="long"/>.
@@ -423,8 +393,11 @@ public static class DateTimeExtensions
     /// </summary>
     /// <param name="value"></param>
     /// <returns>true if the <see cref="DateTime"/> is null or Empty, else false</returns>
-    public static bool IsNullOrEmpty(this DateTime value) =>
-        value == null || value.Equals(new DateTime());
+    public static bool IsNullOrEmpty(this DateTime value)
+    {
+        DateTime? nullable = value;
+        return nullable.IsNullOrEmpty();
+    }
 
     /// <summary>
     /// Extension method to determine if a <see cref="DateTime"/> is Not Null Or Empty
@@ -456,8 +429,11 @@ public static class DateTimeExtensions
     /// </summary>
     /// <param name="value"></param>
     /// <returns>true if the <see cref="DateOnly"/> is null or Empty, else false</returns>
-    public static bool IsNullOrEmpty(this DateOnly value) =>
-        value == null || value.Equals(new DateOnly());
+    public static bool IsNullOrEmpty(this DateOnly value)
+    {
+        DateOnly? nullable = value;
+        return nullable.IsNullOrEmpty();
+    }
 
     /// <summary>
     /// Extension method to determine if a <see cref="DateOnly"/> is Not Null Or Empty
@@ -488,8 +464,11 @@ public static class DateTimeExtensions
     /// </summary>
     /// <param name="value"></param>
     /// <returns>true if the <see cref="TimeOnly"/> is null or Empty, else false</returns>
-    public static bool IsNullOrEmpty(this TimeOnly value) =>
-        value == null || value.Equals(new TimeOnly());
+    public static bool IsNullOrEmpty(this TimeOnly value)
+    {
+        TimeOnly? nullable = value;
+        return nullable.IsNullOrEmpty();
+    }
 
     /// <summary>
     /// Extension method to determine if a <see cref="TimeOnly"/> is Not Null Or Empty
@@ -561,8 +540,6 @@ public static class DateTimeExtensions
     /// </remarks>
     /// <param name="Duration">The time span to format.</param>
     /// <returns>A string like "1 day, 2 hours, 5 minutes".</returns>
-    public static string ToHumanString(this TimeSpan? Duration)
-    {
-        return Duration is null ? string.Empty : Duration.Value.ToHumanString();
-    }
+    public static string ToHumanString(this TimeSpan? Duration) =>
+        Duration is null ? string.Empty : Duration.Value.ToHumanString();
 }

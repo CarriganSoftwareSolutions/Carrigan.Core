@@ -7,8 +7,8 @@ public class ByteExtensionsTests
     [Fact]
     public void FormattedSize_NullByteArray_ReturnsZeroBytes()
     {
-        byte[] byteArray = null;
-        string result = byteArray!.FormattedSize();
+        byte[]? byteArray = null;
+        string result = byteArray.FormattedSize();
         Assert.Equal("0 bytes", result);
     }
 
@@ -114,7 +114,7 @@ public class ByteExtensionsTests
     [Fact]
     public void BlockAppend_FirstArrayNull_ShouldReturnSecondArray()
     {
-        byte[] first = null;
+        byte[]? first = null;
         byte[] second = [4, 5, 6];
         byte[] expected = [4, 5, 6];
 
@@ -127,7 +127,7 @@ public class ByteExtensionsTests
     public void BlockAppend_SecondArrayNull_ShouldReturnFirstArray()
     {
         byte[] first = [1, 2, 3];
-        byte[] second = null;
+        byte[]? second = null;
         byte[] expected = [1, 2, 3];
 
         byte[] result = first.BlockAppend(second);
@@ -138,8 +138,8 @@ public class ByteExtensionsTests
     [Fact]
     public void BlockAppend_BothArraysNull_ShouldReturnEmptyArray()
     {
-        byte[] first = null;
-        byte[] second = null;
+        byte[]? first = null;
+        byte[]? second = null;
         byte[] expected = [];
 
         byte[] result = first.BlockAppend(second);

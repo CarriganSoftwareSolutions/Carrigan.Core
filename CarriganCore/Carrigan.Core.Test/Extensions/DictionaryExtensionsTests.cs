@@ -82,7 +82,7 @@ public class DictionaryExtensionsTests
     public void Add_NullDictionary_ThrowsNullReferenceException()
     {
         // Arrange
-        Dictionary<int, string> dictionary = null;
+        Dictionary<int, string>? dictionary = null;
         IEnumerable<KeyValuePair<int, string>> keyValuePairs =
         [
             new KeyValuePair<int, string>(1, "one")
@@ -99,11 +99,11 @@ public class DictionaryExtensionsTests
     {
         // Arrange
         Dictionary<int, string> dictionary = [];
-        KeyValuePair<int, string> singleKvp = new(1, "one");
+        KeyValuePair<int, string> singleItem = new(1, "one");
 
         // Act
         // Wrap the single key/value pair in an enumerable
-        dictionary.Add(singleKvp);
+        dictionary.Add(singleItem);
 
         // Assert
         Assert.Single(dictionary);

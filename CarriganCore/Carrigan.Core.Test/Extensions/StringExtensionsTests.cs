@@ -2,7 +2,7 @@
 
 namespace Carrigan.Core.Test.Extensions;
 
-//IGNORE SPELLING: abc
+//IGNORE SPELLING: abc, Http
 
 public class StringExtensionsTests
 {
@@ -324,7 +324,7 @@ public class StringExtensionsTests
     public void Coalesce_ReturnsFirstNonEmptyValue_WhenValueIsNullOrWhiteSpace()
     {
         // Arrange
-        string original = null;
+        string? original = null;
 
         // Act
         string result = original.Coalesce(null, "   ", "FirstValid", "SecondValid");
@@ -350,7 +350,7 @@ public class StringExtensionsTests
     public void Coalesce_ReturnsEmptyString_WhenValueIsNullAndNoAlternativesProvided()
     {
         // Arrange
-        string original = null;
+        string? original = null;
 
         // Act
         string result = original.Coalesce();
@@ -371,7 +371,7 @@ public class StringExtensionsTests
     public void SplitCamelPascalCase_ReturnsExpected(string? input, string? expected)
     {
         // Act
-        string result = input.SplitCamelPascalCase();
+        string? result = input.SplitCamelPascalCase();
 
         // Assert
         Assert.Equal(expected, result);

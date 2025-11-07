@@ -20,7 +20,7 @@ public class PropertyInfoExtensionsTests
     public void GetDisplayName_PropertyWithDisplayAttribute_ReturnsDisplayName(string propertyName, string expectedDisplayName)
     {
         // Arrange
-        PropertyInfo property = typeof(SampleClass).GetProperty(propertyName);
+        PropertyInfo? property = typeof(SampleClass).GetProperty(propertyName);
         Assert.NotNull(property);
 
         // Act
@@ -38,7 +38,7 @@ public class PropertyInfoExtensionsTests
     public void GetDisplayName_PropertyWithoutDisplayAttribute_ReturnsPropertyName(string propertyName)
     {
         // Arrange
-        PropertyInfo property = typeof(SampleClass).GetProperty(propertyName);
+        PropertyInfo? property = typeof(SampleClass).GetProperty(propertyName);
         Assert.NotNull(property);
 
         // Act
@@ -57,7 +57,7 @@ public class PropertyInfoExtensionsTests
     public void GetDisplayName_PropertyWithEmptyDisplayName_ReturnsPropertyName(string propertyName)
     {
         // Arrange
-        PropertyInfo property = typeof(SampleClass).GetProperty(propertyName);
+        PropertyInfo? property = typeof(SampleClass).GetProperty(propertyName);
         Assert.NotNull(property);
 
         // Act
@@ -76,7 +76,7 @@ public class PropertyInfoExtensionsTests
     public void GetDisplayName_PropertyWithNullDisplayName_ReturnsPropertyName(string propertyName)
     {
         // Arrange
-        PropertyInfo property = typeof(SampleClass).GetProperty(propertyName);
+        PropertyInfo? property = typeof(SampleClass).GetProperty(propertyName);
         Assert.NotNull(property);
 
         // Act

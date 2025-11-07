@@ -66,7 +66,7 @@ public class IEnumerableExtensionsTests
     public void DoesNotContain_NullCollection_ThrowsArgumentNullException()
     {
         // Arrange
-        IEnumerable<int> enumerable = null;
+        IEnumerable<int>? enumerable = null;
         int value = 1;
 
         // Act & Assert
@@ -118,7 +118,7 @@ public class IEnumerableExtensionsTests
     public void ForEach_NullCollection_ThrowsArgumentNullException()
     {
         // Arrange
-        IEnumerable<int> enumerable = null;
+        IEnumerable<int>? enumerable = null;
 
         // Act & Assert
         Assert.Throws<ArgumentNullException>(() => enumerable!.ForEach(item => { }));
@@ -132,7 +132,7 @@ public class IEnumerableExtensionsTests
     {
         // Arrange
         IEnumerable<int> enumerable = [1, 2, 3];
-        Action<int> action = null;
+        Action<int>? action = null;
 
         // Act & Assert
         Assert.Throws<ArgumentNullException>(() => enumerable.ForEach(action!));
@@ -302,7 +302,7 @@ public class IEnumerableExtensionsTests
     {
         // Arrange
         IEnumerable<int> enumerable = [1, 2, 3];
-        IEnumerable<int> postfix = null;
+        IEnumerable<int>? postfix = null;
 
         // Act & Assert
         Assert.Throws<ArgumentNullException>(() => enumerable.EndsWith(postfix!));
@@ -315,7 +315,7 @@ public class IEnumerableExtensionsTests
     public void EndsWith_NullCollection_ThrowsArgumentNullException()
     {
         // Arrange
-        IEnumerable<int> enumerable = null;
+        IEnumerable<int>? enumerable = null;
         IEnumerable<int> postfix = [1];
 
         // Act & Assert
@@ -477,7 +477,7 @@ public class IEnumerableExtensionsTests
     {
         // Arrange
         IEnumerable<int> enumerable = [1, 2, 3];
-        IEnumerable<int> prefix = null;
+        IEnumerable<int>? prefix = null;
 
         // Act & Assert
         Assert.Throws<ArgumentNullException>(() => enumerable.StartsWith(prefix!));
@@ -490,7 +490,7 @@ public class IEnumerableExtensionsTests
     public void StartsWith_NullCollection_ThrowsArgumentNullException()
     {
         // Arrange
-        IEnumerable<int> enumerable = null;
+        IEnumerable<int>? enumerable = null;
         IEnumerable<int> prefix = [1];
 
         // Act & Assert
@@ -542,7 +542,7 @@ public class IEnumerableExtensionsTests
     public void None_NullCollection_ReturnsTrue()
     {
         // Arrange
-        IEnumerable<int> enumerable = null;
+        IEnumerable<int>? enumerable = null;
         // Act & Assert
         Assert.Throws<ArgumentNullException>(() => enumerable!.None());
     }
@@ -592,7 +592,7 @@ public class IEnumerableExtensionsTests
     public void IsNullOrEmpty_NullCollection_ReturnsTrue()
     {
         // Arrange
-        IEnumerable<int> enumerable = null;
+        IEnumerable<int>? enumerable = null;
 
         // Act
         bool result = enumerable.IsNullOrEmpty();
@@ -646,7 +646,7 @@ public class IEnumerableExtensionsTests
     public void IsNotNullOrEmpty_NullCollection_ReturnsFalse()
     {
         // Arrange
-        IEnumerable<int> enumerable = null;
+        IEnumerable<int>? enumerable = null;
 
         // Act
         bool result = enumerable.IsNotNullOrEmpty();

@@ -75,10 +75,8 @@ public static class ObjectExtensions
     /// </summary>
     /// <param name="type">The type to evaluate.</param>
     /// <returns>True if the type is Nullable; otherwise, false.</returns>
-    private static bool IsNullable(Type type)
-    {
-        return Nullable.GetUnderlyingType(type) != null;
-    }
+    public static bool IsNullable(Type type) =>
+        Nullable.GetUnderlyingType(type) != null;
     #endregion
 
     #region GetNullableValue
@@ -87,10 +85,10 @@ public static class ObjectExtensions
     /// </summary>
     /// <param name="nullable">The nullable object.</param>
     /// <returns>The underlying value if present; otherwise, null.</returns>
-    private static object? GetNullableValue(object nullable)
+    public static object? GetNullableValue(object nullable)
     {
         Type type = nullable.GetType();
-        PropertyInfo valueProperty = type.GetProperty("Value");
+        PropertyInfo? valueProperty = type.GetProperty("Value");
         if (valueProperty != null)
         {
             return valueProperty.GetValue(nullable);
