@@ -3,7 +3,9 @@
 namespace Carrigan.Core.Test.Extensions;
 
 public class TypeExtensionsTests
-{
+{    private enum ByteEnum : byte { A = 1 }
+    private enum LongEnum : long { A = 1 }
+
     #region IsBoolType Tests
 
     /// <summary>
@@ -198,5 +200,29 @@ public class TypeExtensionsTests
         Assert.Equal(expected, result);
     }
 
+    #endregion
+
+    #region Get Underlying Type Tests
+
+    [Fact]
+    public void GetUnderlyingType_NullException() => 
+        Assert.Throws<ArgumentNullException>(() => ((Type?)null)!.GetUnderlyingType());
+
+    [Theory]
+    [InlineData(typeof(int?), typeof(int))]
+    [InlineData(typeof(double?), typeof(double))]
+    [InlineData(typeof(DateTime?), typeof(DateTime))]
+    [InlineData(typeof(int), typeof(int))]
+    [InlineData(typeof(string), typeof(string))]
+    [InlineData(typeof(decimal), typeof(decimal))]
+    [InlineData(typeof(Guid), typeof(Guid))]
+    [InlineData(typeof(ConsoleColor), typeof(int))]
+    [InlineData(typeof(ByteEnum), typeof(byte))]
+    [InlineData(typeof(LongEnum), typeof(long))]
+    public void GetUnderlyingType(Type input, Type expected)
+    {
+        Type result = input.GetUnderlyingType();
+        Assert.Equal(expected, result);
+    }
     #endregion
 }

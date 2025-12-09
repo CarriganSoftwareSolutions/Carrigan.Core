@@ -5,6 +5,11 @@ namespace Carrigan.Core.Test.Extensions;
 
 public class ObjectExtensionsTests
 {
+    private enum ByteEnum : byte
+    {
+        A = 1
+    }
+
     #region HasValue Tests
 
     /// <summary>
@@ -246,5 +251,78 @@ public class ObjectExtensionsTests
         Assert.False(result);
     }
 
+    #endregion
+
+    #region Get Underlying Type tests
+
+    [Fact]
+    public void GetUnderlyingType_WhenInstanceIsNull()
+    {
+        object? value = null;
+
+        Type? result = value.GetUnderlyingTypeOrNull();
+
+        Assert.Null(result);
+    }
+
+    [Fact]
+    public void GetUnderlyingType_ForReferenceType()
+    {
+        string value = "hello";
+
+        Type? result = value.GetUnderlyingTypeOrNull();
+
+        Assert.Equal(typeof(string), result);
+    }
+
+    [Fact]
+    public void GetUnderlyingType_ForValueType()
+    {
+        int value = 123;
+
+        Type? result = value.GetUnderlyingTypeOrNull();
+
+        Assert.Equal(typeof(int), result);
+    }
+
+    [Fact]
+    public void GetUnderlyingType_ForNullableInt()
+    {
+        int? value = 42;
+
+        Type? result = value.GetUnderlyingTypeOrNull();
+
+        Assert.Equal(typeof(int), result);
+    }
+
+    [Fact]
+    public void GetUnderlyingType_ForNullableDateTime()
+    {
+        DateTime? value = DateTime.UtcNow;
+
+        Type? result = value.GetUnderlyingTypeOrNull();
+
+        Assert.Equal(typeof(DateTime), result);
+    }
+
+    [Fact]
+    public void GetUnderlyingType_ForEnum()
+    {
+        ConsoleColor value = ConsoleColor.Red;
+
+        Type? result = value.GetUnderlyingTypeOrNull();
+
+        Assert.Equal(typeof(int), result);
+    }
+
+    [Fact]
+    public void GetUnderlyingType_ForNullableEnum()
+    {
+        ByteEnum? value = ByteEnum.A;
+
+        Type? result = value.GetUnderlyingTypeOrNull();
+
+        Assert.Equal(typeof(byte), result);
+    }
     #endregion
 }

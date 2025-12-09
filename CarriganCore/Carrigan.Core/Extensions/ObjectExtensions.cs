@@ -101,4 +101,32 @@ public static class ObjectExtensions
     // Cache for reflection information on nullable types to reduce overhead.
     private static readonly ConcurrentDictionary<Type, (PropertyInfo? HasValue, PropertyInfo? Value)> NullablePropertyCache = new();
     #endregion
+
+    /// <summary>
+    /// Returns the underlying type of the specified object instance.
+    /// </summary>
+    /// <remarks>
+    /// Behavior:
+    /// <list type="bullet">
+    /// <item><description>If the instance is <c>null</c>, returns <c>null</c>.</description></item>
+    /// <item><description><b>Nullable&lt;T&gt;</b>: returns <c>T</c>.</description></item>
+    /// <item><description><b>Enum</b>: returns the enum's underlying integral type.</description></item>
+    /// <item><description>Anything else: returns the actual runtime type.</description></item>
+    /// </list>
+    /// </remarks>
+    /// <param name="instance">The object instance being examined.</param>
+    /// <returns>
+    /// A <see cref="Type"/> representing the underlying type of
+    /// <paramref name="instance"/>, or <c>null</c> if the instance is <c>null</c>.
+    /// </returns>
+    public static Type? GetUnderlyingTypeOrNull(this object? instance)
+    {
+        if (instance is null)
+        {
+            return null;
+        }
+
+        Type type = instance.GetType();
+        return type.GetUnderlyingType();
+    }
 }

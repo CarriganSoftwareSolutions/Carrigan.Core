@@ -97,4 +97,42 @@ public static class TypeExtensions
     public static bool IsTimeOnlyType(this Type type) =>
         type == typeof(TimeOnly) || type == typeof(TimeOnly?);
     #endregion
+
+
+
+    /// <summary>
+    /// Returns the underlying type for a given <see cref="Type"/>.
+    /// </summary>
+    /// <remarks>
+    /// Behavior:
+    /// <list type="bullet">
+    /// <item><description><b>Nullable&lt;T&gt;</b>: returns <c>T</c>.</description></item>
+    /// <item><description><b>Enum</b>: returns the enum's underlying integral type.</description></item>
+    /// <item><description>Anything else: returns the type itself.</description></item>
+    /// </list>
+    /// </remarks>
+    /// <param name="type">The input type.</param>
+    /// <returns>
+    /// The "underlying" type as defined above.
+    /// </returns>
+    /// <exception cref="ArgumentNullException">
+    /// Thrown when <paramref name="type"/> is <c>null</c>.
+    /// </exception>
+    public static Type GetUnderlyingType(this Type type)
+    {
+        ArgumentNullException.ThrowIfNull(type);
+
+        Type? nullableUnderlying = Nullable.GetUnderlyingType(type);
+        if (nullableUnderlying is not null)
+        {
+            return nullableUnderlying;
+        }
+
+        if (type.IsEnum)
+        {
+            return Enum.GetUnderlyingType(type);
+        }
+
+        return type;
+    }
 }
