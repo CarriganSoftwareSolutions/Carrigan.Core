@@ -260,7 +260,7 @@ public class ObjectExtensionsTests
     {
         object? value = null;
 
-        Type? result = value.GetUnderlyingTypeOrNull();
+        Type? result = value.GetUnderlyingType();
 
         Assert.Null(result);
     }
@@ -270,7 +270,7 @@ public class ObjectExtensionsTests
     {
         string value = "hello";
 
-        Type? result = value.GetUnderlyingTypeOrNull();
+        Type? result = value.GetUnderlyingType();
 
         Assert.Equal(typeof(string), result);
     }
@@ -280,7 +280,7 @@ public class ObjectExtensionsTests
     {
         int value = 123;
 
-        Type? result = value.GetUnderlyingTypeOrNull();
+        Type? result = value.GetUnderlyingType();
 
         Assert.Equal(typeof(int), result);
     }
@@ -290,7 +290,7 @@ public class ObjectExtensionsTests
     {
         int? value = 42;
 
-        Type? result = value.GetUnderlyingTypeOrNull();
+        Type? result = value.GetUnderlyingType();
 
         Assert.Equal(typeof(int), result);
     }
@@ -300,7 +300,7 @@ public class ObjectExtensionsTests
     {
         DateTime? value = DateTime.UtcNow;
 
-        Type? result = value.GetUnderlyingTypeOrNull();
+        Type? result = value.GetUnderlyingType();
 
         Assert.Equal(typeof(DateTime), result);
     }
@@ -310,7 +310,7 @@ public class ObjectExtensionsTests
     {
         ConsoleColor value = ConsoleColor.Red;
 
-        Type? result = value.GetUnderlyingTypeOrNull();
+        Type? result = value.GetUnderlyingType();
 
         Assert.Equal(typeof(int), result);
     }
@@ -320,7 +320,7 @@ public class ObjectExtensionsTests
     {
         ByteEnum? value = ByteEnum.A;
 
-        Type? result = value.GetUnderlyingTypeOrNull();
+        Type? result = value.GetUnderlyingType();
 
         Assert.Equal(typeof(byte), result);
     }

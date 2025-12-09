@@ -119,7 +119,7 @@ public static class ObjectExtensions
     /// A <see cref="Type"/> representing the underlying type of
     /// <paramref name="instance"/>, or <c>null</c> if the instance is <c>null</c>.
     /// </returns>
-    public static Type? GetUnderlyingTypeOrNull(this object? instance)
+    public static Type? GetUnderlyingType(this object? instance)
     {
         if (instance is null)
         {
