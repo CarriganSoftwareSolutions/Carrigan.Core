@@ -464,8 +464,8 @@ public class MemberNameTests
     public void ImplicitConversion_ToString_AssignmentAndInterpolation()
     {
         MemberName a = new(eStr);
-        string assigned = eStr;
-        string interpolated = $"{eStr}";
+        string assigned = a;
+        string interpolated = $"{a}";
 
         Assert.Equal(eStr, assigned);
         Assert.Equal(eStr, interpolated);
@@ -497,5 +497,90 @@ public class MemberNameTests
         object nameWrapper2 = new MemberName(eStr);
         Assert.True(nameWrapper1.Equals((StringWrapper)nameWrapper2));
         Assert.True(nameWrapper1.Equals(nameWrapper2));
+    }
+
+    [Fact]
+    public void ImplicitConversion_NullWrapper_ReturnsEmptyString()
+    {
+        StringWrapper? wrapper = null;
+        string value = (string)wrapper!;
+        Assert.Equal(string.Empty, value);
+    }
+
+    [Fact]
+    public void Equals_DifferentStringComparison()
+    {
+        MemberName left = new("abc");
+        MemberNameIgnoreCase right = new("ABC");
+
+        Assert.Throws<InvalidOperationException>(() => left.Equals((StringWrapper)right));
+        Assert.Throws<InvalidOperationException>(() => right.Equals((StringWrapper)left));
+    }
+
+    [Fact]
+    public void CompareTo_DifferentStringComparison()
+    {
+        MemberName left = new("abc");
+        MemberNameIgnoreCase right = new("ABC");
+
+        Assert.Throws<InvalidOperationException>(() => left.CompareTo(right));
+        Assert.Throws<InvalidOperationException>(() => right.CompareTo(left));
+    }
+
+    [Fact]
+    public void EqualityComparer_Equals_DifferentStringComparisonFromComparer()
+    {
+        MemberName comparer = new("x");
+        MemberNameIgnoreCase x = new("abc");
+        MemberNameIgnoreCase y = new("ABC");
+
+        Assert.Throws<InvalidOperationException>(() => comparer.Equals(x, y));
+    }
+
+    [Fact]
+    public void EqualityComparer_GetHashCode_DifferentStringComparisonFromComparer()
+    {
+        MemberName comparer = new("x");
+        MemberNameIgnoreCase obj = new("abc");
+
+        Assert.Throws<InvalidOperationException>(() => comparer.GetHashCode((StringWrapper)obj));
+    }
+    [Fact]
+    public void Equals_DifferentStringComparison_Throws()
+    {
+        MemberName left = new("abc");
+        MemberNameIgnoreCase right = new("ABC");
+
+        Assert.Throws<InvalidOperationException>(() => left.Equals((StringWrapper)right));
+        Assert.Throws<InvalidOperationException>(() => right.Equals((StringWrapper)left));
+    }
+
+    [Fact]
+    public void CompareTo_DifferentStringComparison_Throws()
+    {
+        MemberName left = new("abc");
+        MemberNameIgnoreCase right = new("ABC");
+
+        Assert.Throws<InvalidOperationException>(() => left.CompareTo(right));
+        Assert.Throws<InvalidOperationException>(() => right.CompareTo(left));
+    }
+
+    [Fact]
+    public void EqualityComparer_Equals_DifferentStringComparisonFromComparer_Throws()
+    {
+        MemberName comparer = new("x");
+        MemberNameIgnoreCase x = new("abc");
+        MemberNameIgnoreCase y = new("ABC");
+
+        Assert.Throws<InvalidOperationException>(() => comparer.Equals(x, y));
+    }
+
+    [Fact]
+    public void EqualityComparer_GetHashCode_DifferentStringComparisonFromComparer_Throws()
+    {
+        MemberName comparer = new("x");
+        MemberNameIgnoreCase obj = new("abc");
+
+        Assert.Throws<InvalidOperationException>(() => comparer.GetHashCode((StringWrapper)obj));
     }
 }
