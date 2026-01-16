@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using Carrigan.Core.Enums;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Carrigan.Core.Extensions;
 
@@ -99,5 +100,30 @@ public static class IEnumerableExtensions
     public static bool IsNotNullOrEmpty<T>([NotNullWhen(true)] this IEnumerable<T>? enumerable) =>
         enumerable.IsNullOrEmpty() == false;
     #endregion
+    /// <summary>
+/// Specifies how <c>null</c> elements in an enumerable should be handled.
+/// </summary>
+    public static IEnumerable<T> Materialize<T>(this IEnumerable<T> enumerable, NullOptionsEnum nullOptionsEnum)
+    {
+        ArgumentNullException.ThrowIfNull(enumerable);
+        switch (nullOptionsEnum)
+        {
+            case NullOptionsEnum.Allowed:
+                return [.. enumerable];
+            case NullOptionsEnum.Exception:
+                List<T> list = [];
+                foreach (T element in enumerable)
+                {
+                    if (element is null)
+                        throw new NullReferenceException($"{nameof(enumerable)} contains disallowed nulls");
 
+                    list.Add(element);
+                }
+                return list;
+            case NullOptionsEnum.FilteredOut:
+                return [.. enumerable.Where(static element => element is not null)];
+            default:
+                throw new InvalidOperationException($"{nameof(nullOptionsEnum)} contains unsupported value.");
+        }
+    }
 }

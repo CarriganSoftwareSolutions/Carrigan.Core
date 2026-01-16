@@ -1,4 +1,5 @@
-﻿using Carrigan.Core.Extensions;
+﻿using Carrigan.Core.Enums;
+using Carrigan.Core.Extensions;
 
 namespace Carrigan.Core.Test.Extensions;
 
@@ -657,5 +658,73 @@ public class IEnumerableExtensionsTests
 
     #endregion
 
+    #region Materialize
 
+    [Fact]
+    public void Materialize_AllDefinedEnumValues_DoesNotThrow()
+    {
+        foreach (NullOptionsEnum option in Enum.GetValues<NullOptionsEnum>())
+        {
+            IEnumerable<string> source = ["a", "b", "c"];
+
+            Exception? ex = Record.Exception(() => source.Materialize(option).ToArray());
+
+            Assert.Null(ex);
+        }
+    }
+
+    [Fact]
+    public void Materialize_Allowed_ReturnsMaterializedCopy_WithSameValues()
+    {
+        IEnumerable<int> source = [1, 2, 3];
+
+        IEnumerable<int> result = source.Materialize(NullOptionsEnum.Allowed);
+
+        Assert.Equal([1, 2, 3], result);
+        Assert.NotSame(source, result);
+    }
+
+    [Fact]
+    public void Materialize_Exception_WhenContainsNull_ThrowsNullReferenceException()
+    {
+        IEnumerable<string?> source = ["a", null, "c"];
+
+        NullReferenceException ex =
+            Assert.Throws<NullReferenceException>(() => source.Materialize(NullOptionsEnum.Exception).ToArray());
+    }
+
+    [Fact]
+    public void Materialize_Exception_WhenNoNulls_ReturnsMaterializedCopy_WithSameValues()
+    {
+        IEnumerable<string> source = ["a", "b", "c"];
+
+        IEnumerable<string> result = source.Materialize(NullOptionsEnum.Exception);
+
+        Assert.Equal(["a", "b", "c"], result);
+        Assert.NotSame(source, result);
+    }
+
+    [Fact]
+    public void Materialize_FilteredOut_FiltersNulls()
+    {
+        IEnumerable<int?> source = [1, null, 2, null, 3];
+
+        IEnumerable<int?> result = source.Materialize(NullOptionsEnum.FilteredOut);
+
+        // The extension returns IEnumerable<T>, so keep the assertion on enumeration results.
+        Assert.Equal([1, 2, 3], result.ToArray());
+    }
+
+    [Fact]
+    public void Materialize_InvalidEnumValue_ThrowsInvalidOperationException()
+    {
+        IEnumerable<int> source = [1, 2, 3];
+        NullOptionsEnum invalid = (NullOptionsEnum)999;
+
+        InvalidOperationException ex =
+            Assert.Throws<InvalidOperationException>(() => source.Materialize(invalid).ToArray());
+
+        Assert.Contains("unsupported value", ex.Message, StringComparison.Ordinal);
+    }
+    #endregion
 }
