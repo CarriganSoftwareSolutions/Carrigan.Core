@@ -102,12 +102,56 @@ public class DictionaryExtensionsTests
         KeyValuePair<int, string> singleItem = new(1, "one");
 
         // Act
-        // Wrap the single key/value pair in an enumerable
         dictionary.Add(singleItem);
 
         // Assert
         Assert.Single(dictionary);
         Assert.Equal("one", dictionary[1]);
+    }
+
+    [Fact]
+    public void Add_SingleKeyValuePair_DuplicateKey_ThrowsArgumentException()
+    {
+        // Arrange
+        Dictionary<int, string> dictionary = new()
+        {
+            { 1, "one" }
+        };
+
+        KeyValuePair<int, string> duplicateItem = new(1, "uno");
+
+        // Act & Assert
+        Assert.Throws<ArgumentException>(() => dictionary.Add(duplicateItem));
+    }
+
+    [Fact]
+    public void Add_SingleKeyValuePair_NullDictionary_ThrowsArgumentNullException()
+    {
+        // Arrange
+        Dictionary<int, string>? dictionary = null;
+        KeyValuePair<int, string> item = new(1, "one");
+
+        // Act & Assert
+        Assert.Throws<ArgumentNullException>(() => dictionary!.Add(item));
+    }
+
+    [Fact]
+    public void CollectionExpression_SpreadKeyValuePairs_AddsKeyValuePairs()
+    {
+        // Arrange
+        IEnumerable<KeyValuePair<int, string>> keyValuePairs =
+        [
+            new(1, "one"),
+            new(2, "two")
+        ];
+
+        // Act
+        Dictionary<int, string> dictionary = [.. keyValuePairs];
+
+        // Assert
+        Assert.Equal(2, dictionary.Count);
+        Assert.Equal("one", dictionary[1]);
+        Assert.Equal("two", dictionary[2]);
     }
 
     [Fact]
@@ -133,5 +177,4 @@ public class DictionaryExtensionsTests
         Assert.Equal("two", dictionary[2]);
         Assert.Equal("three", dictionary[3]);
     }
-
 }
