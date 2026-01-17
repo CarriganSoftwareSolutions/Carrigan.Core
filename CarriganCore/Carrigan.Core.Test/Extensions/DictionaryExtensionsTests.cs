@@ -79,7 +79,7 @@ public class DictionaryExtensionsTests
     }
 
     [Fact]
-    public void Add_NullDictionary_ThrowsNullReferenceException()
+    public void Add_NullDictionary_ThrowsArgumentNullException()
     {
         // Arrange
         Dictionary<int, string>? dictionary = null;
@@ -90,8 +90,8 @@ public class DictionaryExtensionsTests
 
         // Act & Assert
         // Since the extension method is invoked on a null instance,
-        // a NullReferenceException is expected.
-        Assert.Throws<NullReferenceException>(() => dictionary!.Add(keyValuePairs));
+        // a ArgumentNullException is expected.
+        Assert.Throws<ArgumentNullException>(() => dictionary!.Add(keyValuePairs));
     }
 
     [Fact]
