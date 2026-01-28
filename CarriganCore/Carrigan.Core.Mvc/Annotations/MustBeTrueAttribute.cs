@@ -1,8 +1,7 @@
-﻿
-using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
 
-namespace GuthrieMethodistChurch.Annotations;
+namespace Carrigan.Core.Mvc.Annotations;
 
 //ignore spelling: mustbetrue
 
