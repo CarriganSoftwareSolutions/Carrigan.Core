@@ -11,15 +11,13 @@ namespace Carrigan.Core.Mvc.Recaptcha;
 /// </summary>
 public class RecaptchaValidation
 {
-    private IRecaptchaConfiguration _recaptchaConfiguration;
+    private readonly IRecaptchaConfiguration _recaptchaConfiguration;
     /// <summary>
     /// Constructor
     /// </summary>
     /// <param name="recaptchaConfiguration">contains definitions for keys</param>
-    public RecaptchaValidation(IRecaptchaConfiguration recaptchaConfiguration)
-    {
+    public RecaptchaValidation(IRecaptchaConfiguration recaptchaConfiguration) => 
         _recaptchaConfiguration = recaptchaConfiguration;
-    }
 
     /// <summary>
     /// Perform V3 validation
