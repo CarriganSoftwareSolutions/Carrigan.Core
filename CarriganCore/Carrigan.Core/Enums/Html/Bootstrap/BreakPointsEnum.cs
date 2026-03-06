@@ -31,4 +31,16 @@ public static class BreakPointsEnumExtensions
         int width = pick ?? breakPoint.Col ?? defaultWidth;
         return width < 1 ? 1 : (width > 12 ? 12 : width);
     }
+
+
+    public static string ToBootstrapToken(this BreakPointsEnum bp) => bp switch
+    {
+        BreakPointsEnum.Default => "",
+        BreakPointsEnum.Small => "sm",
+        BreakPointsEnum.Medium => "md",
+        BreakPointsEnum.Large => "lg",
+        BreakPointsEnum.ExtraLarge => "xl",
+        BreakPointsEnum.ExtraExtraLarge => "xxl",
+        _ => ""
+    };
 }
