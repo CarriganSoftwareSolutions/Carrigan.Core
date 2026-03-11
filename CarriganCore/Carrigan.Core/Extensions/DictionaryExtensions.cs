@@ -20,4 +20,10 @@ public static class DictionaryExtensions
             dictionary.Add(keyValuePair.Key, keyValuePair.Value);
         }
     }
+
+
+    public static bool DoesNotContainKey<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key)
+    {
+        return !dictionary.ContainsKey(key);
+    }
 }
