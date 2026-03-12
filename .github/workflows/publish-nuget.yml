@@ -44,7 +44,7 @@ jobs:
         run: dotnet build CarriganCore\CarriganCore.sln --configuration Release --no-restore
 
       - name: Pack solution
-        run: dotnet pack CarriganCore\CarriganCore.sln --configuration Release --no-build -o .\artifacts
+        run: dotnet pack CarriganCore\CarriganCore.sln --configuration Release --no-build -o .\artifacts --include-source -p:SymbolPackageFormat=snupkg
 
       - name: Publish to NuGet
         env:
