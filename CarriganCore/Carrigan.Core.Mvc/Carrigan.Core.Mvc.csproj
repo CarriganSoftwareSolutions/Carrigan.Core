@@ -14,7 +14,7 @@
   <PropertyGroup>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">True</GeneratePackageOnBuild>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
     <Description>
       Carrigan.Core.Mvc is a core library designed to provide essential utilities and infrastructure for other projects, specifically for projects already using Microsoft.AspNetCore.Mvc. While not intended for standalone use, it serves as a dependency required by other packages to enable key functionality.
