@@ -45,6 +45,7 @@ public enum FontAwesomeEnum
     SearchMap,
     Search,
     ScaleBalanced,
+    Shield,
     Sort,
     Submit,
     Subscribe,

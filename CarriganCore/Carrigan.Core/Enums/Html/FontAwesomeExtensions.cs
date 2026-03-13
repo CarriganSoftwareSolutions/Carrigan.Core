@@ -65,6 +65,7 @@ public static class FontAwesomeEnumExtensions
             FontAwesomeEnum.Save => "fa-solid fa-floppy-disk",
             FontAwesomeEnum.SearchMap => "fa-solid fa-magnifying-glass-location",
             FontAwesomeEnum.Search => "fa-solid fa-magnifying-glass",
+            FontAwesomeEnum.Shield => "fa-solid shield",
             FontAwesomeEnum.Sort => "fa-solid fa-arrow-down-1-9",
             FontAwesomeEnum.Submit => "fa-solid fa-paper-plane",
             FontAwesomeEnum.Subscribe => "fa-regular fa-bell",
