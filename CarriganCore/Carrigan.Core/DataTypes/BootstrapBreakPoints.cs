@@ -14,7 +14,7 @@ public class BootstrapBreakPoints
 
     /// <summary>
     /// Builds Bootstrap grid classes for the configured breakpoints.
-    /// - If all values are null, returns " col-auto ".
+    /// - If all values are null, returns an empty string.
     /// - Otherwise returns a string that begins and ends with a space, containing:
     ///   - Col  -> "col-{n}"
     ///   - Sm   -> "col-sm-{n}"
@@ -28,7 +28,7 @@ public class BootstrapBreakPoints
     {
         if (Col is null  && Sm is null && Md is null && Lg is null && Xl is null && Xxl is null)
         {
-            return " col-auto ";
+            return string.Empty;
         }
         else
         {
