@@ -14,7 +14,6 @@
     <Deterministic>true</Deterministic>
 
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
 
     <!-- PreRelease Status -->
     <PreReleaseLabel>alpha</PreReleaseLabel>

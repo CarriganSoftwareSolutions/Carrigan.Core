@@ -1,9 +1,4 @@
-﻿Carrigan.Core
-Carrigan.Core.Mvc
-Carrigan.Core.Test 
-and related projects
-
-Copyright 2026 Carrigan Software Solutions LLC
+﻿Copyright 2026 Carrigan Software Solutions LLC
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -16,73 +11,6 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
-
----------------------------------------------------------------------
-THIRD-PARTY DEPENDENCIES AND ATTRIBUTIONS
-
-This project includes projects that depend on external packages.  
-Those packages are licensed separately as follows:
-
-- Microsoft.NETCore.App  
-    © Microsoft Corporation  
-    Licensed under the MIT License  
-    https://github.com/dotnet/runtime/blob/main/LICENSE.TXT  
-
-- Microsoft.AspNetCore.Mvc  
-    © Microsoft Corporation  
-    Licensed under the Apache License, Version 2.0  
-    https://github.com/dotnet/aspnetcore/blob/main/LICENSE.txt  
-
-- NetStandard.Library
-    © .NET Foundation and contributors
-    Licensed under the MIT License
-    https://github.com/dotnet/runtime/blob/main/LICENSE.TXT
-
-- GitInfo  
-    © devlooped and Contributors  
-    Licensed under the MIT License  
-    https://github.com/devlooped/GitInfo/blob/main/license.txt
-
-- coverlet.collector  
-    © Contributors  
-    Licensed under the MIT License  
-    https://github.com/coverlet-coverage/coverlet/blob/master/LICENSE  
-
-- Microsoft.NET.Test.Sdk  
-    © Microsoft Corporation  
-    Licensed under the MIT License  
-    https://github.com/microsoft/vstest/blob/main/LICENSE  
-
-- xUnit  
-    © James Newkirk, Brad Wilson, and xUnit contributors  
-    Licensed under the Apache License, Version 2.0  
-    https://github.com/xunit/xunit/blob/main/LICENSE
-
-- xunit.runner.visualstudio  
-    © xUnit contributors  
-    Licensed under the Apache License, Version 2.0  
-    https://github.com/xunit/visualstudio.xunit/blob/main/License.txt
-
-- Microsoft.CodeAnalysis.CSharp
-    © .NET Foundation and contributors
-    Licensed under the MIT License
-    https://github.com/dotnet/roslyn/blob/main/License.txt
-
-- Microsoft.CodeAnalysis.Common
-    © .NET Foundation and contributors
-    Licensed under the MIT License
-    https://github.com/dotnet/roslyn/blob/main/License.txt
-
-- Microsoft.CodeAnalysis.Analyzers
-    © .NET Foundation and contributors
-    Licensed under the MIT License
-    https://github.com/dotnet/roslyn-analyzers/blob/main/License.txt
-
-- Microsoft.SourceLink.GitHub
-  © .NET Foundation and Contributors
-  Licensed under the MIT License
-  https://github.com/dotnet/sourcelink/blob/main/LICENSE
-
 
 ---------------------------------------------------------------------
 

@@ -27,20 +27,14 @@
     <PackageTags>core, utilities, dependency, internal</PackageTags>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <UseGitInfo>true</UseGitInfo>
-  </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="GitInfo" Version="3.6.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.5" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.201" PrivateAssets="All" />
   </ItemGroup>
   
   <ItemGroup>
     <None Include="readme.md" Pack="true" PackagePath="\" />
+    <None Include="Acknowledgements.txt" Pack="true" PackagePath="\" />
+    <None Include="Notices.txt" Pack="true" PackagePath="\" />
   </ItemGroup>
 </Project>
