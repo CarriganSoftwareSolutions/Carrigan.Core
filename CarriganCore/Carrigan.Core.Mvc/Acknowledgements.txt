@@ -1,16 +1,14 @@
-﻿
-This repository uses a number of third-party libraries, frameworks, and tools.
-Their work is sincerely appreciated.
+﻿ACKNOWLEDGEMENTS
 
-This file is provided for informational and courtesy purposes only.
-It is not intended to replace, modify, or restate the license terms of any
-third-party dependency. For complete and authoritative licensing information,
-please refer to the applicable package metadata, license files, notice files,
+This file accompanies this package as a courtesy acknowledgement of
+third-party libraries, frameworks, and tools used in the development of
+this package and related projects.
+
+This file is provided for informational purposes only. It is not intended
+to replace, modify, or restate the license terms of any third-party
+dependency. For complete and authoritative licensing information, please
+refer to the applicable package metadata, license files, notice files,
 and upstream project repositories.
-
-Projects in this repository may rely on technologies and packages from the
-broader .NET ecosystem and other open-source contributors, including but not
-limited to:
 
 - Microsoft.NETCore.App  
     © Microsoft Corporation  
@@ -30,17 +28,10 @@ limited to:
     https://github.com/dotnet/sourcelink/blob/main/License.txt
 
 - Microsoft.Extensions.Logging.Abstractions
-    @ Microsoft
+    © Microsoft Corporation
     Licensed under the MIT License
     https://github.com/dotnet/dotnet/blob/main/LICENSE.TXT
     https://github.com/dotnet/dotnet/blob/main/THIRD-PARTY-NOTICES.txt
-
-- Carrigan.Core
-    @ Carrigan Software Solutions LLC
-    Licensed under the Apache License, Version 2.0
-    https://github.com/CarriganSoftwareSolutions/Carrigan.Core/blob/main/CarriganCore/LICENSE
-    https://github.com/CarriganSoftwareSolutions/Carrigan.Core/blob/main/CarriganCore/Notices.txt
-    https://github.com/CarriganSoftwareSolutions/Carrigan.Core/blob/main/CarriganCore/Acknowledgements.txt
 
 Unless otherwise expressly stated in a given package or distribution, references
 to third-party dependencies in this repository generally refer to dependencies

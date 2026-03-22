@@ -41,17 +41,10 @@ limited to:
     https://github.com/xunit/visualstudio.xunit/blob/main/License.txt
 
 - Microsoft.Extensions.Logging.Abstractions
-    @ Microsoft
+    © Microsoft Corporation
     Licensed under the MIT License
     https://github.com/dotnet/dotnet/blob/main/LICENSE.TXT
     https://github.com/dotnet/dotnet/blob/main/THIRD-PARTY-NOTICES.txt
-
-- Carrigan.Core
-    @ Carrigan Software Solutions LLC
-    Licensed under the Apache License, Version 2.0
-    https://github.com/CarriganSoftwareSolutions/Carrigan.Core/blob/main/CarriganCore/LICENSE
-    https://github.com/CarriganSoftwareSolutions/Carrigan.Core/blob/main/CarriganCore/Notices.txt
-    https://github.com/CarriganSoftwareSolutions/Carrigan.Core/blob/main/CarriganCore/Acknowledgements.txt
 
 Unless otherwise expressly stated in a given package or distribution, references
 to third-party dependencies in this repository generally refer to dependencies
