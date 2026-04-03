@@ -2,7 +2,6 @@
 using Carrigan.Core.Mvc.Interfaces;
 using Microsoft.AspNetCore.DataProtection;
 using System.Globalization;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Carrigan.Core.Mvc.Services;
 
