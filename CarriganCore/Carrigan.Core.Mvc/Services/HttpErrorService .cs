@@ -1,5 +1,6 @@
 ﻿
 using Carrigan.Core.Exceptions;
+using Carrigan.Core.Extensions;
 using Carrigan.Core.Mvc.Interfaces;
 using Carrigan.Core.Mvc.TransferModels;
 using Microsoft.AspNetCore.WebUtilities;
@@ -33,8 +34,8 @@ public sealed class HttpErrorService : IHttpErrorService
     {
         string errorTrackingCode = Guid.CreateVersion7().ToString();
 
-        additionalDetails ??= ReasonPhrases.GetReasonPhrase((int)httpStatusCode);
-        action ??= "If the problem persists, contact your system administrator.";
+        additionalDetails = additionalDetails.IsNullOrWhiteSpace() ? ReasonPhrases.GetReasonPhrase((int)httpStatusCode) : additionalDetails;
+        action ??= action.IsNullOrWhiteSpace() ? "If the problem persists, contact your system administrator." : action;
 
         return new HttpErrorData
         {
