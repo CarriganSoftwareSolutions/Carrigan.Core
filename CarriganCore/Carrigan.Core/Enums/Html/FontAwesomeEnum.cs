@@ -24,6 +24,7 @@ public enum FontAwesomeEnum
     Events,
     Facebook,
     FileInvoiceDollar,
+    Globe,
     HeartPulse,
     Information,
     Instagram,

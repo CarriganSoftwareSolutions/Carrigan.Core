@@ -44,6 +44,7 @@ public static class FontAwesomeEnumExtensions
             FontAwesomeEnum.Events => "fa-solid fa-calendar-days",
             FontAwesomeEnum.Facebook => "fa-brands fa-facebook",
             FontAwesomeEnum.FileInvoiceDollar => "fa-solid fa-file-invoice-dollar",
+            FontAwesomeEnum.Globe => "fa-solid fa-globe",
             FontAwesomeEnum.HeartPulse => "fa-solid fa-heart-pulse",
             FontAwesomeEnum.Information => "fa-solid fa-circle-info",
             FontAwesomeEnum.Instagram => "fa-brands fa-instagram",
