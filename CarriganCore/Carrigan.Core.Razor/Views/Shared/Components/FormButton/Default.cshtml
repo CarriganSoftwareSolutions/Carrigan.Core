@@ -1,0 +1,35 @@
+﻿@model FormButtonViewModel
+
+@{
+    //ignore spelling: btn nowrap  formmethod formnovalidate
+}
+
+
+<button id=@Model.Id
+        form="@Model.FormId"
+        class="btn @Model.ColorText"
+        asp-controller="@(Model.Controller.IsNullOrWhiteSpace() ? ViewContext.RouteData.Values["controller"]?.ToString() : Model.Controller)"
+        asp-area="@(Model.Area == null
+                   ? ViewContext.RouteData.Values["area"]?.ToString()
+                   : (Model.Area.IsNullOrWhiteSpace() ? "" : Model.Area))"
+        asp-action=@(Model.Action ?? ViewContext.RouteData.Values["action"]?.ToString())
+        asp-all-route-data="@Model.RouteValues"
+        title="@Model.Tooltip"
+        aria-label="@Model.AriaDescription"
+        type="@Model.TypeText"
+        formmethod="@Model.FormMethodText"
+        formnovalidate=@(Model.FormValidate is false)
+        disabled=@(Model.Enabled is false)>
+    @if (Model.IconText is not null)
+    {
+        <i class="@Model.IconText"></i>
+    }
+    @if (Model.HideTextOnSmall)
+    {
+        <span class="text-nowrap hide-on-small-screens">@Model.Text</span>
+    }
+    else
+    {
+        <span class="text-nowrap">@Model.Text</span>
+    }
+</button>

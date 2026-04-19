@@ -1,0 +1,30 @@
+﻿@model LinkViewModel
+
+@{
+    //ignore spelling: nowrap btn
+    bool disabled = Model.Enabled is false;
+    Dictionary<string, object> anchorAttributes = new();
+    if (disabled)
+    {
+        anchorAttributes["aria-disabled"] = "true";
+    }
+}
+
+<a id="@Model.Id"
+   class="btn @Model.ColorText @(disabled ? "disabled" : "")"
+   href="@Model.Href"
+   title="@Model.Tooltip"
+   attributes="@anchorAttributes">
+    @if (Model.IconText is not null)
+    {
+        <i class="@Model.IconText"></i>
+    }
+    @if (Model.HideTextOnSmall)
+    {
+        <span class="text-nowrap hide-on-small-screens">@Model.Text</span>
+    }
+    else
+    {
+        <span class="text-nowrap">@Model.Text</span>
+    }
+</a>

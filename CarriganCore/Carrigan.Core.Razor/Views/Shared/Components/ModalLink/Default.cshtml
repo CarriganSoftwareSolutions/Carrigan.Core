@@ -1,0 +1,27 @@
+﻿@model ModalLinkViewModel
+
+@*ignore spelling: nowrap *@
+@{
+    Dictionary<string, object> anchorAttributes = new();
+    if (Model.Enabled is false)
+    {
+        anchorAttributes["aria-disabled"] = "true";
+    }
+}
+
+<a id="@Model.Id"
+       class="text-nowrap"
+       href="#" data-bs-toggle="modal"
+       data-bs-target="@Model.Target"
+       aria-label="@Model.AriaDescription"
+       attributes="@anchorAttributes">
+    @if (@Model.IconText.IsNotNullOrEmpty())
+    {
+        <i class="@Model.IconText"></i>
+        @Model.Text
+    }
+    else
+    {
+        @Model.Text
+    }
+</a>

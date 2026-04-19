@@ -2,6 +2,6 @@
 
 This NOTICE file applies to the Carrigan.Core NuGet package only.
 
-Copyright (c) 2026 Carrigan Software Solutions LLC
+Copyright (c) 2025 - 2026 Carrigan Software Solutions LLC
 
 Licensed under the Apache License, Version 2.0.

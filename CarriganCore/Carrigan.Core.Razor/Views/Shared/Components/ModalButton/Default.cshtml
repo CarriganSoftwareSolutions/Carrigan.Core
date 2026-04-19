@@ -1,0 +1,22 @@
+﻿@model ModalButtonViewModel
+
+@*ignore spelling: btn bs*@
+
+<button id="@Model.Id"
+        type="button"
+        class="btn @Model.ColorText"
+        data-bs-toggle="modal"
+        data-bs-target="@Model.Target"
+        aria-label="@Model.AriaDescription"
+        disabled=@(Model.Enabled is false)>
+    @if (@Model.IconText.IsNotNullOrWhiteSpace())
+    {
+        <i class="@Model.IconText"></i>
+        @Model.Text
+    }
+    else
+    {
+        @Model.Text
+    }
+</button>
+

@@ -1,0 +1,36 @@
+﻿@model ActionLinkViewModel
+
+@{
+    //ignore spelling: nowrap btn
+    bool disabled = Model.Enabled is false;
+    Dictionary<string, object> anchorAttributes = new();
+    if (disabled)
+    {
+        anchorAttributes["aria-disabled"] = "true";
+    }
+}
+
+<a id="@Model.Id"
+       aria-label="@Model.AriaDescription"
+       class="btn @Model.ColorText @(disabled ? "disabled" : "")"
+       asp-controller="@(Model.Controller.IsNullOrWhiteSpace() ? ViewContext.RouteData.Values["controller"]?.ToString() : Model.Controller)"
+       asp-area="@(Model.Area == null
+        ? ViewContext.RouteData.Values["area"]?.ToString()
+        : (Model.Area.IsNullOrWhiteSpace() ? "" : Model.Area))"
+       asp-action="@Model.Action"
+       asp-all-route-data="@Model.RouteValues"
+       title="@Model.Tooltip"
+       attributes="@anchorAttributes">
+    @if (Model.IconText is not null)
+    {
+        <i class="@Model.IconText"></i>
+    }
+    @if (Model.HideTextOnSmall)
+    {
+        <span class="text-nowrap hide-on-small-screens">@Model.Text</span>
+    }
+    else
+    {
+        <span class="text-nowrap">@Model.Text</span>
+    }
+</a>
