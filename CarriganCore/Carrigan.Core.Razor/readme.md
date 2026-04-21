@@ -57,7 +57,7 @@ To avoid naming conflicts in consuming applications, library partials and view c
 
 ## Links
 
-* NuGet: [https://www.nuget.org/packages/Carrigan.Core](https://www.nuget.org/packages/Carrigan.Core)
+* NuGet: [https://www.nuget.org/packages/Carrigan.Core.Razor](https://www.nuget.org/packages/Carrigan.Core.Razor)
 * Repo:  [https://github.com/CarriganSoftwareSolutions/Carrigan.Core](https://github.com/CarriganSoftwareSolutions/Carrigan.Core)
 
 ---
@@ -65,4 +65,4 @@ To avoid naming conflicts in consuming applications, library partials and view c
 ## License
 
 Apache‑2.0 
-[https://www.apache.org/licenses](https://www.apache.org/licenses)
+[http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0)
