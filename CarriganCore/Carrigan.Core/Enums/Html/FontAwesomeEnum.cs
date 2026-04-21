@@ -26,6 +26,7 @@ public enum FontAwesomeEnum
     FileInvoiceDollar,
     Globe,
     HeartPulse,
+    Home,
     Information,
     Instagram,
     LeftRight,

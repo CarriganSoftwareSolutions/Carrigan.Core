@@ -48,6 +48,7 @@ public static class FontAwesomeEnumExtensions
             FontAwesomeEnum.HeartPulse => "fa-solid fa-heart-pulse",
             FontAwesomeEnum.Information => "fa-solid fa-circle-info",
             FontAwesomeEnum.Instagram => "fa-brands fa-instagram",
+            FontAwesomeEnum.Home => "fa-solid fa-house-chimney",
             FontAwesomeEnum.LeftRight => "fa-solid fa-right-left",
             FontAwesomeEnum.LinkedIn => "fa-brands fa-linkedin",
             FontAwesomeEnum.MapLocation => "fa-solid fa-map-location-dot",
