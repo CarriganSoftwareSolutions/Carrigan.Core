@@ -21,8 +21,14 @@ Install-Package Carrigan.Core.Analyzers
 
 ---
 
-License
+## Links
 
-Apache-2.0
+* NuGet: [https://www.nuget.org/packages/Carrigan.Core.Analyzers](https://www.nuget.org/packages/Carrigan.Core.Analyzers)
+* Repo:  [https://github.com/CarriganSoftwareSolutions/Carrigan.Core](https://github.com/CarriganSoftwareSolutions/Carrigan.Core)
 
-https://www.apache.org/licenses/LICENSE-2.0
+---
+
+## License
+
+Apache‑2.0 
+[https://www.apache.org/licenses](https://www.apache.org/licenses)

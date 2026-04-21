@@ -28,14 +28,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Carrigan.Core" Version="0.1.0-alpha.202604142354" />
+    <ProjectReference Include="..\Carrigan.Core\Carrigan.Core.csproj" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.202" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="readme.md" Pack="true" PackagePath="\" />
     <None Include="Acknowledgements.txt" Pack="true" PackagePath="\" />
-    <None Include="NOTICE.txt" Pack="true" PackagePath="\" />
+    <None Include="Notice.txt" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 

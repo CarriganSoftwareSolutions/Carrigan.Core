@@ -26,10 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="README.md" Pack="true" PackagePath="\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="$(TargetPath)" Pack="true" PackagePath="analyzers/dotnet/cs" />
     <None Include="readme.md" Pack="true" PackagePath="\" />
     <None Include="Acknowledgements.txt" Pack="true" PackagePath="\" />

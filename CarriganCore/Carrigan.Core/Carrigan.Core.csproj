@@ -16,13 +16,8 @@
     <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">True</GeneratePackageOnBuild>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
     <Description>
-      Carrigan.Core is a core library designed to provide essential utilities and infrastructure for other projects. While not intended for standalone use, it serves as a dependency required by other packages to enable key functionality.
-
-      This package contains primarily extension methods, helper methods, base classes, interfaces, data structures, enums, etc which are shared by multiple other packages. It is an internal-use library that supports the architecture of larger projects, ensuring consistency and re-usability across the code base.
-
-      If you are working with other Carrigan Software Solutions projects or components in your solution, Carrigan.Core will be automatically referenced as part of the required dependencies, if it requires this package as a dependency.
-
-      This package is not intended for direct consumption, but if you really want to use my pointless helper methods, feel free.
+      Carrigan.Core provides shared extension methods, helper methods, base types,
+      and other reusable utilities for .NET applications.
     </Description>
     <PackageTags>core, utilities, dependency, internal</PackageTags>
   </PropertyGroup>

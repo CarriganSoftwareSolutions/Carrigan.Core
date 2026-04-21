@@ -53,6 +53,16 @@ To avoid naming conflicts in consuming applications, library partials and view c
 
 `razor`, `aspnetcore`, `mvc`, `view-components`, `partial-views`, `razor-class-library`, `ui`, `web`
 
+---
+
+## Links
+
+* NuGet: [https://www.nuget.org/packages/Carrigan.Core](https://www.nuget.org/packages/Carrigan.Core)
+* Repo:  [https://github.com/CarriganSoftwareSolutions/Carrigan.Core](https://github.com/CarriganSoftwareSolutions/Carrigan.Core)
+
+---
+
 ## License
 
-This project is licensed under the Apache License 2.0.
+Apache‑2.0 
+[https://www.apache.org/licenses](https://www.apache.org/licenses)

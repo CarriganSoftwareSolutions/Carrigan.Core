@@ -30,11 +30,11 @@ Install-Package Carrigan.Core
 ## Links
 
 * NuGet: [https://www.nuget.org/packages/Carrigan.Core](https://www.nuget.org/packages/Carrigan.Core)
-* Repo:  [https://github.com/CarriganSoftware/Carrigan.Core](https://github.com/CarriganSoftware/Carrigan.Core)
+* Repo:  [https://github.com/CarriganSoftwareSolutions/Carrigan.Core](https://github.com/CarriganSoftwareSolutions/Carrigan.Core)
 
 ---
 
 ## License
 
 Apache‑2.0 
-[https://www.apache.org/licenses/LICEN](https://www.apache.org/licenses/LICEN)
+[https://www.apache.org/licenses](https://www.apache.org/licenses)

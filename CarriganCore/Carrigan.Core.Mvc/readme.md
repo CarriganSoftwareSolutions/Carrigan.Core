@@ -21,6 +21,19 @@ Install-Package Carrigan.Core.Mvc
 
 ---
 
+## reCAPTCHA compliance notice
+
+This library helps integrate Google reCAPTCHA, but compliance with Google's reCAPTCHA terms, branding, disclosure, privacy, and cookie requirements remains the responsibility of the application developer.
+
+If you hide the reCAPTCHA badge, make sure the required reCAPTCHA branding/disclosure remains visibly present in the user flow, consistent with Google's reCAPTCHA documentation.
+
+Example disclosure text from Google's documentation:
+
+This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.
+
+This library does not automatically determine whether your implementation, privacy notice, cookie notice, or UI placement satisfies legal or platform requirements.
+
+---
 
 ## Targets
 
@@ -28,15 +41,14 @@ Install-Package Carrigan.Core.Mvc
 
 ---
 
-## NuGet
+## Links
 
-* [https://www.nuget.org/packages/Carrigan.Core.Mvc](https://www.nuget.org/packages/Carrigan.Core.Mvc)
-* [https://github.com/CarriganSoftwareSolutions/Carrigan.Core](https://github.com/CarriganSoftwareSolutions/Carrigan.Core)
+* NuGet: [https://www.nuget.org/packages/Carrigan.Core.Mvc](https://www.nuget.org/packages/Carrigan.Core.Mvc)
+* Repo:  [https://github.com/CarriganSoftwareSolutions/Carrigan.Core](https://github.com/CarriganSoftwareSolutions/Carrigan.Core)
 
 ---
 
-License
+## License
 
-Apache-2.0
-
-https://www.apache.org/licenses/LICENSE-2.0
+Apache‑2.0 
+[https://www.apache.org/licenses](https://www.apache.org/licenses)

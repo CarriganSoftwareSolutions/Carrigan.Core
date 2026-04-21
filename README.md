@@ -1,20 +1,26 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# Carrigan.Core
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+Carrigan.Core is a small collection of reusable .NET libraries published by Carrigan Software Solutions LLC. This is primarily intended to support other projects, and was open sourced for full disclosure of the codebase. However, if you see if anything you find useful feel free to use it in accordance with the Apache 2.0 license.
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+## Projects
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+- `Carrigan.Core` - general-purpose helpers and extension methods
+- `Carrigan.Core.Mvc` - ASP.NET Core MVC helpers
+- `Carrigan.Core.Razor` - reusable Razor UI components and assets
+- `Carrigan.Core.Analyzers` - Roslyn analyzers
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+## Status
+
+Pre-1.0. APIs may change.
+
+## Packages
+
+- `Carrigan.Core`
+- `Carrigan.Core.Mvc`
+- `Carrigan.Core.Razor`
+- `Carrigan.Core.Analyzers`
+
+## Build
+
+```bash
+dotnet build CarriganCore/CarriganCore.sln

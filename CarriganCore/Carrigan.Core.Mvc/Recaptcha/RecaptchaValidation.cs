@@ -9,6 +9,18 @@ namespace Carrigan.Core.Mvc.Recaptcha;
 /// Class used for Google Recaptcha validation
 /// This is very specific to my own uses in projects, and likely of little value to anyone else.
 /// </summary>
+/// /// <remarks>
+/// This helper assists with technical integration only.
+/// Application developers remain responsible for ensuring their implementation
+/// complies with Google's reCAPTCHA terms, branding, disclosure, privacy,
+/// cookie, and notice requirements.
+///
+/// If a consuming application hides the reCAPTCHA badge, the application should
+/// still provide any disclosure text and related notices required by Google.
+///
+/// This library does not determine whether a specific implementation satisfies
+/// legal, contractual, policy, accessibility, privacy, or user-interface requirements.
+/// </remarks>
 public class RecaptchaValidation
 {
     private readonly IRecaptchaConfiguration _recaptchaConfiguration;
@@ -16,6 +28,18 @@ public class RecaptchaValidation
     /// Constructor
     /// </summary>
     /// <param name="recaptchaConfiguration">contains definitions for keys</param>
+    /// <remarks>
+    /// This helper assists with technical integration only.
+    /// Application developers remain responsible for ensuring their implementation
+    /// complies with Google's reCAPTCHA terms, branding, disclosure, privacy,
+    /// cookie, and notice requirements.
+    ///
+    /// If a consuming application hides the reCAPTCHA badge, the application should
+    /// still provide any disclosure text and related notices required by Google.
+    ///
+    /// This library does not determine whether a specific implementation satisfies
+    /// legal, contractual, policy, accessibility, privacy, or user-interface requirements.
+    /// </remarks>
     public RecaptchaValidation(IRecaptchaConfiguration recaptchaConfiguration) => 
         _recaptchaConfiguration = recaptchaConfiguration;
 
@@ -25,6 +49,18 @@ public class RecaptchaValidation
     /// <param name="modelState">provide the model state, which is going to get updated with any relevant validation errors.</param>
     /// <param name="token">provide the token to validate</param>
     /// <returns><see cref="Task{bool}"/> <c>true</c> if the validation passes, else <c>false</c></returns>
+    /// <remarks>
+    /// This helper assists with technical integration only.
+    /// Application developers remain responsible for ensuring their implementation
+    /// complies with Google's reCAPTCHA terms, branding, disclosure, privacy,
+    /// cookie, and notice requirements.
+    ///
+    /// If a consuming application hides the reCAPTCHA badge, the application should
+    /// still provide any disclosure text and related notices required by Google.
+    ///
+    /// This library does not determine whether a specific implementation satisfies
+    /// legal, contractual, policy, accessibility, privacy, or user-interface requirements.
+    /// </remarks>
     public async Task<bool> ValidateV3(ModelStateDictionary modelState, string? token)
     {
         ReCaptchaV3Response? recaptchaResponse = null;
@@ -63,6 +99,18 @@ public class RecaptchaValidation
     /// <param name="modelState">provide the model state, which is going to get updated with any relevant validation errors.</param>
     /// <param name="recaptchaResponse">provide the recaptcha response to validate</param>
     /// <returns><see cref="Task{bool}"/> <c>true</c> if the validation passes, else <c>false</c></returns>
+    /// <remarks>
+    /// This helper assists with technical integration only.
+    /// Application developers remain responsible for ensuring their implementation
+    /// complies with Google's reCAPTCHA terms, branding, disclosure, privacy,
+    /// cookie, and notice requirements.
+    ///
+    /// If a consuming application hides the reCAPTCHA badge, the application should
+    /// still provide any disclosure text and related notices required by Google.
+    ///
+    /// This library does not determine whether a specific implementation satisfies
+    /// legal, contractual, policy, accessibility, privacy, or user-interface requirements.
+    /// </remarks>
     public async Task<bool> ValidateV2(ModelStateDictionary modelState, string recaptchaResponse)
     {
         // Prepare the verification URL
