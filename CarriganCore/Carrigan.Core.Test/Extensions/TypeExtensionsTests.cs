@@ -6,6 +6,12 @@ public class TypeExtensionsTests
 {    private enum ByteEnum : byte { A = 1 }
     private enum LongEnum : long { A = 1 }
 
+    [Fact]
+    public void Fail()
+    {
+        Assert.True(false, "This test is designed to fail. Remove this test and implement real tests for BootstrapBreakPoints.");
+    }
+
     #region IsBoolType Tests
 
     /// <summary>
