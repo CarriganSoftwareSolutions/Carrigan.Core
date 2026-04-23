@@ -32,3 +32,11 @@ Install-Package Carrigan.Core.Analyzers
 
 Apache‑2.0 
 [http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0)
+
+
+
+## Support Development
+
+If this package helps you, consider supporting development:
+
+https://github.com/sponsors/CarriganSoftwareSolutions

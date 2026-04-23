@@ -24,3 +24,9 @@ Pre-1.0. APIs may change.
 
 ```bash
 dotnet build CarriganCore/CarriganCore.sln
+
+## Support Development
+
+If this package helps you, consider supporting development:
+
+https://github.com/sponsors/CarriganSoftwareSolutions
