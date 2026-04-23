@@ -2,14 +2,53 @@ name: Publish to NuGet (version/0.x)
 
 on:
   push:
-    branches: [ version/0.x ]
+    branches:
+      - version/0.x
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-nuget-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET SDKs
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: |
+            9.0.x
+            10.0.x
+
+      - name: Restore
+        run: dotnet restore CarriganCore/CarriganCore.sln
+
+      - name: Build
+        run: dotnet build CarriganCore/CarriganCore.sln --configuration Release --no-restore
+
+      - name: Test
+        run: >-
+          dotnet test CarriganCore/Carrigan.Core.Test/Carrigan.Core.Test.csproj
+          --configuration Release
+          --no-build
+          --collect:"XPlat Code Coverage"
+          --logger "trx;LogFileName=test-results.trx"
+
   build-pack-publish:
+    needs: validate
     runs-on: self-hosted
     env:
       NUGET_SOURCE: https://api.nuget.org/v3/index.json
-      DOTNET_INSTALL_DIR: C:\actions-runner\dotnet   
+      DOTNET_INSTALL_DIR: C:\actions-runner\dotnet
       DOTNET_ROOT: C:\actions-runner\dotnet
     defaults:
       run:
@@ -21,19 +60,16 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Debug Git presence
-        run: |
-          where git
-          git --version
-
       - name: Ensure dotnet install directory exists
         run: if not exist "C:\actions-runner\dotnet" mkdir "C:\actions-runner\dotnet"
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
+      - name: Setup .NET SDKs
+        uses: actions/setup-dotnet@v5
         with:
-          dotnet-version: '9.0.x'
-                    
+          dotnet-version: |
+            9.0.x
+            10.0.x
+
       - name: dotnet info
         run: dotnet --info
 
@@ -42,6 +78,9 @@ jobs:
 
       - name: Build (Release)
         run: dotnet build CarriganCore\CarriganCore.sln --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test CarriganCore\Carrigan.Core.Test\Carrigan.Core.Test.csproj --configuration Release --no-build
 
       - name: Pack solution
         run: dotnet pack CarriganCore\CarriganCore.sln --configuration Release --no-build -o .\artifacts --include-symbols -p:SymbolPackageFormat=snupkg
@@ -61,7 +100,7 @@ jobs:
           for %%F in (.\artifacts\*.snupkg) do (
             dotnet nuget push "%%F" --api-key "%NUGET_API_KEY%" --source %NUGET_SOURCE% --skip-duplicate
           )
-          
+
       - name: Publish packages to local feed
         run: |
           for %%F in (.\artifacts\*.nupkg) do (
