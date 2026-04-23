@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use Carrigan.Core, please cite it using the metadata below."
+type: software
+title: "Carrigan.Core"
+authors:
+  - family-names: "Carrigan"
+    given-names: "Jonathan"
+    alias: "Carrigan Software Solutions LLC"
+version: "1.0.0"
+date-released: "2026-04-22"
+repository-code: "https://github.com/CarriganSoftwareSolutions/Carrigan.Core"
+url: "https://github.com/CarriganSoftwareSolutions/Carrigan.Core"
+abstract: "Reusable core library for .NET applications from Carrigan Software Solutions."
+keywords:
+  - ".NET"
+  - "NuGet"
+  - "ASP.NET Core"
+  - "C#"
+license: "Apache-2.0"
