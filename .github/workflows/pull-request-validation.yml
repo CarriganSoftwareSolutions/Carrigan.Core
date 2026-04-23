@@ -17,7 +17,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup .NET SDKs
         uses: actions/setup-dotnet@v5
@@ -42,9 +42,10 @@ jobs:
 
       - name: Upload test results
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: test-results
           path: |
             **/TestResults/**/*.trx
             **/TestResults/**/coverage.cobertura.xml
+          if-no-files-found: warn
