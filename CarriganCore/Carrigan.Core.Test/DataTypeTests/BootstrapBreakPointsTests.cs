@@ -6,13 +6,13 @@ namespace Carrigan.Core.Test.DataTypeTests;
 public sealed class BootstrapBreakPointsTests
 {
     [Fact]
-    public void ToHtml_WhenAllValuesAreNull_ReturnsColAutoWithSpaces()
+    public void ToHtml_WhenAllValuesAreNull_ReturnsEmptyString()
     {
         BootstrapBreakPoints sut = new();
 
         string actual = sut.ToHtml();
 
-        Assert.Equal(" col-auto ", actual);
+        Assert.Equal(string.Empty, actual);
     }
 
     [Fact]
