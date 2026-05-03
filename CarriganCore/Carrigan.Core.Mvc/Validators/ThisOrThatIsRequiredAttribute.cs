@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 
-namespace Carrigan.Core.Mvc.Annotations;
+namespace Carrigan.Core.Mvc.Validators;
 
 //ignore spelling: thisorthatisrequired otherproperty
 public class ThisOrThatIsRequiredAttribute : ValidationAttribute, IClientModelValidator

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
 
-namespace Carrigan.Core.Mvc.Annotations;
+namespace Carrigan.Core.Mvc.Validators;
 
 //ignore spelling: mustbetrue
 
