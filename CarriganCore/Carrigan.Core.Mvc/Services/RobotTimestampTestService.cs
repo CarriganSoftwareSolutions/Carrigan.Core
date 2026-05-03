@@ -30,7 +30,7 @@ public sealed class RobotTimestampTestService : IRobotTimestampTestService
         string payload = $"{DateTimeOffset.UtcNow.ToString("O", CultureInfo.InvariantCulture)}";
         return _protector.Protect(payload);
     }
-    public bool TryValidateToken(string token, int secondsToRespond, int minutesToRespond = 30)
+    public bool TryValidateToken(string token, int secondsToRespond, int minutesToRespond)
     {
         TimeSpan minAge = new(0, 0, secondsToRespond);
         TimeSpan maxAge = new(0, minutesToRespond, 0);
