@@ -3,5 +3,5 @@
 public interface IRobotTimestampTestService
 {
     string CreateToken();
-    bool TryValidateToken(string token, int minSecondsToRespond);
+    bool TryValidateToken(string token, int minSecondsToRespond, int minutesToRespond);
 }

@@ -1,5 +1,4 @@
 ﻿using Carrigan.Core.Mvc.Interfaces;
-using Carrigan.Core.Mvc.Interfaces;
 using System.ComponentModel.DataAnnotations;
 
 namespace Carrigan.Core.Mvc.Validators;
@@ -10,8 +9,11 @@ public sealed class RobotTimestampTestAttribute : ValidationAttribute
     private readonly int _minSecondsToRespond;
     private readonly int _minutesToRespond;
 
-    public RobotTimestampTestAttribute(int minSecondsToRespond) =>
+    public RobotTimestampTestAttribute(int minSecondsToRespond, int minutesToRespond = 30)
+    {
         _minSecondsToRespond = minSecondsToRespond;
+        _minutesToRespond = minutesToRespond;
+    }
 
     protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
     {
@@ -19,7 +21,7 @@ public sealed class RobotTimestampTestAttribute : ValidationAttribute
         {
             string? token = value as string;
 
-            bool isValid = formTimestampService.TryValidateToken(token ?? string.Empty, _minSecondsToRespond);
+            bool isValid = formTimestampService.TryValidateToken(token ?? string.Empty, _minSecondsToRespond, _minutesToRespond);
 
             if (isValid)
                 return ValidationResult.Success;

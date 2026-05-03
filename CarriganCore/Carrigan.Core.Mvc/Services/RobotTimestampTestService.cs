@@ -30,10 +30,10 @@ public sealed class RobotTimestampTestService : IRobotTimestampTestService
         string payload = $"{DateTimeOffset.UtcNow.ToString("O", CultureInfo.InvariantCulture)}";
         return _protector.Protect(payload);
     }
-
-    public bool TryValidateToken(string token, int secondsToRespond)
+    public bool TryValidateToken(string token, int secondsToRespond, int minutesToRespond = 30)
     {
         TimeSpan minAge = new(0, 0, secondsToRespond);
+        TimeSpan maxAge = new(0, minutesToRespond, 0);
 
         if (token.IsNotNullOrWhiteSpace())
         {
@@ -41,12 +41,11 @@ public sealed class RobotTimestampTestService : IRobotTimestampTestService
             {
                 string unprotected = _protector.Unprotect(token);
 
-
                 if (DateTimeOffset.TryParse(unprotected, null, DateTimeStyles.RoundtripKind, out DateTimeOffset timestampUtc))
                 {
                     TimeSpan age = DateTimeOffset.UtcNow - timestampUtc;
 
-                    return (age >= minAge);
+                    return age >= minAge && age <= maxAge;
                 }
                 else return false;
             }
