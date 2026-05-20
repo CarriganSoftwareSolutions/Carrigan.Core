@@ -32,14 +32,11 @@ public static class ReflectorCache<T>
     /// <summary>
     /// Static constructor that initializes the lazy property cache.
     /// </summary>
-    static ReflectorCache()
-    {
-
-        _LazyPublicInstanceProperties = new Lazy<IEnumerable<PropertyInfo>>
-            (() =>
-                Type
-                    .GetProperties(BindingFlags.Public | BindingFlags.Instance)
-            );
-    }
+    static ReflectorCache() => _LazyPublicInstanceProperties = new Lazy<IEnumerable<PropertyInfo>>
+    (
+        () =>
+            Type
+                .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+    );
 
 }
