@@ -15,13 +15,9 @@ public class NavigationPagesTestClass : PagedContentBase<int>
 
     public override uint TotalItemCount => throw new NotImplementedException();
 
-    public override IEnumerable<int> AsEnumerable()
-    {
+    public override IEnumerable<int> AsEnumerable() => 
         throw new NotImplementedException();
-    }
 
-    public override IEnumerable<int> PageAsEnumerable()
-    {
+    public override IEnumerable<int> PageAsEnumerable() => 
         throw new NotImplementedException();
-    }
 }

@@ -8,7 +8,7 @@
 /// <typeparam name="T">The item type.</typeparam>
 public class PagedList<T> : PagedContentBase<T>
 {
-    private IEnumerable<T> _enumerable;
+    private readonly IEnumerable<T> _enumerable;
 
     /// <summary>
     /// Total number of items, computed from the underlying <see cref="IEnumerable{T}"/>.

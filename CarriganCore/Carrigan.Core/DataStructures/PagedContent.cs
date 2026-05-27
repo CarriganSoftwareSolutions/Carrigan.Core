@@ -7,7 +7,7 @@ namespace Carrigan.Core.DataStructures;
 /// <typeparam name="T"></typeparam>
 public class PagedContent<TModel> : PagedContentBase<TModel>
 {
-    private IPageAccess<TModel> _access;
+    private readonly IPageAccess<TModel> _access;
     private uint _PageSize;
     private uint _PageNumber;
 

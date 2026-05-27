@@ -9,7 +9,7 @@ namespace Carrigan.Core.DataStructures;
 /// <typeparam name="T">The type of the model to be paged.</typeparam>
 public class PagedContentAsync<T> : PagedContentBaseAsync<T>
 {
-    private IAsyncPageAccess<T> _access;
+    private readonly IAsyncPageAccess<T> _access;
     private uint _PageSize;
     private uint _PageNumber;
 

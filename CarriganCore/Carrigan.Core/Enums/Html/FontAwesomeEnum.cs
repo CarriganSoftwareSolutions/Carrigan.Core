@@ -1,5 +1,7 @@
 ﻿namespace Carrigan.Core.Enums.Html;
 
+//Ignore Spelling: Pinterest, Tik, Tok
+
 /// <summary>
 /// This is an enumeration of font awesome fonts being used for internal purposes.
 /// It was part of the core library we decided to open source, but this enum definition has little value to anyone outside of my organization.

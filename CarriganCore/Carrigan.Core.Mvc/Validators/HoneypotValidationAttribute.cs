@@ -14,10 +14,8 @@ public sealed class HoneypotValidationAttribute : ValidationAttribute
     /// <summary>
     /// Creates a new <see cref="HoneypotValidationAttribute"/>.
     /// </summary>
-    public HoneypotValidationAttribute()
-    {
+    public HoneypotValidationAttribute() => 
         ErrorMessage = "The {0} field is required.";
-    }
 
     /// <summary>
     /// Returns true only when the submitted value is null or empty.

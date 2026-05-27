@@ -9,7 +9,7 @@ namespace Carrigan.Core.Test.DataStructures;
 public class PagedListUnitTests
 {
     private readonly List<int> _data;
-    private PagedList<int> _pagedList;
+    private readonly PagedList<int> _pagedList;
 
     public PagedListUnitTests()
     {

@@ -2,6 +2,8 @@
 using Carrigan.Core.Enums.Html.Bootstrap;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
+//Ignore spelling: href, Tooltip
+
 namespace Carrigan.Core.Razor.ViewModels;
 
 public class LinkViewModel

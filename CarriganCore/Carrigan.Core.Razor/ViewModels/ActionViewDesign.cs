@@ -1,7 +1,8 @@
 ﻿using Carrigan.Core.Enums.Html;
 using Carrigan.Core.Enums.Html.Bootstrap;
 using System.Diagnostics.CodeAnalysis;
-using System.Drawing;
+
+//IGNORE SPELLING: tooltip 
 
 namespace Carrigan.Core.Razor.ViewModels;
 

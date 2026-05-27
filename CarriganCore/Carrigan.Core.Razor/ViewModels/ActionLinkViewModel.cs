@@ -3,7 +3,7 @@ using Carrigan.Core.Enums.Html.Bootstrap;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 namespace Carrigan.Core.Razor.ViewModels;
-
+//IGNORE SPELLING: tooltip 
 public class ActionLinkViewModel
 {
     public string? Id { get; private init; }
@@ -43,8 +43,8 @@ public class ActionLinkViewModel
             .RouteValues?
             .ToDictionary
             (
-                kvp => kvp.Key,
-                kvp => kvp.Value?.ToString() ?? string.Empty
+                keyValuePair => keyValuePair.Key,
+                keyValuePair => keyValuePair.Value?.ToString() ?? string.Empty
             ) ?? [];
 
     public string IconText =>

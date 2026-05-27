@@ -35,16 +35,14 @@ public static class ButtonTypeEnumExtension
     /// This occurs when a <see cref="ButtonTypeEnum"/> is being used that was not coded for in this method.
     /// Fix this by adding the new enum value to the code in the method.
     /// </exception>
-    public static string ToHtml(this ButtonTypeEnum buttonType)
-    {
-        return buttonType switch
+    public static string ToHtml(this ButtonTypeEnum buttonType) => 
+        buttonType switch
         {
             ButtonTypeEnum.Button => "button",
             ButtonTypeEnum.Submit => "submit",
             ButtonTypeEnum.Reset => "reset",
             _ => throw new ArgumentOutOfRangeException(nameof(buttonType), buttonType, null)
         };
-    }
 
     [Obsolete("Use ToHtml instead.", false)]
     public static string ToString(this ButtonTypeEnum buttonType) =>

@@ -7,10 +7,8 @@ public class FontAwesomeStruct
 {
     public FontAwesomeEnum Value { get; }
 
-    public FontAwesomeStruct(FontAwesomeEnum value)
-    {
+    public FontAwesomeStruct(FontAwesomeEnum value) => 
         Value = value;
-    }
 
     // Implicit conversion from FontAwesomeEnum to FontAwesomeIcon
     public static implicit operator FontAwesomeStruct(FontAwesomeEnum value)

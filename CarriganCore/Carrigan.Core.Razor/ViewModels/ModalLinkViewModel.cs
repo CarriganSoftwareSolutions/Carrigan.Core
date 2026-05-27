@@ -1,6 +1,8 @@
 ﻿using Carrigan.Core.Enums.Html;
 using Carrigan.Core.Enums.Html.Bootstrap;
 
+//IGNORE SPELLING: Tooltip
+
 namespace Carrigan.Core.Razor.ViewModels;
 
 public class ModalLinkViewModel

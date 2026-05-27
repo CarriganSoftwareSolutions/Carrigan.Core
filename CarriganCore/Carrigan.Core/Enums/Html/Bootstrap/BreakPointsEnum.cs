@@ -2,6 +2,8 @@
 
 namespace Carrigan.Core.Enums.Html.Bootstrap;
 
+//ignore spelling: xxl, xl, md, sm, Breakpoint
+
 public enum BreakPointsEnum
 {
     Default = 0,
@@ -14,7 +16,11 @@ public enum BreakPointsEnum
 
 public static class BreakPointsEnumExtensions
 {
-    public static int GetColWidthAtBreakpoint(this BreakPointsEnum at, BootstrapBreakPoints breakPoint, int defaultWidth = 4)
+    [Obsolete("Use \"GetColWidthAtBreakPoint\" instead")]
+    public static int GetColWidthAtBreakpoint(this BreakPointsEnum at, BootstrapBreakPoints breakPoint, int defaultWidth = 4) =>
+        GetColWidthAtBreakPoint(at, breakPoint, defaultWidth);
+
+    public static int GetColWidthAtBreakPoint(this BreakPointsEnum at, BootstrapBreakPoints breakPoint, int defaultWidth = 4)
     {
         ArgumentNullException.ThrowIfNull(breakPoint);
 

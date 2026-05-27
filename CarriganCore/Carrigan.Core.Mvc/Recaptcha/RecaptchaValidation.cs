@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Text.Json;
 
+//IGNORE SPELLING: json
 
 namespace Carrigan.Core.Mvc.Recaptcha;
 

@@ -20,14 +20,12 @@ public class MustBeTrueAttribute : ValidationAttribute,IClientModelValidator
 
     }
 
-    public override string FormatErrorMessage(string name)
-    {
-        return ErrorMessage ?? $"The {name} field must be checked in order to continue.";
-    }
+    public override string FormatErrorMessage(string name) =>
+        ErrorMessage ?? $"The {name} field must be checked in order to continue.";
 
     public override bool IsValid(object? value) =>
          (bool?)value ?? false;
-    protected bool MergeAttribute(IDictionary<string, string> attributes, string key, string value)
+    protected static bool MergeAttribute(IDictionary<string, string> attributes, string key, string value)
     {
         if (attributes.ContainsKey(key))
             return false;

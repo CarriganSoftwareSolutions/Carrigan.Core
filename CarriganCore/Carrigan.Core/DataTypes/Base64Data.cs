@@ -36,10 +36,8 @@ public readonly struct Base64Data
     /// Build directly from a byte array.
     /// </summary>
     /// <param name="data">A byte array to be converted to a base 64 string.</param>
-    public Base64Data(byte[] data)
-    {
+    public Base64Data(byte[] data) => 
         _encoded = Convert.ToBase64String(data);
-    }
 
     /// <summary>
     /// Convert back to a byte array.

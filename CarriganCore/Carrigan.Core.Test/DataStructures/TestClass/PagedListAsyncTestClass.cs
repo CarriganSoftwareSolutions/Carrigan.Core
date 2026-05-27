@@ -12,7 +12,7 @@ namespace Carrigan.Core.Test.DataStructures.TestClass;
 /// <typeparam name="T"></typeparam>
 public class PagedListAsyncTestClass<T> : PagedContentBaseAsync<T>
 {
-    private IEnumerable<T> _enumerable;
+    private readonly IEnumerable<T> _enumerable;
 
     public override Task<uint> GetTotalItemCountAsync() =>
         Task.FromResult((uint)_enumerable.Count());

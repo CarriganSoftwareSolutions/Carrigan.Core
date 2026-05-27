@@ -1,7 +1,10 @@
 ﻿using Carrigan.Core.Enums.Html;
 using Carrigan.Core.Enums.Html.Bootstrap;
 
+//IGNORE SPELLING: Tooltip
+
 namespace Carrigan.Core.Razor.ViewModels;
+
 
 public class FormButtonViewModel
 {
@@ -57,8 +60,8 @@ public class FormButtonViewModel
             .RouteValues?
             .ToDictionary
             (
-                kvp => kvp.Key,
-                kvp => kvp.Value?.ToString() ?? string.Empty
+                keyValuePair => keyValuePair.Key,
+                keyValuePair => keyValuePair.Value?.ToString() ?? string.Empty
             ) ?? [];
 
     public bool FormValidate =>

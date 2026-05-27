@@ -109,7 +109,7 @@ public class DateTimeAfterAttribute : ValidationAttribute, IClientModelValidator
         MergeAttribute(context.Attributes, "data-val-datetimeafter-inclusive", _inclusive.ToString().ToLower());
     }
 
-    protected bool MergeAttribute(IDictionary<string, string> attributes, string key, string value)
+    protected static bool MergeAttribute(IDictionary<string, string> attributes, string key, string value)
     {
         if (attributes.ContainsKey(key))
             return false;

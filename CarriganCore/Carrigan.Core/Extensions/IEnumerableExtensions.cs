@@ -18,10 +18,8 @@ public static class IEnumerableExtensions
     /// <param name="enumerable">the enumerable</param>
     /// <param name="value">the value being looked for</param>
     /// <returns></returns>
-    public static bool DoesNotContain<T>(this IEnumerable<T> enumerable, T value)
-    {
-        return enumerable.Contains(value) == false;
-    }
+    public static bool DoesNotContain<T>(this IEnumerable<T> enumerable, T value) => 
+        enumerable.Contains(value) == false;
     #endregion
 
     #region ForEach

@@ -78,11 +78,11 @@ public sealed class UsaPhoneNumberTests
     }
 
     [Fact]
-    public void ToParensDashNotation_ReturnsExpectedFormat()
+    public void ToParenthesisDashNotation_ReturnsExpectedFormat()
     {
         UsaPhoneNumber phoneNumber = new("6155551212");
 
-        string formatted = phoneNumber.ToParensDashNotation();
+        string formatted = phoneNumber.ToParenthesisDashNotation();
 
         Assert.Equal("(615)555-1212", formatted);
     }

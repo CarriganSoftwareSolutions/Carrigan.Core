@@ -32,20 +32,17 @@ public static class ButtonColorsEnumExtension
     /// This occurs when a <see cref="ButtonColorsEnum"/> is being used that was not coded for in this method.
     /// Fix this by adding the new enum value to the code in the method.
     /// </exception>
-    public static string ToBootStrapClass(this ButtonColorsEnum color)
+    public static string ToBootStrapClass(this ButtonColorsEnum color) => color switch
     {
-        return color switch
-        {
-            ButtonColorsEnum.Primary => "btn-primary",
-            ButtonColorsEnum.Secondary => "btn-secondary",
-            ButtonColorsEnum.Success => "btn-success",
-            ButtonColorsEnum.Danger => "btn-danger",
-            ButtonColorsEnum.Warning => "btn-warning",
-            ButtonColorsEnum.Info => "btn-info",
-            ButtonColorsEnum.Light => "btn-light",
-            ButtonColorsEnum.Dark => "btn-dark",
-            ButtonColorsEnum.Link => "btn-link",
-            _ => throw new ArgumentOutOfRangeException(nameof(color), color, null)
-        };
-    }
+        ButtonColorsEnum.Primary => "btn-primary",
+        ButtonColorsEnum.Secondary => "btn-secondary",
+        ButtonColorsEnum.Success => "btn-success",
+        ButtonColorsEnum.Danger => "btn-danger",
+        ButtonColorsEnum.Warning => "btn-warning",
+        ButtonColorsEnum.Info => "btn-info",
+        ButtonColorsEnum.Light => "btn-light",
+        ButtonColorsEnum.Dark => "btn-dark",
+        ButtonColorsEnum.Link => "btn-link",
+        _ => throw new ArgumentOutOfRangeException(nameof(color), color, null)
+    };
 }

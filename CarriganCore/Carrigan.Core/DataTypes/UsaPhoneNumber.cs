@@ -38,10 +38,15 @@ public sealed class UsaPhoneNumber : StringWrapper
     public string ToDotNotation() =>
         $"{_value[..3]}.{_value.Substring(3, 3)}.{_value[6..]}";
 
+    [Obsolete("Use ToParenthesisDashNotation instead.")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "VSSpell001:Spell Check", Justification = "<Pending>")]
+    public string ToParensDashNotation() =>
+        ToParenthesisDashNotation();
+
     /// <summary>
     /// Formats this number as (xxx)xxx-xxxx.
     /// </summary>
-    public string ToParensDashNotation() =>
+    public string ToParenthesisDashNotation() =>
         $"({_value[..3]}){_value.Substring(3, 3)}-{_value[6..]}";
 
     private static string NormalizeToTenDigits(string? phoneNumber)

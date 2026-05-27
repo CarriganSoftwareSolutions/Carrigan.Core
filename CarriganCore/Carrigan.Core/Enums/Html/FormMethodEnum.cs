@@ -28,14 +28,12 @@ public static class FormMethodEnumExtension
     /// This occurs when a <see cref="FormMethodEnum"/> is being used that was not coded for in this method.
     /// Fix this by adding the new enum value to the code in the method.
     /// </exception>
-    public static string? ToHtml(this FormMethodEnum formMethodType)
-    {
-        return formMethodType switch
+    public static string? ToHtml(this FormMethodEnum formMethodType) => 
+        formMethodType switch
         {
             FormMethodEnum.Null => null,
             FormMethodEnum.Get => "get",
             FormMethodEnum.Post => "post",
             _ => throw new ArgumentOutOfRangeException(nameof(formMethodType), formMethodType, null)
         };
-    }
 }

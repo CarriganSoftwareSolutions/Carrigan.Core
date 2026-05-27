@@ -10,8 +10,6 @@ public class TestOrder : IOrder
 {
     public long Order { get; }
 
-    public TestOrder(long order)
-    {
+    public TestOrder(long order) =>
         Order = order;
-    }
 }

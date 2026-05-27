@@ -27,14 +27,12 @@ public static class HorizontalAlignmentExtensions
     /// This occurs when a <sse cref="HorizontalAlignmentEnum"/> is being used that was not coded for in this method.
     /// Fix this by adding the new enum value to the code in the method.
     /// </exception>
-    public static string ToBootstrapClass(this HorizontalAlignmentEnum alignment)
-    {
-        return alignment switch
+    public static string ToBootstrapClass(this HorizontalAlignmentEnum alignment) => 
+        alignment switch
         {
             HorizontalAlignmentEnum.Left => "text-start",
             HorizontalAlignmentEnum.Center => "text-center",
             HorizontalAlignmentEnum.Right => "text-end",
             _ => throw new ArgumentOutOfRangeException(nameof(alignment), alignment, null)
         };
-    }
 }
