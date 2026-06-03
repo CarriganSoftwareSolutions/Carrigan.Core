@@ -16,7 +16,7 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
 
     <!-- PreRelease Status -->
-    <PreReleaseLabel>alpha</PreReleaseLabel>
+    <PreReleaseLabel></PreReleaseLabel>
 
     <!--Base Version for other projects-->
     <BaseVersion>0.1.0</BaseVersion>
