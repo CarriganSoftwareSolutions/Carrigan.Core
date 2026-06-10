@@ -85,7 +85,7 @@ public static class IEnumerableExtensions
     /// </summary>
     /// <param name="enumerable"></param>
     /// <returns>return true if null or empty</returns>
-    public static bool IsNullOrEmpty<T>(this IEnumerable<T>? enumerable) =>
+    public static bool IsNullOrEmpty<T>([NotNullWhen(false)]this IEnumerable<T>? enumerable) =>
         enumerable?.None() ?? true;
     #endregion
 
