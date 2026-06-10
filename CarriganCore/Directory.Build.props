@@ -16,16 +16,18 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
 
     <!-- PreRelease Status -->
-    <PreReleaseLabel>alpha</PreReleaseLabel>
+    <PreReleaseLabel></PreReleaseLabel>
 
     <!--Base Version for other projects-->
-    <BaseVersion>0.1.1</BaseVersion>
+    <BaseVersion>0.1.2</BaseVersion>
     <!-- Base version: x.y.z For Carrigan.Core -->
-    <CoreVersionBase>0.1.1</CoreVersionBase>
+    <CoreVersionBase>0.1.2</CoreVersionBase>
     <!-- Base version: x.y.z For Carrigan.Core.Mvc -->
-    <CoreMvcVersionBase>0.1.1</CoreMvcVersionBase>
+    <CoreMvcVersionBase>0.1.2</CoreMvcVersionBase>
+    <!-- Base version: x.y.z For Carrigan.Core.Mvc -->
+    <CoreRazorVersionBase>0.1.2</CoreRazorVersionBase>
     <!-- Base version: x.y.z For Carrigan.Core.Analyzers -->
-    <CoreAnalyzersVersionBase>0.1.1</CoreAnalyzersVersionBase>
+    <CoreAnalyzersVersionBase>0.1.2</CoreAnalyzersVersionBase>
     
     <!-- Time Stamp -->
     <BuildTimeStamp>$([System.DateTime]::UtcNow.ToString('yyyyMMddHHmm'))</BuildTimeStamp>
@@ -33,6 +35,7 @@
     <!-- Pick base/label by package -->
     <BaseVersion Condition="'$(PackageId)'=='Carrigan.Core'">$(CoreVersionBase)</BaseVersion>
     <BaseVersion Condition="'$(PackageId)'=='Carrigan.Core.Mvc'">$(CoreMvcVersionBase)</BaseVersion>
+    <BaseVersion Condition="'$(PackageId)'=='Carrigan.Core.Razor'">$(CoreRazorVersionBase)</BaseVersion>
     <BaseVersion Condition="'$(PackageId)'=='Carrigan.Core.Analyzers'">$(CoreAnalyzersVersionBase)</BaseVersion>
 
 
