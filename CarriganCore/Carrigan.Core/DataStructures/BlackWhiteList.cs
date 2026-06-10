@@ -9,7 +9,7 @@ namespace Carrigan.Core.DataStructures;
 /// The IsAllowed method checks if an item is in the whitelist and not in the blacklist, returning true if it is allowed and false otherwise.
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public class BlackWhiteList<T> where T : IEquatable<T>
+public class BlackWhiteList<T> where T : notnull
 {
     /// <summary>
     /// The WhiteBlackList dictionary stores the items and their allowed/disallowed status.
