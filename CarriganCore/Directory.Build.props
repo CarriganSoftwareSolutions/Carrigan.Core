@@ -16,18 +16,18 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
 
     <!-- PreRelease Status -->
-    <PreReleaseLabel></PreReleaseLabel>
+    <PreReleaseLabel>alpha</PreReleaseLabel>
 
     <!--Base Version for other projects-->
-    <BaseVersion>0.1.4</BaseVersion>
+    <BaseVersion>0.1.5</BaseVersion>
     <!-- Base version: x.y.z For Carrigan.Core -->
-    <CoreVersionBase>0.1.4</CoreVersionBase>
+    <CoreVersionBase>0.1.5</CoreVersionBase>
     <!-- Base version: x.y.z For Carrigan.Core.Mvc -->
-    <CoreMvcVersionBase>0.1.4</CoreMvcVersionBase>
+    <CoreMvcVersionBase>0.1.5</CoreMvcVersionBase>
     <!-- Base version: x.y.z For Carrigan.Core.Mvc -->
-    <CoreRazorVersionBase>0.1.4</CoreRazorVersionBase>
+    <CoreRazorVersionBase>0.1.5</CoreRazorVersionBase>
     <!-- Base version: x.y.z For Carrigan.Core.Analyzers -->
-    <CoreAnalyzersVersionBase>0.1.4</CoreAnalyzersVersionBase>
+    <CoreAnalyzersVersionBase>0.1.5</CoreAnalyzersVersionBase>
     
     <!-- Time Stamp -->
     <BuildTimeStamp>$([System.DateTime]::UtcNow.ToString('yyyyMMddHHmm'))</BuildTimeStamp>
