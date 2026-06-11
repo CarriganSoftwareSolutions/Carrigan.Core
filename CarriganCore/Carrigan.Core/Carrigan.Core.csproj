@@ -2,7 +2,7 @@
   <!-- Ignore Spelling: Carrigan enums contentfiles buildtransitive snupkg-->
   <PropertyGroup>
     <PackageId>Carrigan.Core</PackageId>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFrameworks>net9.0;net10.0</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     

@@ -49,6 +49,13 @@ Examples may include:
 
 To avoid naming conflicts in consuming applications, library partials and view components should use clear, library-specific naming conventions where practical.
 
+## Targets
+
+* `net10.0`
+* `net9.0`
+
+---
+
 ## Package Tags
 
 `razor`, `aspnetcore`, `mvc`, `view-components`, `partial-views`, `razor-class-library`, `ui`, `web`

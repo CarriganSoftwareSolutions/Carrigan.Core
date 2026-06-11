@@ -1,6 +1,6 @@
 ﻿# Carrigan.Core.Mvc
 
-**This is a small set helpers for ASP.NET Core MVC (.NET 9).**
+**This is a small set of helpers for ASP.NET Core MVC on .NET 10 and .NET 9.**
 *Status: pre‑1.0.*
 
 ---
@@ -37,6 +37,7 @@ This library does not automatically determine whether your implementation, priva
 
 ## Targets
 
+* `net10.0`
 * `net9.0`
 
 ---

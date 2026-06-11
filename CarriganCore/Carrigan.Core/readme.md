@@ -1,6 +1,6 @@
 ﻿# Carrigan.Core
 
-**Small set of helpers and extension methods for .NET (.NET 9).**
+**Small set of helpers and extension methods for .NET 10 and .NET 9.**
 *Status: pre‑1.0.*
 
 ---
@@ -23,6 +23,7 @@ Install-Package Carrigan.Core
 
 ## Targets
 
+* `net10.0`
 * `net9.0`
 
 ---
