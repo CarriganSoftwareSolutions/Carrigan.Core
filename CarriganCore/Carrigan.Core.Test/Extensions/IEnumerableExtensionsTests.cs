@@ -727,4 +727,108 @@ public class IEnumerableExtensionsTests
         Assert.Contains("unsupported value", ex.Message, StringComparison.Ordinal);
     }
     #endregion
+
+    #region SkipAt
+
+    [Fact]
+    public void SkipAt_WhenEnumerableIsNull_ThrowsArgumentNullException()
+    {
+        IEnumerable<int>? enumerable = null;
+
+        Assert.Throws<ArgumentNullException>(() => enumerable!.SkipAt(0));
+    }
+
+    [Fact]
+    public void SkipAt_WhenIndexIsNegative_ThrowsArgumentOutOfRangeException()
+    {
+        IEnumerable<int> enumerable = [1, 2, 3];
+
+        Assert.Throws<ArgumentOutOfRangeException>(() => enumerable.SkipAt(-1));
+    }
+
+    [Fact]
+    public void SkipAt_WhenIndexIsFirst_RemovesFirstElement()
+    {
+        IEnumerable<int> enumerable = [1, 2, 3];
+
+        int[] result = [.. enumerable.SkipAt(0)];
+
+        Assert.Equal([2, 3], result);
+    }
+
+    [Fact]
+    public void SkipAt_WhenIndexIsMiddle_RemovesElementAtIndex()
+    {
+        IEnumerable<int> enumerable = [1, 2, 3, 4];
+
+        int[] result = [.. enumerable.SkipAt(2)];
+
+        Assert.Equal([1, 2, 4], result);
+    }
+
+    [Fact]
+    public void SkipAt_WhenIndexIsLast_RemovesLastElement()
+    {
+        IEnumerable<int> enumerable = [1, 2, 3];
+
+        int[] result = [.. enumerable.SkipAt(2)];
+
+        Assert.Equal([1, 2], result);
+    }
+
+    [Fact]
+    public void SkipAt_WhenIndexEqualsCount_ReturnsOriginalSequence()
+    {
+        IEnumerable<int> enumerable = [1, 2, 3];
+
+        int[] result = [.. enumerable.SkipAt(3)];
+
+        Assert.Equal([1, 2, 3], result);
+    }
+
+    [Fact]
+    public void SkipAt_WhenIndexIsGreaterThanCount_ReturnsOriginalSequence()
+    {
+        IEnumerable<int> enumerable = [1, 2, 3];
+
+        int[] result = [.. enumerable.SkipAt(10)];
+
+        Assert.Equal([1, 2, 3], result);
+    }
+
+    [Fact]
+    public void SkipAt_WhenEnumerableIsEmpty_ReturnsEmptySequence()
+    {
+        IEnumerable<int> enumerable = [];
+
+        int[] result = [.. enumerable.SkipAt(0)];
+
+        Assert.Empty(result);
+    }
+
+    [Fact]
+    public void SkipAt_ReturnsDeferredSequence()
+    {
+        bool enumerated = false;
+
+        IEnumerable<int> Enumerable()
+        {
+            enumerated = true;
+
+            yield return 1;
+            yield return 2;
+            yield return 3;
+        }
+
+        IEnumerable<int> result = Enumerable().SkipAt(1);
+
+        Assert.False(enumerated);
+
+        Assert.Equal([1, 3], [.. result]);
+        Assert.True(enumerated);
+    }
+
+    #endregion
+
+
 }

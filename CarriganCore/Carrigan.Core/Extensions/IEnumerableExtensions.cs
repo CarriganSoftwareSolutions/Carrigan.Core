@@ -98,9 +98,10 @@ public static class IEnumerableExtensions
     public static bool IsNotNullOrEmpty<T>([NotNullWhen(true)] this IEnumerable<T>? enumerable) =>
         enumerable.IsNullOrEmpty() == false;
     #endregion
+
     /// <summary>
-/// Specifies how <c>null</c> elements in an enumerable should be handled.
-/// </summary>
+    /// Specifies how <c>null</c> elements in an enumerable should be handled.
+    /// </summary>
     public static IEnumerable<T> Materialize<T>(this IEnumerable<T> enumerable, NullOptionsEnum nullOptionsEnum)
     {
         ArgumentNullException.ThrowIfNull(enumerable);
@@ -123,5 +124,22 @@ public static class IEnumerableExtensions
             default:
                 throw new InvalidOperationException($"{nameof(nullOptionsEnum)} contains unsupported value.");
         }
+    }
+
+    /// <summary>
+    /// Returns an enumerable that is the same as the input enumerable, except the element at the specified index is skipped.
+    /// </summary>
+    /// <typeparam name="T">
+    /// the type of the enumeration
+    /// </typeparam>
+    /// <param name="enumerable">the enumerable</param>
+    /// <param name="index">the index of the element to skip</param>
+    /// <returns>an enumerable with the element at the specified index skipped</returns>
+    public static IEnumerable<T> SkipAt<T>(this IEnumerable<T> enumerable, int index)
+    {
+        ArgumentNullException.ThrowIfNull(enumerable);
+        ArgumentOutOfRangeException.ThrowIfLessThan(index, 0, nameof(index));
+
+        return enumerable.Where((_, i) => i != index);
     }
 }
