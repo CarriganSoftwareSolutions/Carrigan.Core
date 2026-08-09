@@ -98,7 +98,37 @@ public static class TypeExtensions
         type == typeof(TimeOnly) || type == typeof(TimeOnly?);
     #endregion
 
+    #region IsNumericType
+    /// <summary>
+    /// Determines whether the specified type is a numeric type (including nullable numeric types).
+    /// </summary>
+    /// <param name="type">
+    /// The type to check.
+    /// </param>
+    /// <returns>
+    /// <c>true</c> if the specified type is a numeric type or a nullable numeric type; otherwise, <c>false</c>.
+    /// </returns>
+    public static bool IsNumericType(this Type type)
+    {
+        type = type.GetUnderlyingType();
 
+        return Type.GetTypeCode(type) switch
+        {
+            TypeCode.Byte => true,
+            TypeCode.SByte => true,
+            TypeCode.Int16 => true,
+            TypeCode.UInt16 => true,
+            TypeCode.Int32 => true,
+            TypeCode.UInt32 => true,
+            TypeCode.Int64 => true,
+            TypeCode.UInt64 => true,
+            TypeCode.Single => true,
+            TypeCode.Double => true,
+            TypeCode.Decimal => true,
+            _ => false
+        };
+    }
+    #endregion
 
     /// <summary>
     /// Returns the underlying type for a given <see cref="Type"/>.
