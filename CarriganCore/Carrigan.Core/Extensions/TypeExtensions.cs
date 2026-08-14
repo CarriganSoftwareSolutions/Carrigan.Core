@@ -108,26 +108,40 @@ public static class TypeExtensions
     /// <returns>
     /// <c>true</c> if the specified type is a numeric type or a nullable numeric type; otherwise, <c>false</c>.
     /// </returns>
-    public static bool IsNumericType(this Type type)
+    public static bool IsNumericType(this Type? type)
     {
-        type = type.GetUnderlyingType();
-
-        return Type.GetTypeCode(type) switch
-        {
-            TypeCode.Byte => true,
-            TypeCode.SByte => true,
-            TypeCode.Int16 => true,
-            TypeCode.UInt16 => true,
-            TypeCode.Int32 => true,
-            TypeCode.UInt32 => true,
-            TypeCode.Int64 => true,
-            TypeCode.UInt64 => true,
-            TypeCode.Single => true,
-            TypeCode.Double => true,
-            TypeCode.Decimal => true,
-            _ => false
-        };
+        type = type?.GetUnderlyingType();
+        if (type is null)
+            return false;
+        else
+            return Type.GetTypeCode(type) switch
+            {
+                TypeCode.Byte => true,
+                TypeCode.SByte => true,
+                TypeCode.Int16 => true,
+                TypeCode.UInt16 => true,
+                TypeCode.Int32 => true,
+                TypeCode.UInt32 => true,
+                TypeCode.Int64 => true,
+                TypeCode.UInt64 => true,
+                TypeCode.Single => true,
+                TypeCode.Double => true,
+                TypeCode.Decimal => true,
+                _ => false
+            };
     }
+
+    /// <summary>
+    /// Determines whether the specified type is not a numeric type (including nullable numeric types).
+    /// </summary>
+    /// <param name="type">
+    /// The type to check.
+    /// </param>
+    /// <returns>
+    /// <c>true</c> if the specified type is not a numeric type or a nullable numeric type; otherwise, <c>false</c>.
+    /// </returns>
+    public static bool IsNotNumericType(this Type? type) =>
+        IsNumericType(type) is false;
     #endregion
 
     /// <summary>

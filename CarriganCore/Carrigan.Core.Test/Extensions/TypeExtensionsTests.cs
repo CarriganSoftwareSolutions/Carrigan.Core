@@ -216,7 +216,7 @@ public class TypeExtensionsTests
     [InlineData(typeof(float))]
     [InlineData(typeof(double))]
     [InlineData(typeof(decimal))]
-    public void IsNumericType_NumericType_ReturnsTrue(Type type) =>
+    public void IsNumericType_NumericType_ReturnsTrue(Type? type) =>
         Assert.True(type.IsNumericType());
 
     [Theory]
@@ -231,7 +231,7 @@ public class TypeExtensionsTests
     [InlineData(typeof(float?))]
     [InlineData(typeof(double?))]
     [InlineData(typeof(decimal?))]
-    public void IsNumericType_NullableNumericType_ReturnsTrue(Type type) =>
+    public void IsNumericType_NullableNumericType_ReturnsTrue(Type? type) =>
         Assert.True(type.IsNumericType());
 
     [Theory]
@@ -241,16 +241,52 @@ public class TypeExtensionsTests
     [InlineData(typeof(DateTime))]
     [InlineData(typeof(Guid))]
     [InlineData(typeof(object))]
-    public void IsNumericType_NonNumericType_ReturnsFalse(Type type) => 
+    [InlineData(null)]
+
+    public void IsNumericType_NonNumericType_ReturnsFalse(Type? type) => 
         Assert.False(type.IsNumericType());
 
-    [Fact]
-    public void IsNumericType_NullType_ThrowsArgumentNullException()
-    {
-        Type type = null!;
+    [Theory]
+    [InlineData(typeof(byte))]
+    [InlineData(typeof(sbyte))]
+    [InlineData(typeof(short))]
+    [InlineData(typeof(ushort))]
+    [InlineData(typeof(int))]
+    [InlineData(typeof(uint))]
+    [InlineData(typeof(long))]
+    [InlineData(typeof(ulong))]
+    [InlineData(typeof(float))]
+    [InlineData(typeof(double))]
+    [InlineData(typeof(decimal))]
+    public void IsNotNumericType_NumericType_ReturnsTrue(Type? type) =>
+        Assert.False(type.IsNotNumericType());
 
-        Assert.Throws<ArgumentNullException>(() => type.IsNumericType());
-    }
+    [Theory]
+    [InlineData(typeof(byte?))]
+    [InlineData(typeof(sbyte?))]
+    [InlineData(typeof(short?))]
+    [InlineData(typeof(ushort?))]
+    [InlineData(typeof(int?))]
+    [InlineData(typeof(uint?))]
+    [InlineData(typeof(long?))]
+    [InlineData(typeof(ulong?))]
+    [InlineData(typeof(float?))]
+    [InlineData(typeof(double?))]
+    [InlineData(typeof(decimal?))]
+    public void IsNotNumericType_NullableNumericType_ReturnsTrue(Type? type) =>
+        Assert.False(type.IsNotNumericType());
+
+    [Theory]
+    [InlineData(typeof(string))]
+    [InlineData(typeof(bool))]
+    [InlineData(typeof(char))]
+    [InlineData(typeof(DateTime))]
+    [InlineData(typeof(Guid))]
+    [InlineData(typeof(object))]
+    [InlineData(null)]
+    public void IsNotNumericType_NonNumericType_ReturnsFalse(Type? type) =>
+        Assert.True(type.IsNotNumericType());
+
     #endregion
 
     #region Get Underlying Type Tests
