@@ -11,10 +11,22 @@ public static class TypeExtensions
     /// </summary>
     /// <param name="type">the type being tested</param>
     /// <returns>
-    /// Returns true if the <see cref="Type"/> is <see cref="bool"/> else false
+    /// Returns false if null, true if the <see cref="Type"/> is <see cref="bool"/> else false
     /// </returns>
-    public static bool IsBoolType(this Type type) =>
-        type == typeof(bool) || type == typeof(bool?);
+    public static bool IsBoolType(this Type? type) =>
+        type is not null && (type == typeof(bool) || type == typeof(bool?));
+
+    /// <summary>
+    /// Returns true if the <see cref="Type"/> is not <see cref="bool"/> else false
+    /// </summary>
+    /// <param name="type">
+    /// The type being tested
+    /// </param>
+    /// <returns>
+    /// Returns false if null, true if the <see cref="Type"/> is not <see cref="bool"/> else false
+    /// </returns>
+    public static bool IsNotBoolType(this Type? type) =>
+        IsBoolType(type) is false;
     #endregion
 
     #region IsDateOnlyType
@@ -106,7 +118,7 @@ public static class TypeExtensions
     /// The type to check.
     /// </param>
     /// <returns>
-    /// <c>true</c> if the specified type is a numeric type or a nullable numeric type; otherwise, <c>false</c>.
+    /// <c>false</> if null, <c>true</c> if the specified type is a numeric type or a nullable numeric type; otherwise, <c>false</c>.
     /// </returns>
     public static bool IsNumericType(this Type? type)
     {
@@ -138,7 +150,7 @@ public static class TypeExtensions
     /// The type to check.
     /// </param>
     /// <returns>
-    /// <c>true</c> if the specified type is not a numeric type or a nullable numeric type; otherwise, <c>false</c>.
+    /// <c>false</> if null, <c>true</c> if the specified type is not a numeric type or a nullable numeric type; otherwise, <c>false</c>.
     /// </returns>
     public static bool IsNotNumericType(this Type? type) =>
         IsNumericType(type) is false;

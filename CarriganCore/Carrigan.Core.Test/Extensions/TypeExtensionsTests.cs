@@ -20,10 +20,33 @@ public class TypeExtensionsTests
     [InlineData(typeof(object), false)]
     [InlineData(typeof(DateTime), false)]
     [InlineData(typeof(DateTime?), false)]
-    public void IsBoolType_Tests(Type type, bool expected)
+    [InlineData(null, false)]
+    public void IsBoolType_Tests(Type? type, bool expected)
     {
         // Act
         bool result = type.IsBoolType();
+
+        // Assert
+        Assert.Equal(expected, result);
+    }
+
+    /// <summary>
+    /// Tests the IsBoolType extension method for non-nullable and nullable bool types.
+    /// </summary>
+    [Theory]
+    [InlineData(typeof(bool), false)]
+    [InlineData(typeof(bool?), false)]
+    [InlineData(typeof(string), true)]
+    [InlineData(typeof(int), true)]
+    [InlineData(typeof(int?), true)]
+    [InlineData(typeof(object), true)]
+    [InlineData(typeof(DateTime), true)]
+    [InlineData(typeof(DateTime?), true)]
+    [InlineData(null, true)]
+    public void IsNotBoolType_Tests(Type? type, bool expected)
+    {
+        // Act
+        bool result = type.IsNotBoolType();
 
         // Assert
         Assert.Equal(expected, result);
