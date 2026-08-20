@@ -2,15 +2,19 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Operations;
-//IGNORE SPELLING: callee
+
 namespace Carrigan.Core.Analyzers;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class TypeSafetyLossAnalyzer : DiagnosticAnalyzer
 {
-    public const string DiagnosticId = "CARRIGAN0002"; 
+    public const string DiagnosticId = "CARRIGAN0002";
+
+    private const string TypeSafetyLossAttributeMetadataName = "Carrigan.Core.Attributes.TypeSafetyLossAttribute";
+
     private const string MessageFormat = "Member '{0}' is marked [TypeSafetyLoss] and could result in a loss of type safety";
-    private static readonly DiagnosticDescriptor Rule = new (
+
+    private static readonly DiagnosticDescriptor Rule = new(
         id: DiagnosticId,
         title: "Loss of Type Safety",
         messageFormat: MessageFormat,
@@ -18,10 +22,6 @@ public sealed class TypeSafetyLossAnalyzer : DiagnosticAnalyzer
         defaultSeverity: DiagnosticSeverity.Warning,
         isEnabledByDefault: true,
         description: "APIs marked [TypeSafetyLoss] could result in a loss of type safety.");
-
-    public TypeSafetyLossAnalyzer()
-    {
-    }
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
     {
@@ -33,89 +33,79 @@ public sealed class TypeSafetyLossAnalyzer : DiagnosticAnalyzer
         context.EnableConcurrentExecution();
         context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
 
-        context.RegisterOperationAction(
-            AnalyzeOperation,
-            OperationKind.Invocation,
-            OperationKind.ObjectCreation,
-            OperationKind.PropertyReference,
-            OperationKind.FieldReference,
-            OperationKind.EventReference,
-            OperationKind.MethodReference,
-            OperationKind.Binary,
-            OperationKind.Unary,
-            OperationKind.Conversion,
-            OperationKind.Increment,
-            OperationKind.Decrement,
-            OperationKind.CompoundAssignment);
+        context.RegisterCompilationStartAction(InitializeCompilation);
     }
 
-    private static void AnalyzeOperation(OperationAnalysisContext context)
+    private static void InitializeCompilation(CompilationStartAnalysisContext context)
     {
-        if (GetReferencedSymbol(context.Operation) is ISymbol symbol)
+        if (context.Compilation.GetTypeByMetadataName(TypeSafetyLossAttributeMetadataName) is INamedTypeSymbol typeSafetyLossAttribute)
         {
-            if (HasTypeSafetyLoss(symbol))
-            {
-                Location location = context.Operation.Syntax.GetLocation();
-                string displayString = symbol.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat);
+            context.RegisterOperationAction(
+                operationContext => AnalyzeOperation(operationContext, typeSafetyLossAttribute),
+                OperationKind.Invocation,
+                OperationKind.ObjectCreation,
+                OperationKind.PropertyReference,
+                OperationKind.FieldReference,
+                OperationKind.EventReference,
+                OperationKind.MethodReference,
+                OperationKind.Binary,
+                OperationKind.Unary,
+                OperationKind.Conversion,
+                OperationKind.Increment,
+                OperationKind.Decrement,
+                OperationKind.CompoundAssignment);
+        }
+    }
 
-                Diagnostic diagnostic = Diagnostic.Create(Rule, location, displayString);
+    private static void AnalyzeOperation(OperationAnalysisContext context, INamedTypeSymbol typeSafetyLossAttribute)
+    {
+        if (GetReferencedSymbol(context.Operation) is ISymbol symbol && HasTypeSafetyLoss(symbol, typeSafetyLossAttribute))
+        {
+            Location location = context.Operation.Syntax.GetLocation();
+            string displayString = symbol.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat);
 
-                context.ReportDiagnostic(diagnostic);
-            }
+            Diagnostic diagnostic = Diagnostic.Create(Rule, location, displayString);
+
+            context.ReportDiagnostic(diagnostic);
         }
     }
 
     private static ISymbol? GetReferencedSymbol(IOperation operation) =>
         operation switch
         {
-            IInvocationOperation invocation =>
-                invocation.TargetMethod,
+            IInvocationOperation invocation => invocation.TargetMethod,
 
-            IObjectCreationOperation objectCreation =>
-                objectCreation.Constructor,
+            IObjectCreationOperation objectCreation => objectCreation.Constructor,
 
-            IPropertyReferenceOperation propertyReference =>
-                 propertyReference.Property,
+            IPropertyReferenceOperation propertyReference => propertyReference.Property,
 
-            IFieldReferenceOperation fieldReference =>
-                fieldReference.Field,
+            IFieldReferenceOperation fieldReference => fieldReference.Field,
 
-            IEventReferenceOperation eventReference =>
-                 eventReference.Event,
+            IEventReferenceOperation eventReference => eventReference.Event,
 
-            IMethodReferenceOperation methodReference =>
-                 methodReference.Method,
+            IMethodReferenceOperation methodReference => methodReference.Method,
 
-            IBinaryOperation binary =>
-                binary.OperatorMethod,
+            IBinaryOperation binary => binary.OperatorMethod,
 
-            IUnaryOperation unary =>
-                 unary.OperatorMethod,
+            IUnaryOperation unary => unary.OperatorMethod,
 
-            IConversionOperation conversion =>
-                 conversion.OperatorMethod,
+            IConversionOperation conversion => conversion.OperatorMethod,
 
-            IIncrementOrDecrementOperation incrementOrDecrement =>
-                 incrementOrDecrement.OperatorMethod,
+            IIncrementOrDecrementOperation incrementOrDecrement => incrementOrDecrement.OperatorMethod,
 
-            ICompoundAssignmentOperation compoundAssignment =>
-                compoundAssignment.OperatorMethod,
+            ICompoundAssignmentOperation compoundAssignment => compoundAssignment.OperatorMethod,
 
-
-            _ =>
-                null
+            _ => null
         };
 
-    private static bool HasTypeSafetyLoss(ISymbol symbol)
+    private static bool HasTypeSafetyLoss(ISymbol symbol, INamedTypeSymbol typeSafetyLossAttribute)
     {
         foreach (AttributeData attribute in symbol.GetAttributes())
         {
-            if (attribute.AttributeClass is INamedTypeSymbol attributeClass)
-            {
-                if (attributeClass.Name == "TypeSafetyLossAttribute")
-                    return true;
-            }
+            if (SymbolEqualityComparer.Default.Equals(attribute.AttributeClass, typeSafetyLossAttribute))
+                return true;
         }
+
         return false;
     }
 }
