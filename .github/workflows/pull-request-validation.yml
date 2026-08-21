@@ -34,11 +34,16 @@ jobs:
 
       - name: Test
         run: >-
-          dotnet test CarriganCore/Carrigan.Core.Test/Carrigan.Core.Test.csproj
+          dotnet test
+          --project CarriganCore/Carrigan.Core.Test/Carrigan.Core.Test.csproj
           --configuration Release
           --no-build
-          --collect:"XPlat Code Coverage"
-          --logger "trx;LogFileName=test-results.trx"
+          --results-directory TestResults
+          --
+          --coverlet
+          --coverlet-output-format cobertura
+          --report-xunit-trx
+          --report-xunit-trx-filename test-results.trx
 
       - name: Upload test results
         if: always()
@@ -47,5 +52,5 @@ jobs:
           name: test-results
           path: |
             **/TestResults/**/*.trx
-            **/TestResults/**/coverage.cobertura.xml
+            **/TestResults/**/coverage.cobertura*.xml
           if-no-files-found: warn
