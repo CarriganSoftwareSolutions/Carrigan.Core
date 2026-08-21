@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-
+//IGNORE SPELLING: xxxx
 namespace Carrigan.Core.DataTypes;
 
 public sealed class UsaPhoneNumber : StringWrapper
@@ -39,7 +39,6 @@ public sealed class UsaPhoneNumber : StringWrapper
         $"{_value[..3]}.{_value.Substring(3, 3)}.{_value[6..]}";
 
     [Obsolete("Use ToParenthesisDashNotation instead.")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "VSSpell001:Spell Check", Justification = "<Pending>")]
     public string ToParensDashNotation() =>
         ToParenthesisDashNotation();
 

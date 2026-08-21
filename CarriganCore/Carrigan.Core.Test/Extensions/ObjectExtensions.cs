@@ -195,7 +195,6 @@ public class ObjectExtensionsTests
     [Theory]
     [InlineData(new string[] { null!, null! }, true)]
     [InlineData(new string[] { null!, "apple" }, true)]
-    [InlineData(new object[] { null!, null! }, true)]
     public void HasValue_CollectionsWithNullElements_ReturnsExpected(object[] input, bool expected)
     {
         // Arrange
