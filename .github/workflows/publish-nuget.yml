@@ -84,24 +84,58 @@ jobs:
       - name: Build
         run: dotnet build CarriganCore/CarriganCore.sln --configuration Release --no-restore
 
-      - name: Pack solution
+      - name: Create artifacts directory
+        run: mkdir -p ./artifacts
+
+      - name: Pack Carrigan.Core
         run: >-
-          dotnet pack CarriganCore/CarriganCore.sln
+          dotnet pack CarriganCore/Carrigan.Core/Carrigan.Core.csproj
           --configuration Release
           --no-build
           -o ./artifacts
           --include-symbols
           -p:SymbolPackageFormat=snupkg
 
+      - name: Pack Carrigan.Core.Mvc
+        run: >-
+          dotnet pack CarriganCore/Carrigan.Core.Mvc/Carrigan.Core.Mvc.csproj
+          --configuration Release
+          --no-build
+          -o ./artifacts
+          --include-symbols
+          -p:SymbolPackageFormat=snupkg
+
+      - name: Pack Carrigan.Core.Razor
+        run: >-
+          dotnet pack CarriganCore/Carrigan.Core.Razor/Carrigan.Core.Razor.csproj
+          --configuration Release
+          --no-build
+          -o ./artifacts
+          --include-symbols
+          -p:SymbolPackageFormat=snupkg
+
+      - name: Pack Carrigan.Core.Analyzers
+        run: >-
+          dotnet pack CarriganCore/Carrigan.Core.Analyzers/Carrigan.Core.Analyzers.csproj
+          --configuration Release
+          --no-build
+          -o ./artifacts
+
       - name: Detect alpha packages
         id: package_kind
         shell: bash
         run: |
-          if find ./artifacts -maxdepth 1 -type f -name '*.nupkg' ! -name '*.snupkg' -print | grep -qi -- '-alpha\.'; then
+          if find ./artifacts -maxdepth 1 -type f -name '*.nupkg' -print | grep -qi -- '-alpha\.'; then
             echo "is_alpha=true" >> "$GITHUB_OUTPUT"
           else
             echo "is_alpha=false" >> "$GITHUB_OUTPUT"
           fi
+
+      - name: List generated packages
+        shell: bash
+        run: |
+          echo "Generated NuGet packages:"
+          find ./artifacts -maxdepth 1 -type f \( -name '*.nupkg' -o -name '*.snupkg' \) -print
 
       - name: Upload NuGet packages
         uses: actions/upload-artifact@v7
@@ -131,7 +165,7 @@ jobs:
       - name: Publish packages to NuGet
         shell: bash
         run: |
-          find ./artifacts -maxdepth 1 -type f -name '*.nupkg' ! -name '*.snupkg' -print0 |
+          find ./artifacts -maxdepth 1 -type f -name '*.nupkg' -print0 |
           while IFS= read -r -d '' file; do
             dotnet nuget push "$file" \
               --api-key "$NUGET_API_KEY" \
@@ -143,7 +177,7 @@ jobs:
       - name: Publish symbols to NuGet
         shell: bash
         run: |
-          find ./artifacts -maxdepth 1 -type f -name '*.snupkg' ! -name 'Carrigan.Core.Analyzers*.snupkg' -print0 |
+          find ./artifacts -maxdepth 1 -type f -name '*.snupkg' -print0 |
           while IFS= read -r -d '' file; do
             dotnet nuget push "$file" \
               --api-key "$NUGET_API_KEY" \
@@ -170,7 +204,7 @@ jobs:
       - name: Publish packages to NuGet
         shell: bash
         run: |
-          find ./artifacts -maxdepth 1 -type f -name '*.nupkg' ! -name '*.snupkg' -print0 |
+          find ./artifacts -maxdepth 1 -type f -name '*.nupkg' -print0 |
           while IFS= read -r -d '' file; do
             dotnet nuget push "$file" \
               --api-key "$NUGET_API_KEY" \
@@ -182,7 +216,7 @@ jobs:
       - name: Publish symbols to NuGet
         shell: bash
         run: |
-          find ./artifacts -maxdepth 1 -type f -name '*.snupkg' ! -name 'Carrigan.Core.Analyzers*.snupkg' -print0 |
+          find ./artifacts -maxdepth 1 -type f -name '*.snupkg' -print0 |
           while IFS= read -r -d '' file; do
             dotnet nuget push "$file" \
               --api-key "$NUGET_API_KEY" \
