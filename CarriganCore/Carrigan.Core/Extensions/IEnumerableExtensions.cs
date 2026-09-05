@@ -1,5 +1,6 @@
 ﻿using Carrigan.Core.Enums;
 using System.Diagnostics.CodeAnalysis;
+using System.Numerics;
 
 namespace Carrigan.Core.Extensions;
 
@@ -141,5 +142,35 @@ public static class IEnumerableExtensions
         ArgumentOutOfRangeException.ThrowIfLessThan(index, 0, nameof(index));
 
         return enumerable.Where((_, i) => i != index);
+    }
+
+    /// <summary>
+    /// Returns true if all elements in the enumerable are equal, false if they are not, and null if the enumerable is empty.
+    /// </summary>
+    /// <typeparam name="T">
+    /// the type of the enumeration
+    /// </typeparam>
+    /// <param name="values">
+    /// the enumerable
+    /// </param>
+    /// <returns>
+    /// Returns true if all elements in the enumerable are equal, false if they are not, and null if the enumerable is empty.
+    /// </returns>
+    public static bool? AllEqual<T>(this IEnumerable<T> values) where T : IEqualityOperators<T, T, bool>
+    {
+        ArgumentNullException.ThrowIfNull(values);
+
+        using IEnumerator<T> enumerator = values.GetEnumerator();
+
+        if (!enumerator.MoveNext())
+            return null;
+
+        T first = enumerator.Current;
+
+        while (enumerator.MoveNext())
+            if (enumerator.Current != first)
+                return false;
+
+        return true;
     }
 }

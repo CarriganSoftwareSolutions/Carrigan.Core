@@ -831,4 +831,26 @@ public class IEnumerableExtensionsTests
     #endregion
 
 
+    [Fact]
+    public void AllEqual_NullEnumerable_ThrowsArgumentNullException()
+    {
+        IEnumerable<int>? values = null;
+
+        Assert.Throws<ArgumentNullException>(() => values!.AllEqual());
+    }
+
+    [Fact]
+    public void AllEqual_EmptyEnumerable_ReturnsNull() => 
+        Assert.Null(Array.Empty<int>().AllEqual());
+
+    [Theory]
+    [InlineData(true, 1)]
+    [InlineData(true, 1, 1)]
+    [InlineData(true, 1, 1, 1, 1)]
+    [InlineData(false, 1, 2)]
+    [InlineData(false, 1, 2, 2)]
+    [InlineData(false, 1, 1, 2, 1)]
+    [InlineData(false, 1, 1, 1, 2)]
+    public void AllEqual_Values_ReturnsExpectedResult(bool expected, params int[] values) => 
+        Assert.Equal(expected, values.AllEqual());
 }
