@@ -851,6 +851,21 @@ public class IEnumerableExtensionsTests
     [InlineData(false, 1, 2, 2)]
     [InlineData(false, 1, 1, 2, 1)]
     [InlineData(false, 1, 1, 1, 2)]
-    public void AllEqual_Values_ReturnsExpectedResult(bool expected, params int[] values) => 
+    public void AllEqual_Int_Values_ReturnsExpectedResult(bool expected, params int[] values) => 
+        Assert.Equal(expected, values.AllEqual());
+
+
+    [Theory]
+    [InlineData(true, true)]
+    [InlineData(true, false)]
+    [InlineData(true, true, true)]
+    [InlineData(true, false, false, false)]
+    [InlineData(true, true, true, true, true)]
+    [InlineData(true, false, false, false, false, false)]
+    [InlineData(false, true, false)]
+    [InlineData(false, false, true, true)]
+    [InlineData(false, true, true, false, true)]
+    [InlineData(false, true, true, true, false)]
+    public void AllEqual_Bool_Values_ReturnsExpectedResult(bool expected, params bool[] values) =>
         Assert.Equal(expected, values.AllEqual());
 }

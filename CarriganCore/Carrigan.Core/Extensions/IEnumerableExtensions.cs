@@ -156,7 +156,7 @@ public static class IEnumerableExtensions
     /// <returns>
     /// Returns true if all elements in the enumerable are equal, false if they are not, and null if the enumerable is empty.
     /// </returns>
-    public static bool? AllEqual<T>(this IEnumerable<T> values) where T : IEqualityOperators<T, T, bool>
+    public static bool? AllEqual<T>(this IEnumerable<T> values)
     {
         ArgumentNullException.ThrowIfNull(values);
 
@@ -166,9 +166,10 @@ public static class IEnumerableExtensions
             return null;
 
         T first = enumerator.Current;
+        EqualityComparer<T> comparer = EqualityComparer<T>.Default;
 
         while (enumerator.MoveNext())
-            if (enumerator.Current != first)
+            if (!comparer.Equals(enumerator.Current, first))
                 return false;
 
         return true;
