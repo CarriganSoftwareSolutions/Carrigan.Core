@@ -11,14 +11,13 @@ namespace Carrigan.Core.DataTypes;
 /// <see cref="StringComparison"/> provided at construction.
 /// </para>
 /// </summary>
-public abstract class StringWrapper :
+public abstract class StringWrapper : 
+    TextWrapper,
     IComparable<StringWrapper>,
     IEquatable<StringWrapper>,
     IEqualityComparer<StringWrapper>,
     IWhiteSpace
 {
-    protected readonly string _value;
-    protected readonly StringComparison _stringComparison;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="StringWrapper"/> class.
@@ -28,17 +27,9 @@ public abstract class StringWrapper :
     /// The comparison mode used for equality, ordering, and hashing.
     /// Defaults to <see cref="StringComparison.Ordinal"/>.
     /// </param>
-    protected StringWrapper(string? value, StringComparison stringComparison = StringComparison.Ordinal)
+    protected StringWrapper(string? value, StringComparison stringComparison = StringComparison.Ordinal) : base (value, stringComparison)
     {
-        _stringComparison = stringComparison;
-        _value = value ?? string.Empty;
     }
-
-    /// <summary>
-    /// Returns the underlying string value of this <see cref="StringWrapper"/>.
-    /// </summary>
-    public override string ToString() =>
-        _value;
 
     /// <summary>
     /// Implicitly converts a <see cref="StringWrapper"/> to its underlying string value.
@@ -62,15 +53,8 @@ public abstract class StringWrapper :
     /// <exception cref="InvalidOperationException">
     /// Thrown when <paramref name="other"/> uses a different <see cref="StringComparison"/> than this instance.
     /// </exception>
-    public int CompareTo(StringWrapper? other)
-    {
-        if (other is null)
-            return 1;
-
-        ThrowIfComparisonMismatch(other);
-
-        return string.Compare(_value, other._value, _stringComparison);
-    }
+    public int CompareTo(StringWrapper? other) =>
+        base.CompareTo(other);
 
     /// <summary>
     /// Determines whether this <see cref="StringWrapper"/> is equal to another instance
@@ -81,18 +65,8 @@ public abstract class StringWrapper :
     /// <exception cref="InvalidOperationException">
     /// Thrown when <paramref name="other"/> uses a different <see cref="StringComparison"/> than this instance.
     /// </exception>
-    public bool Equals(StringWrapper? other)
-    {
-        if (other is null)
-            return false;
-
-        if (ReferenceEquals(this, other))
-            return true;
-
-        ThrowIfComparisonMismatch(other);
-
-        return string.Equals(_value, other._value, _stringComparison);
-    }
+    public bool Equals(StringWrapper? other) =>
+        base.Equals(other);
 
     /// <summary>
     /// Determines whether the specified object is equal to the current instance.
@@ -107,14 +81,14 @@ public abstract class StringWrapper :
     /// <see cref="StringComparison"/> than this instance.
     /// </exception>
     public override bool Equals(object? obj) =>
-        Equals(obj as StringWrapper);
+        base.Equals(obj);
 
     /// <summary>
     /// Returns a hash code for this <see cref="StringWrapper"/> instance,
     /// consistent with the configured <see cref="StringComparison"/>.
     /// </summary>
     public override int GetHashCode() =>
-        _value.GetHashCode(_stringComparison);
+        base.GetHashCode();
 
     /// <summary>
     /// Determines whether two <see cref="StringWrapper"/> instances are equal
@@ -127,19 +101,8 @@ public abstract class StringWrapper :
     /// Thrown when <paramref name="x"/> or <paramref name="y"/> uses a different
     /// <see cref="StringComparison"/> than this comparer instance.
     /// </exception>
-    public bool Equals(StringWrapper? x, StringWrapper? y)
-    {
-        if (x is null && y is null)
-            return true;
-
-        if (x is null || y is null)
-            return false;
-
-        ThrowIfComparisonMismatch(x);
-        ThrowIfComparisonMismatch(y);
-
-        return string.Equals(x._value, y._value, _stringComparison);
-    }
+    public bool Equals(StringWrapper? x, StringWrapper? y) =>
+        base.Equals(x, y);
 
     /// <summary>
     /// Returns a hash code for the specified <see cref="StringWrapper"/> instance,
@@ -150,13 +113,8 @@ public abstract class StringWrapper :
     /// <exception cref="InvalidOperationException">
     /// Thrown when <paramref name="obj"/> uses a different <see cref="StringComparison"/> than this comparer instance.
     /// </exception>
-    public int GetHashCode(StringWrapper obj)
-    {
-        ArgumentNullException.ThrowIfNull(obj, nameof(obj));
-        ThrowIfComparisonMismatch(obj);
-
-        return obj._value.GetHashCode(_stringComparison);
-    }
+    public int GetHashCode(StringWrapper obj) =>
+        base.GetHashCode(obj);
 
     /// <summary>
     /// Determines whether two <see cref="StringWrapper"/> instances are equal.
@@ -187,42 +145,4 @@ public abstract class StringWrapper :
     /// <returns><c>true</c> if they differ; otherwise, <c>false</c>.</returns>
     public static bool operator !=(StringWrapper? left, StringWrapper? right) =>
         !(left == right);
-
-    /// <summary>
-    /// Determines whether the underlying string is empty or consists only of white-space characters.
-    /// </summary>
-    /// <returns><c>true</c> if the underlying string is empty or white space; otherwise, <c>false</c>.</returns>
-    public bool IsWhiteSpace() =>
-        _value.IsWhiteSpace();
-
-    /// <summary>
-    /// Determines whether the underlying string is not empty and not white space.
-    /// </summary>
-    /// <returns><c>true</c> if the underlying string is neither empty nor white space; otherwise, <c>false</c>.</returns>
-    public bool IsNotWhiteSpace() =>
-        IsWhiteSpace() is false;
-
-    // <summary>
-    /// Determines whether the underlying string is empty.
-    /// </summary>
-    /// <returns><c>true</c> if the underlying string is empty; otherwise, <c>false</c>.</returns>
-    public bool IsEmpty() =>
-        _value.IsEmpty();
-
-    /// <summary>
-    /// Determines whether the underlying string is not empty.
-    /// </summary>
-    /// <returns><c>true</c> if the underlying string is not empty; otherwise, <c>false</c>.</returns>
-    public bool IsNotEmpty() =>
-        IsEmpty() is false;
-
-    private void ThrowIfComparisonMismatch(StringWrapper other)
-    {
-        if (_stringComparison != other._stringComparison)
-        {
-            throw new InvalidOperationException(
-                $"Cannot compare two {nameof(StringWrapper)} instances because their {nameof(StringComparison)} values differ. " +
-                $"Left: {_stringComparison}. Right: {other._stringComparison}.");
-        }
-    }
 }
