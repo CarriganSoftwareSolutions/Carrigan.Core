@@ -1,7 +1,8 @@
-﻿using System.Collections.Immutable;
-using Microsoft.CodeAnalysis;
+﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Operations;
+using System;
+using System.Collections.Immutable;
 
 namespace Carrigan.Core.Analyzers;
 
@@ -59,6 +60,9 @@ public sealed class TypeSafetyLossAnalyzer : DiagnosticAnalyzer
 
     private static void AnalyzeOperation(OperationAnalysisContext context, INamedTypeSymbol typeSafetyLossAttribute)
     {
+        if (IsTypeSafetyLossContext(context.ContainingSymbol, typeSafetyLossAttribute))
+            return;
+
         if (GetReferencedSymbol(context.Operation) is ISymbol symbol && HasTypeSafetyLoss(symbol, typeSafetyLossAttribute))
         {
             Location location = context.Operation.Syntax.GetLocation();
@@ -68,6 +72,26 @@ public sealed class TypeSafetyLossAnalyzer : DiagnosticAnalyzer
 
             context.ReportDiagnostic(diagnostic);
         }
+    }
+
+    private static bool IsTypeSafetyLossContext(ISymbol? symbol, INamedTypeSymbol typeSafetyLossAttribute)
+    {
+        while (symbol is not null)
+        {
+            if (HasTypeSafetyLoss(symbol, typeSafetyLossAttribute))
+                return true;
+
+            //Special case for getters and setters
+            if (symbol is IMethodSymbol { AssociatedSymbol: { } associatedSymbol } &&
+                HasTypeSafetyLoss(associatedSymbol, typeSafetyLossAttribute))
+            {
+                return true;
+            }
+
+            symbol = symbol.ContainingSymbol;
+        }
+
+        return false;
     }
 
     private static ISymbol? GetReferencedSymbol(IOperation operation) =>
