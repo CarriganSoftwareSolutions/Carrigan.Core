@@ -103,25 +103,40 @@ public static class IEnumerableExtensions
     /// <summary>
     /// Specifies how <c>null</c> elements in an enumerable should be handled.
     /// </summary>
-    public static IEnumerable<T> Materialize<T>(this IEnumerable<T> enumerable, NullOptionsEnum nullOptionsEnum)
+    public static IEnumerable<T> Materialize<T>(this IEnumerable<T> enumerable, NullOptionsEnum nullOptionsEnum, string? variableName = "")
     {
         ArgumentNullException.ThrowIfNull(enumerable);
+        List<T> list;
         switch (nullOptionsEnum)
         {
             case NullOptionsEnum.Allowed:
                 return [.. enumerable];
+#pragma warning disable CS0618 // Type or member is obsolete
             case NullOptionsEnum.Exception:
-                List<T> list = [];
+#pragma warning restore CS0618 // Type or member is obsolete
+            case NullOptionsEnum.NullReferenceException:
+                list = [];
                 foreach (T element in enumerable)
                 {
                     if (element is null)
-                        throw new NullReferenceException($"{nameof(enumerable)} contains disallowed nulls");
+                        throw new NullReferenceException($"{variableName ?? nameof(enumerable)} contains disallowed nulls");
+
+                    list.Add(element);
+                }
+                return list;
+            case NullOptionsEnum.ArgumentNullException:
+                list = [];
+                foreach (T element in enumerable)
+                {
+                    if (element is null)
+                        throw new ArgumentNullException($"{variableName ?? nameof(enumerable)} contains disallowed nulls");
 
                     list.Add(element);
                 }
                 return list;
             case NullOptionsEnum.FilteredOut:
                 return [.. enumerable.Where(static element => element is not null)];
+
             default:
                 throw new InvalidOperationException($"{nameof(nullOptionsEnum)} contains unsupported value.");
         }

@@ -685,6 +685,7 @@ public class IEnumerableExtensionsTests
     }
 
     [Fact]
+    [Obsolete ("tests obsolete option")]
     public void Materialize_Exception_WhenContainsNull_ThrowsNullReferenceException()
     {
         IEnumerable<string?> source = ["a", null, "c"];
@@ -694,11 +695,72 @@ public class IEnumerableExtensionsTests
     }
 
     [Fact]
+    [Obsolete("tests obsolete option")]
     public void Materialize_Exception_WhenNoNulls_ReturnsMaterializedCopy_WithSameValues()
     {
         IEnumerable<string> source = ["a", "b", "c"];
 
         IEnumerable<string> result = source.Materialize(NullOptionsEnum.Exception);
+
+        Assert.Equal(["a", "b", "c"], result);
+        Assert.NotSame(source, result);
+    }
+
+    [Fact]
+    public void Materialize_NullReferenceException_WhenContainsNull_ThrowsNullReferenceException_WithName()
+    {
+        IEnumerable<string?> source = ["a", null, "c"];
+
+        NullReferenceException ex =
+            Assert.Throws<NullReferenceException>(() => source.Materialize(NullOptionsEnum.NullReferenceException, "BOB").ToArray());
+        Assert.Contains("BOB", ex.Message);
+    }
+
+    [Fact]
+    public void Materialize_NullReferenceException_WhenContainsNull_ThrowsNullReferenceException()
+    {
+        IEnumerable<string?> source = ["a", null, "c"];
+
+        NullReferenceException ex =
+            Assert.Throws<NullReferenceException>(() => source.Materialize(NullOptionsEnum.NullReferenceException).ToArray());
+    }
+
+    [Fact]
+    public void Materialize_NullReferenceException_WhenNoNulls_ReturnsMaterializedCopy_WithSameValues()
+    {
+        IEnumerable<string> source = ["a", "b", "c"];
+
+        IEnumerable<string> result = source.Materialize(NullOptionsEnum.NullReferenceException);
+
+        Assert.Equal(["a", "b", "c"], result);
+        Assert.NotSame(source, result);
+    }
+
+    [Fact]
+    public void Materialize_ArgumentNullException_WhenContainsNull_ThrowsNullReferenceException()
+    {
+        IEnumerable<string?> source = ["a", null, "c"];
+
+        ArgumentNullException ex =
+            Assert.Throws<ArgumentNullException>(() => source.Materialize(NullOptionsEnum.ArgumentNullException).ToArray());
+    }
+
+    [Fact]
+    public void Materialize_ArgumentNullException_WhenContainsNull_ThrowsNullReferenceException_WithName()
+    {
+        IEnumerable<string?> source = ["a", null, "c"];
+
+        ArgumentNullException ex =
+            Assert.Throws<ArgumentNullException>(() => source.Materialize(NullOptionsEnum.ArgumentNullException, "BOB").ToArray());
+        Assert.Contains("BOB", ex.Message);
+    }
+
+    [Fact]
+    public void Materialize_ArgumentNullException_WhenNoNulls_ReturnsMaterializedCopy_WithSameValues()
+    {
+        IEnumerable<string> source = ["a", "b", "c"];
+
+        IEnumerable<string> result = source.Materialize(NullOptionsEnum.ArgumentNullException);
 
         Assert.Equal(["a", "b", "c"], result);
         Assert.NotSame(source, result);

@@ -6,6 +6,9 @@
 public enum NullOptionsEnum
 {
     Allowed,
+    [Obsolete("Use NullReferenceException or ArgumentNullException instead.")]
     Exception,
-    FilteredOut
+    FilteredOut,
+    NullReferenceException,
+    ArgumentNullException
 }
