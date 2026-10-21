@@ -34,10 +34,12 @@ public class ArgumentNullOrEmptyException : ArgumentException
     /// <exception cref="ArgumentNullOrEmptyException">
     /// <paramref name="argument"/> is null or empty.
     /// </exception>
-    public static new void ThrowIfNullOrEmpty(string? argument, [CallerArgumentExpression(nameof(argument))] string? paramName = null)
+    public static new string ThrowIfNullOrEmpty(string? argument, [CallerArgumentExpression(nameof(argument))] string? paramName = null)
     {
         if (string.IsNullOrEmpty(argument))
             throw new ArgumentNullOrEmptyException(paramName);
+
+        return argument;
     }
 
     /// <summary>

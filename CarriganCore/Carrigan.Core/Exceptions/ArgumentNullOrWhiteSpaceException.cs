@@ -34,10 +34,12 @@ public class ArgumentNullOrWhiteSpaceException : ArgumentException
     /// <exception cref="ArgumentNullOrWhiteSpaceException">
     /// <paramref name="argument"/> is null, empty, or consists only of white-space characters.
     /// </exception>
-    public static new void ThrowIfNullOrWhiteSpace(string? argument, [CallerArgumentExpression(nameof(argument))] string? paramName = null)
+    public static new string ThrowIfNullOrWhiteSpace(string? argument, [CallerArgumentExpression(nameof(argument))] string? paramName = null)
     {
         if (string.IsNullOrWhiteSpace(argument))
             throw new ArgumentNullOrWhiteSpaceException(paramName);
+
+        return argument;
     }
 
     /// <summary>
