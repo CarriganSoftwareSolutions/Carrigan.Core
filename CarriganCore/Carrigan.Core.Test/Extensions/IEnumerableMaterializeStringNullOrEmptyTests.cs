@@ -23,7 +23,7 @@ public class IEnumerableMaterializeStringNullOrEmptyTests
 
         IEnumerable<string> result = Enumerate().Materialize(option);
 
-        Assert.IsType<IEnumerable<WhiteSpaceTestClass>>(result, false);
+        Assert.IsType<IEnumerable<string>>(result, false);
         Assert.Empty(result);
         Assert.Equal(1, enumerationCount);
     }
@@ -50,7 +50,7 @@ public class IEnumerableMaterializeStringNullOrEmptyTests
 
         IEnumerable<string> result = source.Materialize(NullOrEmptyOptionsEnum.Allowed);
 
-        Assert.IsType<IEnumerable<WhiteSpaceTestClass>>(result, false);
+        Assert.IsType<IEnumerable<string>>(result, false);
         Assert.Equal(source, result);
     }
 
