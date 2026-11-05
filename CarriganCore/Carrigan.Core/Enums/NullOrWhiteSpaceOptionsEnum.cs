@@ -7,6 +7,6 @@ public enum NullOrWhiteSpaceOptionsEnum
 {
     Allowed,
     FilteredOut,
-    NullOrWhiteSpaceException,
-    ArgumentNullOrWhiteSpaceException
+    Exception,
+    ArgumentException
 }

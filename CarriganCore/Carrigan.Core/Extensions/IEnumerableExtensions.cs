@@ -243,7 +243,7 @@ public static class IEnumerableExtensions
         {
             case NullOrWhiteSpaceOptionsEnum.Allowed:
                 return [.. enumerable];
-            case NullOrWhiteSpaceOptionsEnum.NullOrWhiteSpaceException:
+            case NullOrWhiteSpaceOptionsEnum.Exception:
                 list = [];
                 foreach (T element in enumerable)
                 {
@@ -253,7 +253,7 @@ public static class IEnumerableExtensions
                     list.Add(element);
                 }
                 return list;
-            case NullOrWhiteSpaceOptionsEnum.ArgumentNullOrWhiteSpaceException:
+            case NullOrWhiteSpaceOptionsEnum.ArgumentException:
                 list = [];
                 foreach (T element in enumerable)
                 {
@@ -283,7 +283,7 @@ public static class IEnumerableExtensions
         {
             case NullOrWhiteSpaceOptionsEnum.Allowed:
                 return [.. enumerable];
-            case NullOrWhiteSpaceOptionsEnum.NullOrWhiteSpaceException:
+            case NullOrWhiteSpaceOptionsEnum.Exception:
                 list = [];
                 foreach (string element in enumerable)
                 {
@@ -293,7 +293,7 @@ public static class IEnumerableExtensions
                     list.Add(element);
                 }
                 return list;
-            case NullOrWhiteSpaceOptionsEnum.ArgumentNullOrWhiteSpaceException:
+            case NullOrWhiteSpaceOptionsEnum.ArgumentException:
                 list = [];
                 foreach (string element in enumerable)
                 {
