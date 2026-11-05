@@ -7,6 +7,6 @@ public enum NullOrEmptyOptionsEnum
 {
     Allowed,
     FilteredOut,
-    NullOrEmptyReferenceException,
-    ArgumentNullOrEmptyException
+    Exception,
+    ArgumentException
 }

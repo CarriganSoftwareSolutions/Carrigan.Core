@@ -117,9 +117,9 @@ public static class IEnumerableExtensions
             case NullOptionsEnum.Allowed:
                 return [.. enumerable];
 #pragma warning disable CS0618 // Type or member is obsolete
-            case NullOptionsEnum.Exception:
-#pragma warning restore CS0618 // Type or member is obsolete
             case NullOptionsEnum.NullReferenceException:
+#pragma warning restore CS0618 // Type or member is obsolete
+            case NullOptionsEnum.Exception:
                 list = [];
                 foreach (T element in enumerable)
                 {
@@ -129,7 +129,10 @@ public static class IEnumerableExtensions
                     list.Add(element);
                 }
                 return list;
+#pragma warning disable CS0618 // Type or member is obsolete
             case NullOptionsEnum.ArgumentNullException:
+#pragma warning restore CS0618 // Type or member is obsolete
+            case NullOptionsEnum.ArgumentException:
                 list = [];
                 foreach (T element in enumerable)
                 {
@@ -159,7 +162,7 @@ public static class IEnumerableExtensions
         {
             case NullOrEmptyOptionsEnum.Allowed:
                 return [.. enumerable];
-            case NullOrEmptyOptionsEnum.NullOrEmptyReferenceException:
+            case NullOrEmptyOptionsEnum.Exception:
                 list = [];
                 foreach (T element in enumerable)
                 {
@@ -169,7 +172,7 @@ public static class IEnumerableExtensions
                     list.Add(element);
                 }
                 return list;
-            case NullOrEmptyOptionsEnum.ArgumentNullOrEmptyException:
+            case NullOrEmptyOptionsEnum.ArgumentException:
                 list = [];
                 foreach (T element in enumerable)
                 {
@@ -199,7 +202,7 @@ public static class IEnumerableExtensions
         {
             case NullOrEmptyOptionsEnum.Allowed:
                 return [.. enumerable];
-            case NullOrEmptyOptionsEnum.NullOrEmptyReferenceException:
+            case NullOrEmptyOptionsEnum.Exception:
                 list = [];
                 foreach (string element in enumerable)
                 {
@@ -209,7 +212,7 @@ public static class IEnumerableExtensions
                     list.Add(element);
                 }
                 return list;
-            case NullOrEmptyOptionsEnum.ArgumentNullOrEmptyException:
+            case NullOrEmptyOptionsEnum.ArgumentException:
                 list = [];
                 foreach (string element in enumerable)
                 {

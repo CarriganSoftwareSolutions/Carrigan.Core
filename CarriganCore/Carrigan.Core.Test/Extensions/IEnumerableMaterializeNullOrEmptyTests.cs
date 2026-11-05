@@ -13,7 +13,7 @@ public class IEnumerableMaterializeNullOrEmptyTests
         IEnumerable<WhiteSpaceTestClass> items = [new("")];
 
         ArgumentNullOrEmptyException exception = Assert.Throws<ArgumentNullOrEmptyException>(
-            () => items.Materialize(NullOrEmptyOptionsEnum.ArgumentNullOrEmptyException).ToArray());
+            () => items.Materialize(NullOrEmptyOptionsEnum.ArgumentException).ToArray());
 
         Assert.Equal("items", exception.ParamName);
         Assert.Contains("Collection contains disallowed null or empty elements.", exception.Message);
@@ -22,8 +22,8 @@ public class IEnumerableMaterializeNullOrEmptyTests
     [Theory]
     [InlineData(NullOrEmptyOptionsEnum.Allowed)]
     [InlineData(NullOrEmptyOptionsEnum.FilteredOut)]
-    [InlineData(NullOrEmptyOptionsEnum.NullOrEmptyReferenceException)]
-    [InlineData(NullOrEmptyOptionsEnum.ArgumentNullOrEmptyException)]
+    [InlineData(NullOrEmptyOptionsEnum.Exception)]
+    [InlineData(NullOrEmptyOptionsEnum.ArgumentException)]
     public void Materialize_EmptyCollection_ReturnsEmptyList(NullOrEmptyOptionsEnum option)
     {
         IEnumerable<WhiteSpaceTestClass> source = [];
@@ -37,8 +37,8 @@ public class IEnumerableMaterializeNullOrEmptyTests
     [Theory]
     [InlineData(NullOrEmptyOptionsEnum.Allowed)]
     [InlineData(NullOrEmptyOptionsEnum.FilteredOut)]
-    [InlineData(NullOrEmptyOptionsEnum.NullOrEmptyReferenceException)]
-    [InlineData(NullOrEmptyOptionsEnum.ArgumentNullOrEmptyException)]
+    [InlineData(NullOrEmptyOptionsEnum.Exception)]
+    [InlineData(NullOrEmptyOptionsEnum.ArgumentException)]
     public void Materialize_ValidElements_PreservesValuesAndOrder(NullOrEmptyOptionsEnum option)
     {
         WhiteSpaceTestClass first = new("first");
@@ -85,7 +85,7 @@ public class IEnumerableMaterializeNullOrEmptyTests
     {
         IEnumerable<WhiteSpaceTestClass> source = [new("valid"), isNull ? null! : new(""), new("later")];
 
-        NullOrEmptyException exception = Assert.Throws<NullOrEmptyException>(() => source.Materialize(NullOrEmptyOptionsEnum.NullOrEmptyReferenceException, "items").ToArray());
+        NullOrEmptyException exception = Assert.Throws<NullOrEmptyException>(() => source.Materialize(NullOrEmptyOptionsEnum.Exception, "items").ToArray());
 
         Assert.Equal("'items' contains disallowed null or empty elements.", exception.Message);
     }
@@ -97,7 +97,7 @@ public class IEnumerableMaterializeNullOrEmptyTests
     {
         IEnumerable<WhiteSpaceTestClass> source = [new("valid"), isNull ? null! : new(""), new("later")];
 
-        ArgumentNullOrEmptyException exception = Assert.Throws<ArgumentNullOrEmptyException>(() => source.Materialize(NullOrEmptyOptionsEnum.ArgumentNullOrEmptyException, "items").ToArray());
+        ArgumentNullOrEmptyException exception = Assert.Throws<ArgumentNullOrEmptyException>(() => source.Materialize(NullOrEmptyOptionsEnum.ArgumentException, "items").ToArray());
 
         Assert.Equal("items", exception.ParamName);
         Assert.Contains("Collection contains disallowed null or empty elements.", exception.Message);
@@ -106,8 +106,8 @@ public class IEnumerableMaterializeNullOrEmptyTests
     [Theory]
     [InlineData(NullOrEmptyOptionsEnum.Allowed)]
     [InlineData(NullOrEmptyOptionsEnum.FilteredOut)]
-    [InlineData(NullOrEmptyOptionsEnum.NullOrEmptyReferenceException)]
-    [InlineData(NullOrEmptyOptionsEnum.ArgumentNullOrEmptyException)]
+    [InlineData(NullOrEmptyOptionsEnum.Exception)]
+    [InlineData(NullOrEmptyOptionsEnum.ArgumentException)]
     public void Materialize_NullSource_ThrowsArgumentNullException(NullOrEmptyOptionsEnum option)
     {
         IEnumerable<WhiteSpaceTestClass>? source = null;
@@ -129,8 +129,8 @@ public class IEnumerableMaterializeNullOrEmptyTests
     [Theory]
     [InlineData(NullOrEmptyOptionsEnum.Allowed)]
     [InlineData(NullOrEmptyOptionsEnum.FilteredOut)]
-    [InlineData(NullOrEmptyOptionsEnum.NullOrEmptyReferenceException)]
-    [InlineData(NullOrEmptyOptionsEnum.ArgumentNullOrEmptyException)]
+    [InlineData(NullOrEmptyOptionsEnum.Exception)]
+    [InlineData(NullOrEmptyOptionsEnum.ArgumentException)]
     public void Materialize_ValidElements_EnumeratesSourceOnce(NullOrEmptyOptionsEnum option)
     {
         int enumerationCount = 0;
