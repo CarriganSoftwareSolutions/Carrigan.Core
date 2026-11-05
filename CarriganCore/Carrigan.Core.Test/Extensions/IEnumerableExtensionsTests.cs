@@ -1,4 +1,4 @@
-﻿using Carrigan.Core.Enums;
+using Carrigan.Core.Enums;
 using Carrigan.Core.Extensions;
 
 namespace Carrigan.Core.Test.Extensions;
@@ -743,6 +743,8 @@ public class IEnumerableExtensionsTests
 
         ArgumentNullException ex =
             Assert.Throws<ArgumentNullException>(() => source.Materialize(NullOptionsEnum.ArgumentNullException).ToArray());
+        Assert.Equal("source", ex.ParamName);
+        Assert.Contains("Collection contains disallowed null elements.", ex.Message);
     }
 
     [Fact]
@@ -752,7 +754,8 @@ public class IEnumerableExtensionsTests
 
         ArgumentNullException ex =
             Assert.Throws<ArgumentNullException>(() => source.Materialize(NullOptionsEnum.ArgumentNullException, "BOB").ToArray());
-        Assert.Contains("BOB", ex.Message);
+        Assert.Equal("BOB", ex.ParamName);
+        Assert.Contains("Collection contains disallowed null elements.", ex.Message);
     }
 
     [Fact]

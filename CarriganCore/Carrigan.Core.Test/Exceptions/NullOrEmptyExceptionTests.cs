@@ -20,6 +20,14 @@ public class NullOrEmptyExceptionTests
         Assert.Equal("Value 'value' cannot be null or empty.", exception.Message);
     }
 
+    [Fact]
+    public void Constructor_WithDescription_IncludesExpressionAndReason()
+    {
+        NullOrEmptyException exception = new("items", "contains disallowed null or empty elements.");
+
+        Assert.Equal("'items' contains disallowed null or empty elements.", exception.Message);
+    }
+
     [Theory]
     [InlineData(null)]
     [InlineData("")]

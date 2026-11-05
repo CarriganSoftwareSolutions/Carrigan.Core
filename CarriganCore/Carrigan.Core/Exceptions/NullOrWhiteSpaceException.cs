@@ -1,4 +1,4 @@
-﻿
+
 using Carrigan.Core.Extensions;
 using System.Runtime.CompilerServices;
 
@@ -23,6 +23,16 @@ public class NullOrWhiteSpaceException : Exception
     /// <param name="expression">The expression that caused the exception.</param>
     public NullOrWhiteSpaceException(string? expression)
         : base($"Value '{expression}' cannot be null, empty, or white space.")
+    {
+    }
+
+    /// <summary>
+    /// Initializes a new instance with the expression and a description of why it is invalid.
+    /// </summary>
+    /// <param name="expression">The expression that caused the exception.</param>
+    /// <param name="description">The reason the expression is invalid.</param>
+    public NullOrWhiteSpaceException(string? expression, string description)
+        : base($"'{expression}' {description}")
     {
     }
 

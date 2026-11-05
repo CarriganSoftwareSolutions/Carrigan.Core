@@ -1,9 +1,18 @@
-﻿using Carrigan.Core.Exceptions;
+using Carrigan.Core.Exceptions;
 
 namespace Carrigan.Core.Test.Exceptions;
 
 public class ArgumentNullOrEmptyExceptionTests
 {
+    [Fact]
+    public void Constructor_WithMessageAndParameterName_PreservesBoth()
+    {
+        ArgumentNullOrEmptyException exception = new("Collection contains disallowed null or empty elements.", "items");
+
+        Assert.Equal("items", exception.ParamName);
+        Assert.Contains("Collection contains disallowed null or empty elements.", exception.Message);
+    }
+
     [Fact]
     public void ThrowIfNullOrEmpty_Null_ThrowsArgumentNullOrEmptyException()
     {

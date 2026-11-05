@@ -7,6 +7,18 @@ namespace Carrigan.Core.Test.Extensions;
 
 public class IEnumerableMaterializeNullOrEmptyTests
 {
+    [Fact]
+    public void Materialize_ArgumentNullOrEmptyException_CapturesCallerExpression()
+    {
+        IEnumerable<WhiteSpaceTestClass> items = [new("")];
+
+        ArgumentNullOrEmptyException exception = Assert.Throws<ArgumentNullOrEmptyException>(
+            () => items.Materialize(NullOrEmptyOptionsEnum.ArgumentNullOrEmptyException).ToArray());
+
+        Assert.Equal("items", exception.ParamName);
+        Assert.Contains("Collection contains disallowed null or empty elements.", exception.Message);
+    }
+
     [Theory]
     [InlineData(NullOrEmptyOptionsEnum.Allowed)]
     [InlineData(NullOrEmptyOptionsEnum.FilteredOut)]
@@ -75,7 +87,7 @@ public class IEnumerableMaterializeNullOrEmptyTests
 
         NullOrEmptyException exception = Assert.Throws<NullOrEmptyException>(() => source.Materialize(NullOrEmptyOptionsEnum.NullOrEmptyReferenceException, "items").ToArray());
 
-        Assert.Contains("items contains disallowed null or empty", exception.Message);
+        Assert.Equal("'items' contains disallowed null or empty elements.", exception.Message);
     }
 
     [Theory]
@@ -87,7 +99,8 @@ public class IEnumerableMaterializeNullOrEmptyTests
 
         ArgumentNullOrEmptyException exception = Assert.Throws<ArgumentNullOrEmptyException>(() => source.Materialize(NullOrEmptyOptionsEnum.ArgumentNullOrEmptyException, "items").ToArray());
 
-        Assert.Equal("items contains disallowed null or empty", exception.ParamName);
+        Assert.Equal("items", exception.ParamName);
+        Assert.Contains("Collection contains disallowed null or empty elements.", exception.Message);
     }
 
     [Theory]

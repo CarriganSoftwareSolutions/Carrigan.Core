@@ -1,4 +1,4 @@
-﻿using Carrigan.Core.Extensions;
+using Carrigan.Core.Extensions;
 using System.Runtime.CompilerServices;
 
 namespace Carrigan.Core.Exceptions;
@@ -21,6 +21,16 @@ public class ArgumentNullOrWhiteSpaceException : ArgumentException
     /// <param name="paramName">The name of the parameter that caused the exception.</param>
     public ArgumentNullOrWhiteSpaceException(string? paramName)
         : base("Value cannot be null, empty, or white space.", paramName)
+    {
+    }
+
+    /// <summary>
+    /// Initializes a new instance with a custom message and parameter name.
+    /// </summary>
+    /// <param name="message">The reason the argument is invalid.</param>
+    /// <param name="paramName">The name of the parameter that caused the exception.</param>
+    public ArgumentNullOrWhiteSpaceException(string message, string? paramName)
+        : base(message, paramName)
     {
     }
 

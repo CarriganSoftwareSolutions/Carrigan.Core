@@ -7,6 +7,18 @@ namespace Carrigan.Core.Test.Extensions;
 
 public class IEnumerableMaterializeNullOrWhiteSpaceTests
 {
+    [Fact]
+    public void Materialize_ArgumentNullOrWhiteSpaceException_CapturesCallerExpression()
+    {
+        IEnumerable<WhiteSpaceTestClass> items = [new("")];
+
+        ArgumentNullOrWhiteSpaceException exception = Assert.Throws<ArgumentNullOrWhiteSpaceException>(
+            () => items.Materialize(NullOrWhiteSpaceOptionsEnum.ArgumentNullOrWhiteSpaceException).ToArray());
+
+        Assert.Equal("items", exception.ParamName);
+        Assert.Contains("Collection contains disallowed null or white space elements.", exception.Message);
+    }
+
     [Theory]
     [InlineData(NullOrWhiteSpaceOptionsEnum.Allowed)]
     [InlineData(NullOrWhiteSpaceOptionsEnum.FilteredOut)]
@@ -77,7 +89,7 @@ public class IEnumerableMaterializeNullOrWhiteSpaceTests
 
         NullOrWhiteSpaceException exception = Assert.Throws<NullOrWhiteSpaceException>(() => source.Materialize(NullOrWhiteSpaceOptionsEnum.NullOrWhiteSpaceException, "items").ToArray());
 
-        Assert.Contains("items", exception.Message);
+        Assert.Equal("'items' contains disallowed null or white space elements.", exception.Message);
     }
 
     [Theory]
@@ -92,7 +104,8 @@ public class IEnumerableMaterializeNullOrWhiteSpaceTests
 
         ArgumentNullOrWhiteSpaceException exception = Assert.Throws<ArgumentNullOrWhiteSpaceException>(() => source.Materialize(NullOrWhiteSpaceOptionsEnum.ArgumentNullOrWhiteSpaceException, "items").ToArray());
 
-        Assert.Equal("items contains disallowed null or white space", exception.ParamName);
+        Assert.Equal("items", exception.ParamName);
+        Assert.Contains("Collection contains disallowed null or white space elements.", exception.Message);
     }
 
     [Theory]

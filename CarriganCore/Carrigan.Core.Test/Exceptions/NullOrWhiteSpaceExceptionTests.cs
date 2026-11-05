@@ -20,6 +20,14 @@ public class NullOrWhiteSpaceExceptionTests
         Assert.Equal("Value 'value' cannot be null, empty, or white space.", exception.Message);
     }
 
+    [Fact]
+    public void Constructor_WithDescription_IncludesExpressionAndReason()
+    {
+        NullOrWhiteSpaceException exception = new("items", "contains disallowed null or white space elements.");
+
+        Assert.Equal("'items' contains disallowed null or white space elements.", exception.Message);
+    }
+
     [Theory]
     [InlineData(null)]
     [InlineData("")]

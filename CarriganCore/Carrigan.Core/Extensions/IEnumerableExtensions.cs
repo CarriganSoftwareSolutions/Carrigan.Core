@@ -1,8 +1,9 @@
-﻿using Carrigan.Core.Enums;
+using Carrigan.Core.Enums;
 using Carrigan.Core.Exceptions;
 using Carrigan.Core.Interfaces;
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 
 namespace Carrigan.Core.Extensions;
 
@@ -21,7 +22,7 @@ public static class IEnumerableExtensions
     /// <param name="enumerable">the enumerable</param>
     /// <param name="value">the value being looked for</param>
     /// <returns></returns>
-    public static bool DoesNotContain<T>(this IEnumerable<T> enumerable, T value) => 
+    public static bool DoesNotContain<T>(this IEnumerable<T> enumerable, T value) =>
         enumerable.Contains(value) == false;
     #endregion
 
@@ -106,9 +107,10 @@ public static class IEnumerableExtensions
     /// <summary>
     /// Specifies how <c>null</c> elements in an enumerable should be handled.
     /// </summary>
-    public static IEnumerable<T> Materialize<T>(this IEnumerable<T> enumerable, NullOptionsEnum nullOptionsEnum, string? variableName = "")
+    public static IEnumerable<T> Materialize<T>(this IEnumerable<T> enumerable, NullOptionsEnum nullOptionsEnum, [CallerArgumentExpression(nameof(enumerable))] string? variableName = null)
     {
         ArgumentNullException.ThrowIfNull(enumerable);
+        string name = variableName ?? nameof(enumerable);
         List<T> list;
         switch (nullOptionsEnum)
         {
@@ -122,7 +124,7 @@ public static class IEnumerableExtensions
                 foreach (T element in enumerable)
                 {
                     if (element is null)
-                        throw new NullReferenceException($"{variableName ?? nameof(enumerable)} contains disallowed nulls");
+                        throw new NullReferenceException($"{name} contains disallowed nulls");
 
                     list.Add(element);
                 }
@@ -132,7 +134,7 @@ public static class IEnumerableExtensions
                 foreach (T element in enumerable)
                 {
                     if (element is null)
-                        throw new ArgumentNullException($"{variableName ?? nameof(enumerable)} contains disallowed nulls");
+                        throw new ArgumentNullException(name, "Collection contains disallowed null elements.");
 
                     list.Add(element);
                 }
@@ -148,9 +150,10 @@ public static class IEnumerableExtensions
     /// <summary>
     /// Specifies how <c>null</c> or empty elements in an enumerable should be handled.
     /// </summary>
-    public static IEnumerable<T> Materialize<T>(this IEnumerable<T> enumerable, NullOrEmptyOptionsEnum nullOptionsEnum, string? variableName = "") where T : IEmpty
+    public static IEnumerable<T> Materialize<T>(this IEnumerable<T> enumerable, NullOrEmptyOptionsEnum nullOptionsEnum, [CallerArgumentExpression(nameof(enumerable))] string? variableName = null) where T : IEmpty
     {
         ArgumentNullException.ThrowIfNull(enumerable);
+        string name = variableName ?? nameof(enumerable);
         List<T> list;
         switch (nullOptionsEnum)
         {
@@ -161,7 +164,7 @@ public static class IEnumerableExtensions
                 foreach (T element in enumerable)
                 {
                     if (element.IsNullOrEmpty())
-                        throw new NullOrEmptyException($"{variableName ?? nameof(enumerable)} contains disallowed null or empty");
+                        throw new NullOrEmptyException(name, "contains disallowed null or empty elements.");
 
                     list.Add(element);
                 }
@@ -171,7 +174,7 @@ public static class IEnumerableExtensions
                 foreach (T element in enumerable)
                 {
                     if (element.IsNullOrEmpty())
-                        throw new ArgumentNullOrEmptyException($"{variableName ?? nameof(enumerable)} contains disallowed null or empty");
+                        throw new ArgumentNullOrEmptyException("Collection contains disallowed null or empty elements.", name);
 
                     list.Add(element);
                 }
@@ -183,12 +186,55 @@ public static class IEnumerableExtensions
                 throw new InvalidOperationException($"{nameof(nullOptionsEnum)} contains unsupported value.");
         }
     }
+
+    /// <summary>
+    /// Specifies how <c>null</c> or empty elements in an enumerable should be handled.
+    /// </summary>
+    public static IEnumerable<string> Materialize(this IEnumerable<string> enumerable, NullOrEmptyOptionsEnum nullOptionsEnum, [CallerArgumentExpression(nameof(enumerable))] string? variableName = null)
+    {
+        ArgumentNullException.ThrowIfNull(enumerable);
+        string name = variableName ?? nameof(enumerable);
+        List<string> list;
+        switch (nullOptionsEnum)
+        {
+            case NullOrEmptyOptionsEnum.Allowed:
+                return [.. enumerable];
+            case NullOrEmptyOptionsEnum.NullOrEmptyReferenceException:
+                list = [];
+                foreach (string element in enumerable)
+                {
+                    if (element.IsNullOrEmpty())
+                        throw new NullOrEmptyException(name, "contains disallowed null or empty elements.");
+
+                    list.Add(element);
+                }
+                return list;
+            case NullOrEmptyOptionsEnum.ArgumentNullOrEmptyException:
+                list = [];
+                foreach (string element in enumerable)
+                {
+                    if (element.IsNullOrEmpty())
+                        throw new ArgumentNullOrEmptyException("Collection contains disallowed null or empty elements.", name);
+
+                    list.Add(element);
+                }
+                return list;
+            case NullOrEmptyOptionsEnum.FilteredOut:
+                return [.. enumerable.Where(static element => element.IsNotNullOrEmpty())];
+
+            default:
+                throw new InvalidOperationException($"{nameof(nullOptionsEnum)} contains unsupported value.");
+        }
+    }
+
+
     /// <summary>
     /// Specifies how <c>null</c> or whitespace elements in an enumerable should be handled.
     /// </summary>
-    public static IEnumerable<T> Materialize<T>(this IEnumerable<T> enumerable, NullOrWhiteSpaceOptionsEnum nullOptionsEnum, string? variableName = "") where T : IWhiteSpace
+    public static IEnumerable<T> Materialize<T>(this IEnumerable<T> enumerable, NullOrWhiteSpaceOptionsEnum nullOptionsEnum, [CallerArgumentExpression(nameof(enumerable))] string? variableName = null) where T : IWhiteSpace
     {
         ArgumentNullException.ThrowIfNull(enumerable);
+        string name = variableName ?? nameof(enumerable);
         List<T> list;
         switch (nullOptionsEnum)
         {
@@ -199,7 +245,7 @@ public static class IEnumerableExtensions
                 foreach (T element in enumerable)
                 {
                     if (element.IsNullOrWhiteSpace())
-                        throw new NullOrWhiteSpaceException($"{variableName ?? nameof(enumerable)} contains disallowed null or white space");
+                        throw new NullOrWhiteSpaceException(name, "contains disallowed null or white space elements.");
 
                     list.Add(element);
                 }
@@ -209,7 +255,47 @@ public static class IEnumerableExtensions
                 foreach (T element in enumerable)
                 {
                     if (element.IsNullOrWhiteSpace())
-                        throw new ArgumentNullOrWhiteSpaceException($"{variableName ?? nameof(enumerable)} contains disallowed null or white space");
+                        throw new ArgumentNullOrWhiteSpaceException("Collection contains disallowed null or white space elements.", name);
+
+                    list.Add(element);
+                }
+                return list;
+            case NullOrWhiteSpaceOptionsEnum.FilteredOut:
+                return [.. enumerable.Where(static element => element.IsNotNullOrWhiteSpace())];
+
+            default:
+                throw new InvalidOperationException($"{nameof(nullOptionsEnum)} contains unsupported value.");
+        }
+    }
+
+    /// <summary>
+    /// Specifies how <c>null</c> or whitespace elements in an enumerable should be handled.
+    /// </summary>
+    public static IEnumerable<string> Materialize(this IEnumerable<string> enumerable, NullOrWhiteSpaceOptionsEnum nullOptionsEnum, [CallerArgumentExpression(nameof(enumerable))] string? variableName = null)
+    {
+        ArgumentNullException.ThrowIfNull(enumerable);
+        string name = variableName ?? nameof(enumerable);
+        List<string> list;
+        switch (nullOptionsEnum)
+        {
+            case NullOrWhiteSpaceOptionsEnum.Allowed:
+                return [.. enumerable];
+            case NullOrWhiteSpaceOptionsEnum.NullOrWhiteSpaceException:
+                list = [];
+                foreach (string element in enumerable)
+                {
+                    if (element.IsNullOrWhiteSpace())
+                        throw new NullOrWhiteSpaceException(name, "contains disallowed null or white space elements.");
+
+                    list.Add(element);
+                }
+                return list;
+            case NullOrWhiteSpaceOptionsEnum.ArgumentNullOrWhiteSpaceException:
+                list = [];
+                foreach (string element in enumerable)
+                {
+                    if (element.IsNullOrWhiteSpace())
+                        throw new ArgumentNullOrWhiteSpaceException("Collection contains disallowed null or white space elements.", name);
 
                     list.Add(element);
                 }
@@ -271,3 +357,4 @@ public static class IEnumerableExtensions
         return true;
     }
 }
+

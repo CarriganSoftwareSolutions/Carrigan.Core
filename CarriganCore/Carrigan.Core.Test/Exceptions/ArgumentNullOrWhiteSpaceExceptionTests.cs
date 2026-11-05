@@ -1,9 +1,18 @@
-﻿using Carrigan.Core.Exceptions;
+using Carrigan.Core.Exceptions;
 
 namespace Carrigan.Core.Test.Exceptions;
 
 public class ArgumentNullOrWhiteSpaceExceptionTests
 {
+    [Fact]
+    public void Constructor_WithMessageAndParameterName_PreservesBoth()
+    {
+        ArgumentNullOrWhiteSpaceException exception = new("Collection contains disallowed null or white space elements.", "items");
+
+        Assert.Equal("items", exception.ParamName);
+        Assert.Contains("Collection contains disallowed null or white space elements.", exception.Message);
+    }
+
     [Fact]
     public void ThrowIfNullOrWhiteSpace_Null_ThrowsArgumentNullOrWhiteSpaceException()
     {
