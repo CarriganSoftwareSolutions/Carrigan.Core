@@ -1,4 +1,6 @@
 ﻿using Carrigan.Core.Enums;
+using Carrigan.Core.Exceptions;
+using Carrigan.Core.Interfaces;
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 
@@ -100,6 +102,7 @@ public static class IEnumerableExtensions
         enumerable.IsNullOrEmpty() == false;
     #endregion
 
+    #region Materialize
     /// <summary>
     /// Specifies how <c>null</c> elements in an enumerable should be handled.
     /// </summary>
@@ -141,6 +144,84 @@ public static class IEnumerableExtensions
                 throw new InvalidOperationException($"{nameof(nullOptionsEnum)} contains unsupported value.");
         }
     }
+
+    /// <summary>
+    /// Specifies how <c>null</c> or empty elements in an enumerable should be handled.
+    /// </summary>
+    public static IEnumerable<T> Materialize<T>(this IEnumerable<T> enumerable, NullOrEmptyOptionsEnum nullOptionsEnum, string? variableName = "") where T : IEmpty
+    {
+        ArgumentNullException.ThrowIfNull(enumerable);
+        List<T> list;
+        switch (nullOptionsEnum)
+        {
+            case NullOrEmptyOptionsEnum.Allowed:
+                return [.. enumerable];
+            case NullOrEmptyOptionsEnum.NullOrEmptyReferenceException:
+                list = [];
+                foreach (T element in enumerable)
+                {
+                    if (element.IsNullOrEmpty())
+                        throw new NullOrEmptyException($"{variableName ?? nameof(enumerable)} contains disallowed null or empty");
+
+                    list.Add(element);
+                }
+                return list;
+            case NullOrEmptyOptionsEnum.ArgumentNullOrEmptyException:
+                list = [];
+                foreach (T element in enumerable)
+                {
+                    if (element.IsNullOrEmpty())
+                        throw new ArgumentNullOrEmptyException($"{variableName ?? nameof(enumerable)} contains disallowed null or empty");
+
+                    list.Add(element);
+                }
+                return list;
+            case NullOrEmptyOptionsEnum.FilteredOut:
+                return [.. enumerable.Where(static element => element.IsNotNullOrEmpty())];
+
+            default:
+                throw new InvalidOperationException($"{nameof(nullOptionsEnum)} contains unsupported value.");
+        }
+    }
+    /// <summary>
+    /// Specifies how <c>null</c> or whitespace elements in an enumerable should be handled.
+    /// </summary>
+    public static IEnumerable<T> Materialize<T>(this IEnumerable<T> enumerable, NullOrWhiteSpaceOptionsEnum nullOptionsEnum, string? variableName = "") where T : IWhiteSpace
+    {
+        ArgumentNullException.ThrowIfNull(enumerable);
+        List<T> list;
+        switch (nullOptionsEnum)
+        {
+            case NullOrWhiteSpaceOptionsEnum.Allowed:
+                return [.. enumerable];
+            case NullOrWhiteSpaceOptionsEnum.NullOrWhiteSpaceException:
+                list = [];
+                foreach (T element in enumerable)
+                {
+                    if (element.IsNullOrWhiteSpace())
+                        throw new NullOrWhiteSpaceException($"{variableName ?? nameof(enumerable)} contains disallowed null or white space");
+
+                    list.Add(element);
+                }
+                return list;
+            case NullOrWhiteSpaceOptionsEnum.ArgumentNullOrWhiteSpaceException:
+                list = [];
+                foreach (T element in enumerable)
+                {
+                    if (element.IsNullOrWhiteSpace())
+                        throw new ArgumentNullOrWhiteSpaceException($"{variableName ?? nameof(enumerable)} contains disallowed null or white space");
+
+                    list.Add(element);
+                }
+                return list;
+            case NullOrWhiteSpaceOptionsEnum.FilteredOut:
+                return [.. enumerable.Where(static element => element.IsNotNullOrWhiteSpace())];
+
+            default:
+                throw new InvalidOperationException($"{nameof(nullOptionsEnum)} contains unsupported value.");
+        }
+    }
+    #endregion
 
     /// <summary>
     /// Returns an enumerable that is the same as the input enumerable, except the element at the specified index is skipped.

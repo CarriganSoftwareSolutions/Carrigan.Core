@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using Carrigan.Core.Extensions;
+using System.Runtime.CompilerServices;
 
 namespace Carrigan.Core.Exceptions;
 
@@ -36,7 +37,7 @@ public class ArgumentNullOrEmptyException : ArgumentException
     /// </exception>
     public static new string ThrowIfNullOrEmpty(string? argument, [CallerArgumentExpression(nameof(argument))] string? paramName = null)
     {
-        if (string.IsNullOrEmpty(argument))
+        if (argument.IsNullOrEmpty())
             throw new ArgumentNullOrEmptyException(paramName);
 
         return argument;

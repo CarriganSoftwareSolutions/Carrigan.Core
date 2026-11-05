@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using Carrigan.Core.Extensions;
+using System.Runtime.CompilerServices;
 
 namespace Carrigan.Core.Exceptions;
 
@@ -36,7 +37,7 @@ public class ArgumentNullOrWhiteSpaceException : ArgumentException
     /// </exception>
     public static new string ThrowIfNullOrWhiteSpace(string? argument, [CallerArgumentExpression(nameof(argument))] string? paramName = null)
     {
-        if (string.IsNullOrWhiteSpace(argument))
+        if (argument.IsNullOrWhiteSpace())
             throw new ArgumentNullOrWhiteSpaceException(paramName);
 
         return argument;
