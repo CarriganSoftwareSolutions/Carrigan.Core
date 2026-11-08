@@ -1,83 +1,91 @@
 ﻿namespace Carrigan.Core.DataTypes;
 
 /// <summary>
-/// An object oriented wrapper around a Base64 string that guarantees validity and type safety.
+/// Represents binary data encoded as a valid Base64 string.
 /// </summary>
 /// <remarks>
-/// The idea here is to have a <see cref="Base64Data"/> object, 
-/// you can trust that it’s a proper Base64 string.
-/// No invalid input gets through the constructor.
+/// Input is normalized to canonical Base64, so equivalent encodings compare equally.
 /// </remarks>
-
-public readonly struct Base64Data
+public class Base64Data : IEquatable<Base64Data>
 {
     private readonly string _encoded;
 
     /// <summary>
-    /// Build from an existing Base64 string.
-    /// Throws an  exception if it’s not actually valid.
+    /// Creates a Base64 value from an existing encoded string.
     /// </summary>
-    /// <param name="base64">A base 64 string to be validated before being stored.</param>
-    /// <exception cref="ArgumentException">Thrown if the string does not represent a valid base 64 number.</exception>
+    /// <param name="base64">A valid Base64-encoded string.</param>
+    /// <exception cref="ArgumentNullException">The input is null.</exception>
+    /// <exception cref="ArgumentException">The input is not valid Base64.</exception>
     public Base64Data(string base64)
     {
+        ArgumentNullException.ThrowIfNull(base64);
+
         try
         {
-            Convert.FromBase64String(base64);
+            byte[] data = Convert.FromBase64String(base64);
+            _encoded = Convert.ToBase64String(data);
         }
-        catch (FormatException ex)
+        catch (FormatException exception)
         {
-            throw new ArgumentException("Invalid Base64 string.", nameof(base64), ex);
+            throw new ArgumentException("Invalid Base64 string.", nameof(base64), exception);
         }
-        _encoded = base64;
     }
 
     /// <summary>
-    /// Build directly from a byte array.
+    /// Creates a Base64 value from binary data.
     /// </summary>
-    /// <param name="data">A byte array to be converted to a base 64 string.</param>
-    public Base64Data(byte[] data) => 
+    /// <param name="data">The bytes to encode.</param>
+    /// <exception cref="ArgumentNullException">The input is null.</exception>
+    public Base64Data(byte[] data)
+    {
+        ArgumentNullException.ThrowIfNull(data);
         _encoded = Convert.ToBase64String(data);
+    }
 
     /// <summary>
-    /// Convert back to a byte array.
+    /// Decodes the Base64 value into a new byte array.
     /// </summary>
-    /// <returns>Returns a byte array represented by the base 64 number this object represents.</returns>
     public byte[] ToByteArray() => Convert.FromBase64String(_encoded);
 
-
     /// <summary>
-    /// Returns the Base64 string as-is.
+    /// Returns the canonical Base64 string.
     /// </summary>
-    /// <returns>Returns the base 64 string this object represents.</returns>
     public override string ToString() => _encoded;
 
     /// <summary>
-    /// Implicit conversion from string to Base64Data.
-    /// This validates the input before accepting it.
+    /// Compares the encoded data with another instance of the same runtime type.
     /// </summary>
-    /// <param name="base64">A string that represents a valid base 64 number.</param>
+    public virtual bool Equals(Base64Data? other) =>
+        other is not null &&  GetType() == other.GetType() && string.Equals(_encoded, other._encoded, StringComparison.Ordinal);
+
+    /// <inheritdoc/>
+    public override bool Equals(object? obj) => obj is Base64Data other && Equals(other);
+
+    /// <inheritdoc/>
+    public override int GetHashCode() => HashCode.Combine(GetType(), _encoded);
+
+    /// <summary>
+    /// Converts a Base64-encoded string to a validated <see cref="Base64Data"/>.
+    /// </summary>
     public static implicit operator Base64Data(string base64) => new(base64);
 
     /// <summary>
-    /// Implicit conversion from Base64 to string
+    /// Converts a <see cref="Base64Data"/> value to a Base64-encoded string.
     /// </summary>
-    /// <param name="base64">Represents a valid base 64 number that represents a byte array.</param>
     public static implicit operator string(Base64Data base64) => base64._encoded;
 
     /// <summary>
-    /// Check if a string looks like valid Base64.
+    /// Returns whether a string contains valid Base64 data.
     /// </summary>
-    /// <param name="base64"></param>
-    /// <returns>True if is the string represents a valid base 64 number</returns>
-    public static bool IsBase64String(string base64)
-    {// Check if the length is a multiple of 4
-        if (base64.Length % 4 != 0)
+    /// <param name="base64">The string to validate, or null.</param>
+    /// <returns>True for valid Base64 data; otherwise, false.</returns>
+    public static bool IsBase64String(string? base64)
+    {
+        if (base64 is null)
             return false;
 
         try
         {
-            // Attempt to convert the string from Base64
             Convert.FromBase64String(base64);
             return true;
         }
