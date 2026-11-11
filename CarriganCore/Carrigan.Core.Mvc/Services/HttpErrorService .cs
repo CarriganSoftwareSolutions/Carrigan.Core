@@ -35,7 +35,7 @@ public sealed class HttpErrorService : IHttpErrorService
         string errorTrackingCode = Guid.CreateVersion7().ToString();
 
         additionalDetails = additionalDetails.IsNullOrWhiteSpace() ? ReasonPhrases.GetReasonPhrase((int)httpStatusCode) : additionalDetails;
-        action ??= action.IsNullOrWhiteSpace() ? "If the problem persists, contact your system administrator." : action;
+        action = action.IsNullOrWhiteSpace() ? "If the problem persists, contact your system administrator." : action;
 
         return new HttpErrorData
         {

@@ -3,7 +3,7 @@
   <!-- Ignore Spelling: Carrigan contentfiles buildtransitive  snupkg-->
   <PropertyGroup>
     <PackageId>Carrigan.Core.Mvc</PackageId>
-    <TargetFrameworks>net9.0;net10.0</TargetFrameworks>
+    <TargetFrameworks>net9.0;net10.0;net11.0</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <DebugType>portable</DebugType>
@@ -28,8 +28,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Carrigan.Core\Carrigan.Core.csproj" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.12" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.401" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="11.0.0" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="11.0.100" PrivateAssets="All" />
   </ItemGroup>
   
   <ItemGroup>

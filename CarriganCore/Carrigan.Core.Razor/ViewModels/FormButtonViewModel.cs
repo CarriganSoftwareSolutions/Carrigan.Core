@@ -11,7 +11,7 @@ public class FormButtonViewModel
     public string? Id { get; private set; }
     public ButtonTypeEnum Type { get; private set; }
     public string TypeText =>
-        Type.ToString();
+        Type.ToHtml();
     protected FormElements FormElements { get; private set; }
     protected ActionProperties ActionProperties { get; private set; }
     protected ActionViewDesign ActionViewDesign { get; private set; }
