@@ -33,14 +33,17 @@ jobs:
       - name: Build
         run: dotnet build CarriganCore/CarriganCore.sln --configuration Release --no-restore
 
-      - name: Test
+      - name: Test all projects (MTP)
         run: >-
           dotnet test
-          --project CarriganCore/Carrigan.Core.Test/Carrigan.Core.Test.csproj
+          --solution CarriganCore/CarriganCore.sln
           --configuration Release
           --no-build
           --results-directory TestResults
+          --results-directory-layout per-module
+          --minimum-expected-tests 1
           --
+          --minimum-expected-tests 1
           --coverlet
           --coverlet-output-format cobertura
           --report-xunit-trx
